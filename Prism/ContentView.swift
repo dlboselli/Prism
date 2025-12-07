@@ -8,15 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selectedTab: Tab = .home
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab) {
+            HomeTabView()
+                .tabItem {
+                    Label("Home", systemImage: selectedTab == .home ? "house.fill" : "house")
+                }
+                .tag(Tab.home)
+            
+            FriendsTabView()
+                .tabItem {
+                    Label("Friends", systemImage: selectedTab == .friends ? "person.2.fill" : "person.2")
+                }
+                .tag(Tab.friends)
+            
+            ReelsTabView()
+                .tabItem {
+                    Label("Video", systemImage: selectedTab == .reels ? "play.square.stack.fill" : "play.square.stack")
+                }
+                .tag(Tab.reels)
+            
+            MarketplaceTabView()
+                .tabItem {
+                    Label("Marketplace", systemImage: selectedTab == .marketplace ? "storefront.fill" : "storefront")
+                }
+                .tag(Tab.marketplace)
+            
+            MoreTabView()
+                .tabItem {
+                    Label("More", systemImage: "line.3.horizontal")
+                }
+                .tag(Tab.more)
         }
-        .padding()
+        .tint(Colors.tabSelected)
     }
+}
+
+// MARK: - Tab Enum
+
+enum Tab: Hashable {
+    case home
+    case friends
+    case reels
+    case marketplace
+    case more
 }
 
 #Preview {
