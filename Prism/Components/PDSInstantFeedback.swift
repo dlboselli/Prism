@@ -142,7 +142,7 @@ struct PDSInstantFeedback: View {
                 } label: {
                     Text(actionText)
                         .typography(Typography.button3)
-                        .foregroundColor(Colors.blue70)
+                        .foregroundColor(Colors.blue300)
                 }
                 .buttonStyle(.plain)
             }

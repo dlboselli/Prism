@@ -54,24 +54,26 @@ prompt:
     All components use the `PDS` prefix:
     - PDSButton
     - PDSListCell
-    - PDSCard
-    - PDSBadge
-    - PDSTextField
+    - PDSInstantFeedback
+    - PDSToggle
+    - PDSNavigationBar
+    - PDSSubNavigationBar
+    - PDSActionChip
+    - PDSIcon
+    - PDSIconButton
 
     ### Typography
-    Use custom extensions:
-    - headline3EmphasizedTypography()
-    - meta4Typography()
+    Use the `.typography()` modifier with `Typography` styles:
+    - `.typography(Typography.headline3Emphasized)`
+    - `.typography(Typography.body2)`
+    - `.typography(Typography.meta4)`
 
     ### Colors
-    Semantic tokens only:
-    - Color("primaryText")
-    - Color("surfaceBackground")
-
-    ### Icons
-    Use icons from the asset catalog (not SF Symbols):
-    - "magnifying-glass-outline"
-    - "plus-square-filled"
+    Use semantic tokens from the `Colors` struct:
+    - `Colors.textPrimary`
+    - `Colors.textSecondary`
+    - `Colors.backgroundSurface`
+    - `Colors.iconPrimary`
 
     ---
 
@@ -90,13 +92,19 @@ prompt:
 
     ## Data Layer
     Sample data stored in `Data/PrismContentData.swift`:
-    - prismDataMap: [String: PrismData]
-    - postData: [PostData]
-    - profileDataMap: [String: ProfileData]
+    - `sampleProfiles: [ProfileData]` — Sample user profiles
+    - `samplePosts: [PostData]` — Sample feed posts
+    - `sampleNotifications: [NotificationData]` — Sample notifications
+    - `sampleStories: [StoryData]` — Sample stories
+    - `sampleComments: [CommentData]` — Sample comments
+    - `profileDataMap: [String: ProfileData]` — Profiles by ID
+    - `postDataMap: [String: PostData]` — Posts by ID
+    - `prismDataMap: [String: PrismData]` — General content by ID
 
-    Images must use descriptive names:
-    - "walking-sunrise-beach"
-    - "night-city-longexposure"
+    Images use descriptive names in asset catalog:
+    - `Posts/walking-sunrise-beach`
+    - `Posts/night-city-longexposure`
+    - `Profiles/sarah`, `Profiles/marcus`, etc.
 
     ---
 

@@ -98,7 +98,7 @@ struct PDSSubNavigationBar: View {
             return isSelected ? Colors.persistentAccent : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
-            return isSelected ? Colors.gray00 : Colors.textPrimaryOnMedia
+            return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
         }
     }
     
@@ -119,7 +119,7 @@ struct PDSSubNavigationBar: View {
             return isSelected ? Colors.persistentAccent : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
-            return isSelected ? Colors.gray00 : Colors.textPrimaryOnMedia
+            return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
         }
     }
     
@@ -129,7 +129,7 @@ struct PDSSubNavigationBar: View {
             return isSelected ? Colors.persistentAccentDeemphasized : Colors.backgroundCard
         case .onMedia:
             // On media: active uses light gray on white bg, inactive uses translucent white
-            return isSelected ? Colors.gray90 : Colors.whiteAlpha10
+            return isSelected ? Colors.gray200 : Colors.white.opacity(0.1)
         }
     }
 }
@@ -182,7 +182,7 @@ extension PDSSubNavigationBar {
                             items: [
                                 PDSSubNavItem(id: "all", title: "All"),
                                 PDSSubNavItem(id: "posts", title: "Posts"),
-                                PDSSubNavItem(id: "reels", title: "Reels"),
+                                PDSSubNavItem(id: "videos", title: "Videos"),
                                 PDSSubNavItem(id: "tagged", title: "Tagged")
                             ],
                             selectedId: $selectedStandard
@@ -226,11 +226,11 @@ extension PDSSubNavigationBar {
                                 PDSSubNavItem(id: "item1", title: "For You"),
                                 PDSSubNavItem(id: "item2", title: "Following"),
                                 PDSSubNavItem(id: "item3", title: "Favorites"),
-                                PDSSubNavItem(id: "item4", title: "Groups"),
-                                PDSSubNavItem(id: "item5", title: "Pages"),
-                                PDSSubNavItem(id: "item6", title: "Events"),
-                                PDSSubNavItem(id: "item7", title: "Marketplace"),
-                                PDSSubNavItem(id: "item8", title: "Gaming")
+                                PDSSubNavItem(id: "item4", title: "Events"),
+                                PDSSubNavItem(id: "item5", title: "Saved"),
+                                PDSSubNavItem(id: "item6", title: "Trending"),
+                                PDSSubNavItem(id: "item7", title: "Shop"),
+                                PDSSubNavItem(id: "item8", title: "Latest")
                             ],
                             selectedId: $selectedScrollable
                         )
@@ -245,7 +245,7 @@ extension PDSSubNavigationBar {
                             RoundedRectangle(cornerRadius: CornerRadius.card)
                                 .fill(
                                     LinearGradient(
-                                        colors: [Colors.gray30, Colors.gray50],
+                                        colors: [Colors.gray700, Colors.gray500],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )

@@ -7,201 +7,87 @@
 
 import SwiftUI
 
-/// Spectrum Corner Radius Tokens
-/// Part of the Prism Design System (PDS)
-///
-/// Source of truth: Spectrum Tokens JSON
-/// These values define the corner radii used throughout the app.
+/// Prism Design System Corner Radii
 struct CornerRadius {
     
-    // ═══════════════════════════════════════════════════════════════════════════
-    // MARK: - Semantic Corner Radii (Base Values)
-    // ═══════════════════════════════════════════════════════════════════════════
+    // MARK: - Base Scale
     
-    /// Square corners (0pt)
     static let square: CGFloat = 0
-    
-    /// XXSmall rounded corners (2pt)
-    static let roundedXXSmall: CGFloat = 2
-    
-    /// XSmall rounded corners (4pt)
-    static let roundedXSmall: CGFloat = 4
-    
-    /// Small rounded corners (6pt)
-    static let roundedSmall: CGFloat = 6
-    
-    /// Medium rounded corners (8pt)
-    static let roundedMedium: CGFloat = 8
-    
-    /// Large rounded corners (12pt)
-    static let roundedLarge: CGFloat = 12
-    
-    /// XLarge rounded corners (16pt)
-    static let roundedXLarge: CGFloat = 16
-    
-    /// XXLarge rounded corners (24pt)
-    static let roundedXXLarge: CGFloat = 24
-    
-    /// Fully rounded / pill shape (255pt)
+    static let xxSmall: CGFloat = 2
+    static let xSmall: CGFloat = 4
+    static let small: CGFloat = 6
+    static let medium: CGFloat = 8
+    static let large: CGFloat = 12
+    static let xLarge: CGFloat = 16
+    static let xxLarge: CGFloat = 24
     static let round: CGFloat = 255
     
-    // ═══════════════════════════════════════════════════════════════════════════
-    // MARK: - Component Corner Radii
-    // ═══════════════════════════════════════════════════════════════════════════
+    // MARK: - Components
     
-    // MARK: Actions & Buttons
-    
-    /// Action corner radius (6pt)
-    static let action: CGFloat = roundedSmall
-    
-    /// Button corner radius (8pt)
-    static let button: CGFloat = roundedMedium
-    
-    /// Icon action corner radius - fully rounded (255pt)
+    // Actions & Buttons
+    static let action: CGFloat = small
+    static let button: CGFloat = medium
     static let iconAction: CGFloat = round
-    
-    /// Sub nav action corner radius - fully rounded (255pt)
     static let subNavAction: CGFloat = round
     
-    // MARK: Cards & Containers
-    
-    /// Card corner radius (12pt)
-    static let card: CGFloat = roundedLarge
-    
-    /// Card large corner radius (16pt)
-    static let cardLarge: CGFloat = roundedXLarge
-    
-    /// Card small corner radius (12pt)
-    static let cardSmall: CGFloat = roundedLarge
-    
-    /// Dialog corner radius (12pt)
-    static let dialog: CGFloat = roundedLarge
-    
-    /// Bottom sheet corner radius (20pt)
+    // Cards & Containers
+    static let card: CGFloat = large
+    static let cardLarge: CGFloat = xLarge
+    static let cardSmall: CGFloat = large
+    static let dialog: CGFloat = large
     static let bottomSheet: CGFloat = 20
+    static let tooltip: CGFloat = large
+    static let bubble: CGFloat = xLarge
+    static let actionTile: CGFloat = xLarge
     
-    /// Tooltip corner radius (12pt)
-    static let tooltip: CGFloat = roundedLarge
+    // Media
+    static let media: CGFloat = large
+    static let mediaLarge: CGFloat = xLarge
+    static let mediaSmall: CGFloat = large
+    static let reshare: CGFloat = xLarge
     
-    /// Bubble corner radius (16pt)
-    static let bubble: CGFloat = roundedXLarge
-    
-    /// Action tile radius (16pt)
-    static let actionTile: CGFloat = roundedXLarge
-    
-    // MARK: Media
-    
-    /// Media corner radius (12pt)
-    static let media: CGFloat = roundedLarge
-    
-    /// Media large corner radius (16pt)
-    static let mediaLarge: CGFloat = roundedXLarge
-    
-    /// Media small corner radius (12pt)
-    static let mediaSmall: CGFloat = roundedLarge
-    
-    /// Reshare radius (16pt)
-    static let reshare: CGFloat = roundedXLarge
-    
-    // MARK: Inputs & Controls
-    
-    /// Input field corner radius (12pt)
-    static let inputField: CGFloat = roundedLarge
-    
-    /// Input bar corner radius - fully rounded (255pt)
+    // Inputs & Controls
+    static let inputField: CGFloat = large
     static let inputBar: CGFloat = round
-    
-    /// Selection control corner radius (4pt)
-    static let selectionControl: CGFloat = roundedXSmall
-    
-    /// Selection control large corner radius - fully rounded (255pt)
+    static let selectionControl: CGFloat = xSmall
     static let selectionControlLarge: CGFloat = round
-    
-    /// Checkbox corner radius (4pt)
-    static let checkbox: CGFloat = roundedXSmall
-    
-    /// Handle corner radius - fully rounded (255pt)
+    static let checkbox: CGFloat = xSmall
     static let handle: CGFloat = round
-    
-    /// Progress corner radius - fully rounded (255pt)
     static let progress: CGFloat = round
     
-    // MARK: Chips & Badges
-    
-    /// Chip corner radius - fully rounded (255pt)
+    // Chips & Badges
     static let chip: CGFloat = round
-    
-    /// Badge corner radius - fully rounded (255pt)
     static let badge: CGFloat = round
+    static let infochipLarge: CGFloat = medium
+    static let infochipMedium: CGFloat = xSmall
+    static let infochipSmall: CGFloat = xSmall
     
-    /// Infochip large radius (8pt)
-    static let infochipLarge: CGFloat = roundedMedium
+    // Lists & Grids
+    static let listcellInset: CGFloat = xLarge
+    static let verticalGrid: CGFloat = large
+    static let verticalGridInset: CGFloat = xLarge
     
-    /// Infochip medium radius (4pt)
-    static let infochipMedium: CGFloat = roundedXSmall
-    
-    /// Infochip small radius (4pt)
-    static let infochipSmall: CGFloat = roundedXSmall
-    
-    // MARK: Lists & Grids
-    
-    /// Listcell inset radius (16pt)
-    static let listcellInset: CGFloat = roundedXLarge
-    
-    /// Vertical grid corner radius (12pt)
-    static let verticalGrid: CGFloat = roundedLarge
-    
-    /// Vertical grid inset corner radius (16pt)
-    static let verticalGridInset: CGFloat = roundedXLarge
-    
-    // MARK: Glimmer (Loading Placeholders)
-    
-    /// Glimmer corner radius - square (0pt)
+    // Glimmer (Loading)
     static let glimmer: CGFloat = square
+    static let glimmerXSmall: CGFloat = xSmall
+    static let glimmerSmall: CGFloat = small
+    static let glimmerMedium: CGFloat = medium
+    static let glimmerLarge: CGFloat = large
+    static let glimmerXLarge: CGFloat = xLarge
     
-    /// Glimmer XSmall corner radius (4pt)
-    static let glimmerXSmall: CGFloat = roundedXSmall
-    
-    /// Glimmer small corner radius (6pt)
-    static let glimmerSmall: CGFloat = roundedSmall
-    
-    /// Glimmer medium corner radius (8pt)
-    static let glimmerMedium: CGFloat = roundedMedium
-    
-    /// Glimmer large corner radius (12pt)
-    static let glimmerLarge: CGFloat = roundedLarge
-    
-    /// Glimmer XLarge corner radius (16pt)
-    static let glimmerXLarge: CGFloat = roundedXLarge
-    
-    // MARK: Pressed States
-    
-    /// Pressed state square corner radius (0pt)
+    // Pressed States
     static let pressedStateSquare: CGFloat = square
-    
-    /// Pressed state XSmall corner radius (4pt)
-    static let pressedStateXSmall: CGFloat = roundedXSmall
-    
-    /// Pressed state small corner radius (6pt)
-    static let pressedStateSmall: CGFloat = roundedSmall
-    
-    /// Pressed state medium corner radius (8pt)
-    static let pressedStateMedium: CGFloat = roundedMedium
-    
-    /// Pressed state large corner radius (12pt)
-    static let pressedStateLarge: CGFloat = roundedLarge
-    
-    /// Pressed state XLarge corner radius (16pt)
-    static let pressedStateXLarge: CGFloat = roundedXLarge
-    
-    /// Pressed state rounded - fully rounded (255pt)
+    static let pressedStateXSmall: CGFloat = xSmall
+    static let pressedStateSmall: CGFloat = small
+    static let pressedStateMedium: CGFloat = medium
+    static let pressedStateLarge: CGFloat = large
+    static let pressedStateXLarge: CGFloat = xLarge
     static let pressedStateRounded: CGFloat = round
 }
 
-// MARK: - View Extensions
+// MARK: - View Extension
 
 extension View {
-    /// Clips the view to a rounded rectangle with the specified corner radius
     func cornerRadius(_ radius: CGFloat) -> some View {
         clipShape(RoundedRectangle(cornerRadius: radius, style: .continuous))
     }
@@ -210,9 +96,7 @@ extension View {
 // MARK: - RoundedRectangle Convenience
 
 extension RoundedRectangle {
-    /// Creates a rounded rectangle with a PDS corner radius
     static func pds(_ radius: CGFloat) -> RoundedRectangle {
         RoundedRectangle(cornerRadius: radius, style: .continuous)
     }
 }
-

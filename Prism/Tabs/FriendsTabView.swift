@@ -9,22 +9,31 @@ import SwiftUI
 
 struct FriendsTabView: View {
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    Text("Friends")
-                        .typography(Typography.headline1Emphasized)
-                        .foregroundColor(Colors.primaryText)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                .padding(20)
-            }
-            .background(Colors.surfaceBackground)
-            .navigationTitle("Friends")
+        VStack(spacing: 16) {
+            Spacer()
+            
+            Image(systemName: "person.2.fill")
+                .font(.system(size: 48, weight: .light))
+                .foregroundStyle(Colors.iconSecondary)
+                .frame(width: 64, height: 64)
+            
+            Text("Friends")
+                .typography(Typography.headline2Emphasized)
+                .foregroundColor(Colors.textPrimary)
+            
+            Text("Connect with your friends")
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textSecondary)
+            
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Colors.backgroundSurface)
     }
 }
 
 #Preview {
-    FriendsTabView()
+    NavigationStack {
+        FriendsTabView()
+    }
 }

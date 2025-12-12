@@ -7,86 +7,155 @@
 
 import SwiftUI
 
+// MARK: - Appearance Mode
+
+enum AppearanceMode: String, CaseIterable {
+    case auto = "auto"
+    case light = "light"
+    case dark = "dark"
+    
+    var displayName: String {
+        switch self {
+        case .auto: return "Auto"
+        case .light: return "Light"
+        case .dark: return "Dark"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .auto: return "circle.lefthalf.filled"
+        case .light: return "sun.max.fill"
+        case .dark: return "moon.fill"
+        }
+    }
+    
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .auto: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
+}
+
 struct MoreTabView: View {
     @State private var toggleState1 = true
     @State private var toggleState3 = true
+    @AppStorage("appearanceMode") private var appearanceMode: String = AppearanceMode.auto.rawValue
+    
+    private var selectedMode: AppearanceMode {
+        AppearanceMode(rawValue: appearanceMode) ?? .auto
+    }
     
     var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    NavigationLink {
-                        ColorsShowcaseView()
-                    } label: {
+        List {
+            Section {
+                HStack(spacing: 12) {
+                    Image(systemName: selectedMode.icon)
+                        .font(.system(size: 16))
+                        .foregroundColor(Colors.iconPrimary)
+                        .frame(width: 24)
+                    
+                    Picker("Appearance", selection: $appearanceMode) {
+                        ForEach(AppearanceMode.allCases, id: \.rawValue) { mode in
+                            Text(mode.displayName).tag(mode.rawValue)
+                        }
+                    }
+                }
+            } header: {
+                Text("Appearance")
+            }
+            
+            Section {
+                NavigationLink {
+                    ColorsShowcaseView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "paintpalette.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
                         Text("Colors")
                     }
-                    
-                    NavigationLink {
-                        TypographyShowcaseView()
-                    } label: {
-                        Text("Typography")
-                    }
-                    
-                    NavigationLink {
-                        ShadowsShowcaseView()
-                    } label: {
-                        Text("Shadows")
-                    }
-                } header: {
-                    Text("Design System")
-                    }
-                    
-                Section {
-                    NavigationLink {
-                        ButtonsDetailView()
-                    } label: {
-                        Text("Buttons")
-                    }
-                    
-                    NavigationLink {
-                        IconButtonsDetailView()
-                    } label: {
-                        Text("Icon Buttons")
-                    }
-                    
-                    NavigationLink {
-                        ActionChipsDetailView()
-                    } label: {
-                        Text("Action Chips")
-                    }
-                    
-                    NavigationLink {
-                        ListCellsDetailView()
-                    } label: {
-                        Text("List Cells")
-                    }
-                    
-                    NavigationLink {
-                        InstantFeedbackDetailView()
-                    } label: {
-                        Text("Instant Feedback")
-                    }
-                    
-                    NavigationLink {
-                        SubNavigationDetailView()
-                    } label: {
-                        Text("Sub Navigation")
-                    }
-                } header: {
-                    Text("Components")
                 }
                 
-                Section {
-                    Toggle("Notifications", isOn: $toggleState1)
-                        .pdsToggle()
-                    
-                    Toggle("Push Alerts", isOn: $toggleState3)
-                        .pdsToggle()
-                } header: {
-                    Text("Toggles")
+                NavigationLink {
+                    TypographyShowcaseView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "textformat")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
+                        Text("Typography")
+                    }
                 }
+                
+                NavigationLink {
+                    ShadowsShowcaseView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "square.stack.3d.up.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
+                        Text("Shadows")
+                    }
+                }
+            } header: {
+                Text("Foundations")
             }
-            .navigationTitle("More")
+            
+            Section {
+                NavigationLink {
+                    ButtonsDetailView()
+                } label: {
+                    Text("Buttons")
+                }
+                
+                NavigationLink {
+                    IconButtonsDetailView()
+                } label: {
+                    Text("Icon Buttons")
+                }
+                
+                NavigationLink {
+                    ActionChipsDetailView()
+                } label: {
+                    Text("Action Chips")
+                }
+                
+                NavigationLink {
+                    ListCellsDetailView()
+                } label: {
+                    Text("List Cells")
+                }
+                
+                NavigationLink {
+                    InstantFeedbackDetailView()
+                } label: {
+                    Text("Instant Feedback")
+                }
+                
+                NavigationLink {
+                    SubNavigationDetailView()
+                } label: {
+                    Text("Sub Navigation")
+                }
+            } header: {
+                Text("Components")
+            }
+            
+            Section {
+                Toggle("Notifications", isOn: $toggleState1)
+                    .pdsToggle()
+                
+                Toggle("Push Alerts", isOn: $toggleState3)
+                    .pdsToggle()
+            } header: {
+                Text("Toggles")
+            }
         }
     }
 }
@@ -94,410 +163,141 @@ struct MoreTabView: View {
 // MARK: - Colors Showcase
 
 struct ColorsShowcaseView: View {
+    private let steps = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"]
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
                 // Semantic Colors
                 semanticColorsSection
                 
-                // Gray Scale
-                colorPaletteSection(
-                    title: "Gray",
-                    colors: [
-                        ("00", Colors.gray00),
-                        ("05", Colors.gray05),
-                        ("10", Colors.gray10),
-                        ("15", Colors.gray15),
-                        ("20", Colors.gray20),
-                        ("25", Colors.gray25),
-                        ("30", Colors.gray30),
-                        ("35", Colors.gray35),
-                        ("40", Colors.gray40),
-                        ("45", Colors.gray45),
-                        ("50", Colors.gray50),
-                        ("55", Colors.gray55),
-                        ("60", Colors.gray60),
-                        ("65", Colors.gray65),
-                        ("70", Colors.gray70),
-                        ("75", Colors.gray75),
-                        ("80", Colors.gray80),
-                        ("85", Colors.gray85),
-                        ("90", Colors.gray90),
-                        ("95", Colors.gray95),
-                        ("100", Colors.gray100),
-                    ]
-                )
-                
-                // Blue Scale
-                colorPaletteSection(
-                    title: "Blue",
-                    colors: [
-                        ("00", Colors.blue00),
-                        ("05", Colors.blue05),
-                        ("10", Colors.blue10),
-                        ("15", Colors.blue15),
-                        ("20", Colors.blue20),
-                        ("25", Colors.blue25),
-                        ("30", Colors.blue30),
-                        ("35", Colors.blue35),
-                        ("40", Colors.blue40),
-                        ("45", Colors.blue45),
-                        ("50", Colors.blue50),
-                        ("55", Colors.blue55),
-                        ("60", Colors.blue60),
-                        ("65", Colors.blue65),
-                        ("70", Colors.blue70),
-                        ("75", Colors.blue75),
-                        ("80", Colors.blue80),
-                        ("85", Colors.blue85),
-                        ("90", Colors.blue90),
-                        ("95", Colors.blue95),
-                        ("100", Colors.blue100),
-                    ]
-                )
-                
-                // Green Scale
-                colorPaletteSection(
-                    title: "Green",
-                    colors: [
-                        ("05", Colors.green05),
-                        ("10", Colors.green10),
-                        ("15", Colors.green15),
-                        ("20", Colors.green20),
-                        ("25", Colors.green25),
-                        ("30", Colors.green30),
-                        ("35", Colors.green35),
-                        ("40", Colors.green40),
-                        ("45", Colors.green45),
-                        ("50", Colors.green50),
-                        ("55", Colors.green55),
-                        ("60", Colors.green60),
-                        ("65", Colors.green65),
-                        ("70", Colors.green70),
-                        ("75", Colors.green75),
-                        ("80", Colors.green80),
-                        ("85", Colors.green85),
-                        ("90", Colors.green90),
-                        ("95", Colors.green95),
-                        ("100", Colors.green100),
-                    ]
-                )
-                
-                // Cyan Scale
-                colorPaletteSection(
-                    title: "Cyan",
-                    colors: [
-                        ("00", Colors.cyan00),
-                        ("05", Colors.cyan05),
-                        ("10", Colors.cyan10),
-                        ("15", Colors.cyan15),
-                        ("20", Colors.cyan20),
-                        ("25", Colors.cyan25),
-                        ("30", Colors.cyan30),
-                        ("35", Colors.cyan35),
-                        ("40", Colors.cyan40),
-                        ("45", Colors.cyan45),
-                        ("50", Colors.cyan50),
-                        ("55", Colors.cyan55),
-                        ("60", Colors.cyan60),
-                        ("65", Colors.cyan65),
-                        ("70", Colors.cyan70),
-                        ("75", Colors.cyan75),
-                        ("80", Colors.cyan80),
-                        ("85", Colors.cyan85),
-                        ("90", Colors.cyan90),
-                        ("95", Colors.cyan95),
-                        ("100", Colors.cyan100),
-                    ]
-                )
-                
-                // Orange Scale
-                colorPaletteSection(
-                    title: "Orange",
-                    colors: [
-                        ("00", Colors.orange00),
-                        ("05", Colors.orange05),
-                        ("10", Colors.orange10),
-                        ("15", Colors.orange15),
-                        ("20", Colors.orange20),
-                        ("25", Colors.orange25),
-                        ("30", Colors.orange30),
-                        ("35", Colors.orange35),
-                        ("40", Colors.orange40),
-                        ("45", Colors.orange45),
-                        ("50", Colors.orange50),
-                        ("55", Colors.orange55),
-                        ("60", Colors.orange60),
-                        ("66", Colors.orange66),
-                        ("70", Colors.orange70),
-                    ]
-                )
-                
-                // Red Scale
-                colorPaletteSection(
-                    title: "Red",
-                    colors: [
-                        ("00", Colors.red00),
-                        ("05", Colors.red05),
-                        ("10", Colors.red10),
-                        ("15", Colors.red15),
-                        ("20", Colors.red20),
-                        ("25", Colors.red25),
-                        ("30", Colors.red30),
-                        ("35", Colors.red35),
-                        ("40", Colors.red40),
-                        ("45", Colors.red45),
-                        ("50", Colors.red50),
-                        ("55", Colors.red55),
-                        ("60", Colors.red60),
-                        ("65", Colors.red65),
-                        ("70", Colors.red70),
-                        ("75", Colors.red75),
-                        ("80", Colors.red80),
-                        ("85", Colors.red85),
-                        ("90", Colors.red90),
-                        ("95", Colors.red95),
-                        ("100", Colors.red100),
-                    ]
-                )
-                
-                // Yellow Scale
-                colorPaletteSection(
-                    title: "Yellow",
-                    colors: [
-                        ("00", Colors.yellow00),
-                        ("05", Colors.yellow05),
-                        ("10", Colors.yellow10),
-                        ("15", Colors.yellow15),
-                        ("20", Colors.yellow20),
-                        ("25", Colors.yellow25),
-                        ("30", Colors.yellow30),
-                        ("35", Colors.yellow35),
-                        ("40", Colors.yellow40),
-                        ("45", Colors.yellow45),
-                        ("50", Colors.yellow50),
-                        ("55", Colors.yellow55),
-                        ("60", Colors.yellow60),
-                        ("65", Colors.yellow65),
-                        ("70", Colors.yellow70),
-                        ("75", Colors.yellow75),
-                        ("80", Colors.yellow80),
-                        ("85", Colors.yellow85),
-                        ("90", Colors.yellow90),
-                        ("95", Colors.yellow95),
-                        ("100", Colors.yellow100),
-                    ]
-                )
-                
-                // Pink Scale
-                colorPaletteSection(
-                    title: "Pink",
-                    colors: [
-                        ("00", Colors.pink00),
-                        ("05", Colors.pink05),
-                        ("10", Colors.pink10),
-                        ("15", Colors.pink15),
-                        ("20", Colors.pink20),
-                        ("25", Colors.pink25),
-                        ("30", Colors.pink30),
-                        ("35", Colors.pink35),
-                        ("40", Colors.pink40),
-                        ("45", Colors.pink45),
-                        ("50", Colors.pink50),
-                        ("55", Colors.pink55),
-                        ("60", Colors.pink60),
-                        ("65", Colors.pink65),
-                        ("70", Colors.pink70),
-                        ("75", Colors.pink75),
-                        ("80", Colors.pink80),
-                        ("85", Colors.pink85),
-                        ("90", Colors.pink90),
-                        ("95", Colors.pink95),
-                        ("100", Colors.pink100),
-                    ]
-                )
-                
-                // Purple Scale
-                colorPaletteSection(
-                    title: "Purple",
-                    colors: [
-                        ("00", Colors.purple00),
-                        ("05", Colors.purple05),
-                        ("10", Colors.purple10),
-                        ("15", Colors.purple15),
-                        ("20", Colors.purple20),
-                        ("25", Colors.purple25),
-                        ("30", Colors.purple30),
-                        ("35", Colors.purple35),
-                        ("40", Colors.purple40),
-                        ("45", Colors.purple45),
-                        ("50", Colors.purple50),
-                        ("55", Colors.purple55),
-                        ("60", Colors.purple60),
-                        ("65", Colors.purple65),
-                        ("70", Colors.purple70),
-                        ("75", Colors.purple75),
-                        ("80", Colors.purple80),
-                        ("85", Colors.purple85),
-                        ("90", Colors.purple90),
-                        ("95", Colors.purple95),
-                        ("100", Colors.purple100),
-                    ]
-                )
-                
-                // Teal Scale
-                colorPaletteSection(
-                    title: "Teal",
-                    colors: [
-                        ("00", Colors.teal00),
-                        ("05", Colors.teal05),
-                        ("10", Colors.teal10),
-                        ("15", Colors.teal15),
-                        ("20", Colors.teal20),
-                        ("25", Colors.teal25),
-                        ("30", Colors.teal30),
-                        ("35", Colors.teal35),
-                        ("40", Colors.teal40),
-                        ("45", Colors.teal45),
-                        ("50", Colors.teal50),
-                        ("55", Colors.teal55),
-                        ("60", Colors.teal60),
-                        ("65", Colors.teal65),
-                        ("70", Colors.teal70),
-                        ("75", Colors.teal75),
-                        ("80", Colors.teal80),
-                        ("85", Colors.teal85),
-                        ("90", Colors.teal90),
-                        ("95", Colors.teal95),
-                        ("100", Colors.teal100),
-                    ]
-                )
-                
-                // Chartreuse Scale
-                colorPaletteSection(
-                    title: "Chartreuse",
-                    colors: [
-                        ("00", Colors.chartreuse00),
-                        ("05", Colors.chartreuse05),
-                        ("10", Colors.chartreuse10),
-                        ("15", Colors.chartreuse15),
-                        ("20", Colors.chartreuse20),
-                        ("25", Colors.chartreuse25),
-                        ("30", Colors.chartreuse30),
-                        ("35", Colors.chartreuse35),
-                        ("40", Colors.chartreuse40),
-                        ("45", Colors.chartreuse45),
-                        ("50", Colors.chartreuse50),
-                        ("55", Colors.chartreuse55),
-                        ("60", Colors.chartreuse60),
-                        ("65", Colors.chartreuse65),
-                        ("70", Colors.chartreuse70),
-                        ("75", Colors.chartreuse75),
-                        ("80", Colors.chartreuse80),
-                        ("85", Colors.chartreuse85),
-                        ("90", Colors.chartreuse90),
-                        ("95", Colors.chartreuse95),
-                        ("100", Colors.chartreuse100),
-                    ]
-                )
-                
-                // Fuchsia Scale
-                colorPaletteSection(
-                    title: "Fuchsia",
-                    colors: [
-                        ("00", Colors.fuchsia00),
-                        ("05", Colors.fuchsia05),
-                        ("10", Colors.fuchsia10),
-                        ("15", Colors.fuchsia15),
-                        ("20", Colors.fuchsia20),
-                        ("25", Colors.fuchsia25),
-                        ("30", Colors.fuchsia30),
-                        ("35", Colors.fuchsia35),
-                        ("40", Colors.fuchsia40),
-                        ("45", Colors.fuchsia45),
-                        ("50", Colors.fuchsia50),
-                        ("55", Colors.fuchsia55),
-                        ("60", Colors.fuchsia60),
-                        ("65", Colors.fuchsia65),
-                        ("70", Colors.fuchsia70),
-                        ("75", Colors.fuchsia75),
-                        ("80", Colors.fuchsia80),
-                        ("85", Colors.fuchsia85),
-                        ("90", Colors.fuchsia90),
-                        ("95", Colors.fuchsia95),
-                        ("100", Colors.fuchsia100),
-                    ]
-                )
-                
-                // Magenta Scale
-                colorPaletteSection(
-                    title: "Magenta",
-                    colors: [
-                        ("00", Colors.magenta00),
-                        ("05", Colors.magenta05),
-                        ("10", Colors.magenta10),
-                        ("15", Colors.magenta15),
-                        ("20", Colors.magenta20),
-                        ("25", Colors.magenta25),
-                        ("30", Colors.magenta30),
-                        ("35", Colors.magenta35),
-                        ("40", Colors.magenta40),
-                        ("45", Colors.magenta45),
-                        ("50", Colors.magenta50),
-                        ("55", Colors.magenta55),
-                        ("60", Colors.magenta60),
-                        ("65", Colors.magenta65),
-                        ("70", Colors.magenta70),
-                        ("75", Colors.magenta75),
-                        ("80", Colors.magenta80),
-                        ("85", Colors.magenta85),
-                        ("90", Colors.magenta90),
-                        ("95", Colors.magenta95),
-                        ("100", Colors.magenta100),
-                    ]
-                )
-                
-                // Black & White
-                colorPaletteSection(
-                    title: "Black (Alpha)",
-                    colors: [
-                        ("100%", Colors.black),
-                        ("80%", Colors.blackAlpha80),
-                        ("65%", Colors.blackAlpha65),
-                        ("60%", Colors.blackAlpha60),
-                        ("50%", Colors.blackAlpha50),
-                        ("40%", Colors.blackAlpha40),
-                        ("35%", Colors.blackAlpha35),
-                        ("30%", Colors.blackAlpha30),
-                        ("20%", Colors.blackAlpha20),
-                        ("15%", Colors.blackAlpha15),
-                        ("10%", Colors.blackAlpha10),
-                        ("05%", Colors.blackAlpha05),
-                    ]
-                )
-                
-                colorPaletteSection(
-                    title: "White (Alpha)",
-                    colors: [
-                        ("100%", Colors.white),
-                        ("90%", Colors.whiteAlpha90),
-                        ("80%", Colors.whiteAlpha80),
-                        ("60%", Colors.whiteAlpha60),
-                        ("50%", Colors.whiteAlpha50),
-                        ("40%", Colors.whiteAlpha40),
-                        ("30%", Colors.whiteAlpha30),
-                        ("20%", Colors.whiteAlpha20),
-                        ("15%", Colors.whiteAlpha15),
-                        ("10%", Colors.whiteAlpha10),
-                        ("05%", Colors.whiteAlpha05),
-                    ]
-                )
+                // Raw Color Palette
+                rawColorPaletteSection
             }
             .padding(20)
         }
         .background(Colors.surfaceBackground)
         .navigationTitle("Colors")
         .navigationBarTitleDisplayMode(.large)
+    }
+    
+    // MARK: - Raw Color Palette
+    
+    private var rawColorPaletteSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            // Header
+            Text("Color Palette")
+                .typography(Typography.headline2Emphasized)
+                .foregroundColor(Colors.textPrimary)
+            
+            // Step Numbers + Color Rows
+            VStack(alignment: .leading, spacing: 12) {
+                // Step Numbers Header
+                HStack(spacing: 0) {
+                    // Spacer for color name column
+                    Color.clear
+                        .frame(width: 70)
+                    
+                    ForEach(steps, id: \.self) { step in
+                        Text(step)
+                            .typography(Typography.meta4)
+                            .foregroundColor(Colors.textSecondary)
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                
+                // Color Rows
+                colorRow("Red", colors: [
+                    Colors.red50, Colors.red100, Colors.red200, Colors.red300, Colors.red400,
+                    Colors.red500, Colors.red600, Colors.red700, Colors.red800, Colors.red900, Colors.red950
+                ])
+                
+                colorRow("Orange", colors: [
+                    Colors.orange50, Colors.orange100, Colors.orange200, Colors.orange300, Colors.orange400,
+                    Colors.orange500, Colors.orange600, Colors.orange700, Colors.orange800, Colors.orange900, Colors.orange950
+                ])
+                
+                colorRow("Yellow", colors: [
+                    Colors.yellow50, Colors.yellow100, Colors.yellow200, Colors.yellow300, Colors.yellow400,
+                    Colors.yellow500, Colors.yellow600, Colors.yellow700, Colors.yellow800, Colors.yellow900, Colors.yellow950
+                ])
+                
+                colorRow("Lime", colors: [
+                    Colors.lime50, Colors.lime100, Colors.lime200, Colors.lime300, Colors.lime400,
+                    Colors.lime500, Colors.lime600, Colors.lime700, Colors.lime800, Colors.lime900, Colors.lime950
+                ])
+                
+                colorRow("Green", colors: [
+                    Colors.green50, Colors.green100, Colors.green200, Colors.green300, Colors.green400,
+                    Colors.green500, Colors.green600, Colors.green700, Colors.green800, Colors.green900, Colors.green950
+                ])
+                
+                colorRow("Teal", colors: [
+                    Colors.teal50, Colors.teal100, Colors.teal200, Colors.teal300, Colors.teal400,
+                    Colors.teal500, Colors.teal600, Colors.teal700, Colors.teal800, Colors.teal900, Colors.teal950
+                ])
+                
+                colorRow("Cyan", colors: [
+                    Colors.cyan50, Colors.cyan100, Colors.cyan200, Colors.cyan300, Colors.cyan400,
+                    Colors.cyan500, Colors.cyan600, Colors.cyan700, Colors.cyan800, Colors.cyan900, Colors.cyan950
+                ])
+                
+                colorRow("Blue", colors: [
+                    Colors.blue50, Colors.blue100, Colors.blue200, Colors.blue300, Colors.blue400,
+                    Colors.blue500, Colors.blue600, Colors.blue700, Colors.blue800, Colors.blue900, Colors.blue950
+                ])
+                
+                colorRow("Violet", colors: [
+                    Colors.violet50, Colors.violet100, Colors.violet200, Colors.violet300, Colors.violet400,
+                    Colors.violet500, Colors.violet600, Colors.violet700, Colors.violet800, Colors.violet900, Colors.violet950
+                ])
+                
+                colorRow("Purple", colors: [
+                    Colors.purple50, Colors.purple100, Colors.purple200, Colors.purple300, Colors.purple400,
+                    Colors.purple500, Colors.purple600, Colors.purple700, Colors.purple800, Colors.purple900, Colors.purple950
+                ])
+                
+                colorRow("Fuchsia", colors: [
+                    Colors.fuchsia50, Colors.fuchsia100, Colors.fuchsia200, Colors.fuchsia300, Colors.fuchsia400,
+                    Colors.fuchsia500, Colors.fuchsia600, Colors.fuchsia700, Colors.fuchsia800, Colors.fuchsia900, Colors.fuchsia950
+                ])
+                
+                colorRow("Magenta", colors: [
+                    Colors.magenta50, Colors.magenta100, Colors.magenta200, Colors.magenta300, Colors.magenta400,
+                    Colors.magenta500, Colors.magenta600, Colors.magenta700, Colors.magenta800, Colors.magenta900, Colors.magenta950
+                ])
+                
+                colorRow("Pink", colors: [
+                    Colors.pink50, Colors.pink100, Colors.pink200, Colors.pink300, Colors.pink400,
+                    Colors.pink500, Colors.pink600, Colors.pink700, Colors.pink800, Colors.pink900, Colors.pink950
+                ])
+                
+                colorRow("Gray", colors: [
+                    Colors.gray50, Colors.gray100, Colors.gray200, Colors.gray300, Colors.gray400,
+                    Colors.gray500, Colors.gray600, Colors.gray700, Colors.gray800, Colors.gray900, Colors.gray950
+                ])
+            }
+        }
+    }
+    
+    private func colorRow(_ name: String, colors: [Color]) -> some View {
+        HStack(spacing: 0) {
+            // Color name
+            Text(name)
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textPrimary)
+                .frame(width: 70, alignment: .leading)
+            
+            // Color swatches
+            HStack(spacing: 2) {
+                ForEach(0..<colors.count, id: \.self) { index in
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(colors[index])
+                        .frame(maxWidth: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                }
+            }
+        }
     }
     
     private var semanticColorsSection: some View {
@@ -592,31 +392,6 @@ struct ColorsShowcaseView: View {
         semanticColorGroup(title: title, colors: colors.map { ($0.0, $0.1, false) })
     }
     
-    private func colorPaletteSection(title: String, colors: [(String, Color)]) -> some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text(title)
-                .typography(Typography.headline2Emphasized)
-                .foregroundColor(Colors.textPrimary)
-            
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 4), count: 7), spacing: 4) {
-                ForEach(colors, id: \.0) { (label, color) in
-                    VStack(spacing: 4) {
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(color)
-                            .frame(height: 40)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Colors.elevationBorderEmphasis, lineWidth: 1)
-                            )
-                        
-                        Text(label)
-                            .typography(Typography.meta4)
-                            .foregroundColor(Colors.textSecondary)
-                    }
-                }
-            }
-        }
-    }
 }
 
 struct SemanticColorCard: View {
@@ -1200,7 +975,8 @@ struct IconButtonsDetailView: View {
                                 }
                             }
                         }
-                        .padding(16)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
                     }
                 }
                 
@@ -1558,7 +1334,7 @@ struct SubNavigationDetailView: View {
                         items: [
                             PDSSubNavItem(id: "all", title: "All"),
                             PDSSubNavItem(id: "posts", title: "Posts"),
-                            PDSSubNavItem(id: "reels", title: "Reels"),
+                            PDSSubNavItem(id: "videos", title: "Videos"),
                             PDSSubNavItem(id: "tagged", title: "Tagged")
                         ],
                         selectedId: $selectedStandard
@@ -1600,11 +1376,11 @@ struct SubNavigationDetailView: View {
                             PDSSubNavItem(id: "item1", title: "For You"),
                             PDSSubNavItem(id: "item2", title: "Following"),
                             PDSSubNavItem(id: "item3", title: "Favorites"),
-                            PDSSubNavItem(id: "item4", title: "Groups"),
-                            PDSSubNavItem(id: "item5", title: "Pages"),
-                            PDSSubNavItem(id: "item6", title: "Events"),
-                            PDSSubNavItem(id: "item7", title: "Marketplace"),
-                            PDSSubNavItem(id: "item8", title: "Gaming")
+                            PDSSubNavItem(id: "item4", title: "Events"),
+                            PDSSubNavItem(id: "item5", title: "Saved"),
+                            PDSSubNavItem(id: "item6", title: "Trending"),
+                            PDSSubNavItem(id: "item7", title: "Shop"),
+                            PDSSubNavItem(id: "item8", title: "Latest")
                         ],
                         selectedId: $selectedScrollable
                     )
@@ -1657,6 +1433,9 @@ struct SubNavigationDetailView: View {
 }
 
 #Preview {
-    MoreTabView()
+    NavigationStack {
+        MoreTabView()
+            .navigationTitle("More")
+    }
 }
 

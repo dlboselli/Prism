@@ -458,7 +458,7 @@ extension View {
                     RoundedRectangle(cornerRadius: CornerRadius.card)
                         .fill(
                             LinearGradient(
-                                colors: [Colors.gray30, Colors.gray50],
+                                colors: [Colors.gray700, Colors.gray500],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )

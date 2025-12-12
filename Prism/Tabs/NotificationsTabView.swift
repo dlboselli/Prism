@@ -9,15 +9,23 @@ import SwiftUI
 
 struct NotificationsTabView: View {
     var body: some View {
-        VStack {
-            Text("Notifications")
-                .font(.largeTitle)
+        ScrollView {
+            VStack(spacing: 16) {
+                Text("Notifications")
+                    .typography(Typography.headline1Emphasized)
+                    .foregroundColor(Colors.primaryText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(20)
         }
-        .padding()
+        .background(Colors.surfaceBackground)
+        .navigationTitle("Notifications")
     }
 }
 
 #Preview {
-    NotificationsTabView()
+    NavigationStack {
+        NotificationsTabView()
+    }
 }
 

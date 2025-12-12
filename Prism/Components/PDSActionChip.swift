@@ -35,7 +35,7 @@ struct PDSActionChipStyle: ButtonStyle {
     private func foregroundColor(isPressed: Bool) -> Color {
         if isSelected {
             // Light: accent blue, Dark: black (for white background)
-            return Color(light: Colors.persistentAccent, dark: Colors.gray00)
+            return Color(light: Colors.persistentAccent, dark: Colors.gray950)
         }
         return isPressed ? Colors.textPrimary : Colors.textSecondary
     }
@@ -54,7 +54,7 @@ struct PDSActionChipStyle: ButtonStyle {
 struct PDSDismissibleChipStyle: ButtonStyle {
     // Light: accent blue, Dark: black (for white background)
     private var foregroundColor: Color {
-        Color(light: Colors.persistentAccent, dark: Colors.gray00)
+        Color(light: Colors.persistentAccent, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
@@ -90,7 +90,7 @@ struct PDSEmojiChipStyle: ButtonStyle {
     
     // Light: accent blue, Dark: black (for white background)
     private var selectedTextColor: Color {
-        Color(light: Colors.persistentAccent, dark: Colors.gray00)
+        Color(light: Colors.persistentAccent, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
