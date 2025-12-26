@@ -127,8 +127,11 @@ struct PDSToggleCell: View {
 struct PDSAvatarCell: View {
     let title: String
     var subtitle: String? = nil
-    var avatarIcon: String = "person.fill"
-    var avatarSize: CGFloat = 44
+    var avatarURL: URL? = nil
+    var avatarImage: String? = nil
+    var avatarInitials: String? = nil
+    var avatarBadge: PDSActorBadgeType? = nil
+    var avatarSize: PDSActorSize = .medium
     var showChevron: Bool = false
     var action: (() -> Void)? = nil
     
@@ -136,8 +139,8 @@ struct PDSAvatarCell: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            // Avatar
-            PDSAvatarLeading(image: avatarIcon, size: avatarSize)
+            // Avatar using PDSActor
+            actorView
             
             // Text content
             VStack(alignment: .leading, spacing: 2) {
@@ -178,6 +181,19 @@ struct PDSAvatarCell: View {
             }
         }
     }
+    
+    @ViewBuilder
+    private var actorView: some View {
+        if let url = avatarURL {
+            PDSActor(url: url, size: avatarSize, badge: avatarBadge)
+        } else if let image = avatarImage {
+            PDSActor(image: image, size: avatarSize, badge: avatarBadge)
+        } else if let initials = avatarInitials {
+            PDSActor(initials: initials, size: avatarSize, badge: avatarBadge)
+        } else {
+            PDSActor(size: avatarSize, badge: avatarBadge)
+        }
+    }
 }
 
 // MARK: - Helper Views
@@ -197,31 +213,6 @@ struct PDSIconLeading: View {
                 RoundedRectangle(cornerRadius: CornerRadius.button)
                     .fill(backgroundColor)
             )
-    }
-}
-
-/// Helper for creating cells with avatar images
-struct PDSAvatarLeading: View {
-    let image: String? // System name or asset name
-    var size: CGFloat = 44
-    
-    var body: some View {
-        Group {
-            if let image = image {
-                Image(systemName: image)
-                    .font(.system(size: size * 0.4))
-                    .foregroundColor(Colors.iconPlaceholder)
-            } else {
-                Image(systemName: "person.fill")
-                    .font(.system(size: size * 0.4))
-                    .foregroundColor(Colors.iconPlaceholder)
-            }
-        }
-        .frame(width: size, height: size)
-        .background(
-            Circle()
-                .fill(Colors.backgroundDeemphasized)
-        )
     }
 }
 
@@ -319,6 +310,8 @@ struct PDSAvatarLeading: View {
             PDSAvatarCell(
                 title: "John Doe",
                 subtitle: "Last seen 5 min ago",
+                avatarInitials: "JD",
+                avatarBadge: .offline,
                 action: { }
             )
             
@@ -328,6 +321,8 @@ struct PDSAvatarLeading: View {
             PDSAvatarCell(
                 title: "Jane Smith",
                 subtitle: "Online",
+                avatarInitials: "JS",
+                avatarBadge: .online,
                 showChevron: true,
                 action: { }
             )

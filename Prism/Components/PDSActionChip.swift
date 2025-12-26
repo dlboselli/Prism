@@ -1,3 +1,37 @@
+//
+//  PDSActionChip.swift
+//  Prism
+//
+//  Part of the Prism Design System (PDS)
+//
+//  Action chips are pill-shaped buttons used for filters, selections,
+//  and contextual actions. They support selected/unselected states,
+//  icons, dismissible badges, and author avatars.
+//
+//  Usage:
+//  ```swift
+//  // Standard chip
+//  Button("Filter") { }
+//      .pdsActionChip()
+//
+//  // Selected state
+//  Button("Active") { }
+//      .pdsActionChip(isSelected: true)
+//
+//  // With icon
+//  Button("Add") { }
+//      .pdsActionChip(icon: "plus")
+//
+//  // Dismissible badge
+//  Button("Tag") { }
+//      .pdsActionChipBadge(onDismiss: { })
+//
+//  // Author chip with avatar
+//  Button("John Doe") { }
+//      .pdsAuthorChip(actorInitials: "JD", name: "John Doe")
+//  ```
+//
+
 import SwiftUI
 
 // MARK: - Action Chip Styles
@@ -83,6 +117,67 @@ struct PDSDismissibleChipStyle: ButtonStyle {
     }
 }
 
+/// Author chip style - includes actor avatar with name
+struct PDSAuthorChipStyle: ButtonStyle {
+    var actorURL: URL? = nil
+    var actorInitials: String? = nil
+    var isSelected: Bool = false
+    
+    // Light: accent blue, Dark: black (for white background)
+    private var selectedTextColor: Color {
+        Color(light: Colors.persistentAccent, dark: Colors.gray950)
+    }
+    
+    // Light: light blue, Dark: white
+    private var selectedBgColor: Color {
+        Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+    }
+    
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 8) {
+            // Actor avatar
+            if let url = actorURL {
+                PDSActor(url: url, size: .xsmall)
+            } else if let initials = actorInitials {
+                PDSActor(initials: initials, size: .xsmall)
+            } else {
+                PDSActor(size: .xsmall)
+            }
+            
+            configuration.label
+                .typography(Typography.button3)
+        }
+        .foregroundColor(foregroundColor(isPressed: configuration.isPressed))
+        .padding(.leading, 4)
+        .padding(.trailing, 14)
+        .padding(.vertical, 4)
+        .background(
+            Capsule()
+                .fill(backgroundColor(isPressed: configuration.isPressed))
+        )
+        .overlay(
+            Capsule()
+                .stroke(isSelected ? Color.clear : Colors.elevationBorderEmphasis, lineWidth: 1)
+        )
+        .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+        .animation(.easeInOut(duration: 0.15), value: configuration.isPressed)
+    }
+    
+    private func foregroundColor(isPressed: Bool) -> Color {
+        if isSelected {
+            return selectedTextColor
+        }
+        return isPressed ? Colors.textPrimary : Colors.textSecondary
+    }
+    
+    private func backgroundColor(isPressed: Bool) -> Color {
+        if isSelected {
+            return isPressed ? selectedBgColor.opacity(0.7) : selectedBgColor
+        }
+        return isPressed ? Colors.backgroundDeemphasized : Colors.backgroundCard
+    }
+}
+
 /// Emoji chip style - for reaction-style chips with emoji
 struct PDSEmojiChipStyle: ButtonStyle {
     var count: Int? = nil
@@ -143,6 +238,19 @@ extension View {
     /// Applies PDS emoji chip style
     func pdsEmojiChip(count: Int? = nil, isSelected: Bool = false) -> some View {
         self.buttonStyle(PDSEmojiChipStyle(count: count, isSelected: isSelected))
+    }
+    
+    /// Applies PDS author chip style with actor avatar
+    func pdsAuthorChip(
+        actorURL: URL? = nil,
+        actorInitials: String? = nil,
+        isSelected: Bool = false
+    ) -> some View {
+        self.buttonStyle(PDSAuthorChipStyle(
+            actorURL: actorURL,
+            actorInitials: actorInitials,
+            isSelected: isSelected
+        ))
     }
 }
 
@@ -231,6 +339,26 @@ extension View {
                 
                 Button("😮") { }
                     .pdsEmojiChip()
+            }
+        }
+        
+        // Author chips
+        VStack(alignment: .leading, spacing: 12) {
+            Text("Author Chips")
+                .typography(Typography.meta1)
+                .foregroundColor(Colors.textSecondary)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    Button("John Doe") { }
+                        .pdsAuthorChip(actorInitials: "JD", isSelected: true)
+                    
+                    Button("Jane Smith") { }
+                        .pdsAuthorChip(actorInitials: "JS")
+                    
+                    Button("Alex Chen") { }
+                        .pdsAuthorChip(actorInitials: "AC")
+                }
             }
         }
     }

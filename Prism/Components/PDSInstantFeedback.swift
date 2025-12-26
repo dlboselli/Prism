@@ -70,6 +70,12 @@ struct PDSInstantFeedback: View {
     /// Optional custom icon (overrides type icon)
     var icon: String? = nil
     
+    /// Optional actor URL (displays avatar before message)
+    var actorURL: URL? = nil
+    
+    /// Optional actor initials (displays avatar before message, used if no URL)
+    var actorInitials: String? = nil
+    
     /// Optional action button text
     var actionText: String? = nil
     
@@ -84,6 +90,11 @@ struct PDSInstantFeedback: View {
     
     /// Position on screen
     var position: PDSInstantFeedbackPosition = .bottom
+    
+    /// Whether to show an actor (computed)
+    private var hasActor: Bool {
+        actorURL != nil || actorInitials != nil
+    }
     
     // MARK: - Private State
     
@@ -118,8 +129,15 @@ struct PDSInstantFeedback: View {
     
     private var feedbackContent: some View {
         HStack(spacing: 12) {
-            // Icon
-            if let iconName = icon ?? type.icon {
+            // Actor (takes precedence over icon)
+            if hasActor {
+                if let url = actorURL {
+                    PDSActor(url: url, size: .small)
+                } else if let initials = actorInitials {
+                    PDSActor(initials: initials, size: .small)
+                }
+            } else if let iconName = icon ?? type.icon {
+                // Icon (only shown if no actor)
                 Image(systemName: iconName)
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(icon != nil ? Colors.iconPrimaryOnColor : type.iconColor)
@@ -195,6 +213,8 @@ struct PDSInstantFeedbackModifier: ViewModifier {
     let message: String
     var type: PDSInstantFeedbackType = .neutral
     var icon: String? = nil
+    var actorURL: URL? = nil
+    var actorInitials: String? = nil
     var actionText: String? = nil
     var action: (() -> Void)? = nil
     @Binding var isPresented: Bool
@@ -214,6 +234,8 @@ struct PDSInstantFeedbackModifier: ViewModifier {
                     message: message,
                     type: type,
                     icon: icon,
+                    actorURL: actorURL,
+                    actorInitials: actorInitials,
                     actionText: actionText,
                     action: action,
                     isPresented: $isPresented,
@@ -246,10 +268,25 @@ extension View {
     ///   - isPresented: Binding to control visibility
     ///   - autoDismissAfter: Duration before auto-dismiss (nil = no auto-dismiss)
     ///   - position: Position on screen (top or bottom)
+    /// Displays instant feedback (toast) overlaid on the view
+    ///
+    /// - Parameters:
+    ///   - message: The message to display
+    ///   - type: The type of feedback (neutral, success, error, warning)
+    ///   - icon: Optional custom icon name (overrides type icon)
+    ///   - actorURL: Optional actor URL for user-context messages
+    ///   - actorInitials: Optional actor initials (used if no URL)
+    ///   - actionText: Optional action button text
+    ///   - action: Optional action callback
+    ///   - isPresented: Binding to control visibility
+    ///   - autoDismissAfter: Duration before auto-dismiss (nil = no auto-dismiss)
+    ///   - position: Position on screen (top or bottom)
     func pdsInstantFeedback(
         message: String,
         type: PDSInstantFeedbackType = .neutral,
         icon: String? = nil,
+        actorURL: URL? = nil,
+        actorInitials: String? = nil,
         actionText: String? = nil,
         action: (() -> Void)? = nil,
         isPresented: Binding<Bool>,
@@ -260,6 +297,8 @@ extension View {
             message: message,
             type: type,
             icon: icon,
+            actorURL: actorURL,
+            actorInitials: actorInitials,
             actionText: actionText,
             action: action,
             isPresented: isPresented,
@@ -278,6 +317,8 @@ class PDSInstantFeedbackManager: ObservableObject {
     @Published var message: String = ""
     @Published var type: PDSInstantFeedbackType = .neutral
     @Published var icon: String? = nil
+    @Published var actorURL: URL? = nil
+    @Published var actorInitials: String? = nil
     @Published var actionText: String? = nil
     @Published var position: PDSInstantFeedbackPosition = .bottom
     
@@ -288,6 +329,8 @@ class PDSInstantFeedbackManager: ObservableObject {
         _ message: String,
         type: PDSInstantFeedbackType = .neutral,
         icon: String? = nil,
+        actorURL: URL? = nil,
+        actorInitials: String? = nil,
         actionText: String? = nil,
         action: (() -> Void)? = nil,
         position: PDSInstantFeedbackPosition = .bottom
@@ -295,6 +338,8 @@ class PDSInstantFeedbackManager: ObservableObject {
         self.message = message
         self.type = type
         self.icon = icon
+        self.actorURL = actorURL
+        self.actorInitials = actorInitials
         self.actionText = actionText
         self.action = action
         self.position = position
@@ -342,6 +387,8 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
                 message: manager.message,
                 type: manager.type,
                 icon: manager.icon,
+                actorURL: manager.actorURL,
+                actorInitials: manager.actorInitials,
                 actionText: manager.actionText,
                 action: manager.performAction,
                 isPresented: $manager.isPresented,

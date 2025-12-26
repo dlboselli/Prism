@@ -111,6 +111,31 @@ struct Typography {
     static let metaSecondary = SemanticStyle(typography: meta3, color: Colors.textSecondary)
 }
 
+// MARK: - Font Accessors
+
+extension Typography {
+    /// Get just the font from a style (useful for TextFields where tracking causes issues)
+    static func font(_ style: Style) -> Font {
+        style.font
+    }
+    
+    // MARK: - Common Font Shortcuts
+    
+    /// Inter Regular fonts for TextField use
+    enum Fonts {
+        static let body1 = Font.custom("Inter-Regular", size: 20)
+        static let body2 = Font.custom("Inter-Regular", size: 17)
+        static let body3 = Font.custom("Inter-Regular", size: 15)
+        static let body4 = Font.custom("Inter-Regular", size: 13)
+        
+        static let headline3 = Font.custom("Inter-Medium", size: 17)
+        static let headline4 = Font.custom("Inter-Medium", size: 15)
+        
+        static let meta3 = Font.custom("Inter-Regular", size: 13)
+        static let meta4 = Font.custom("Inter-Regular", size: 12)
+    }
+}
+
 // MARK: - View Extension
 
 extension View {
@@ -120,5 +145,11 @@ extension View {
     
     func typography(_ style: Typography.SemanticStyle) -> some View {
         style.apply(to: self)
+    }
+    
+    /// Apply just the font from a typography style (no tracking)
+    /// Use for TextFields where tracking causes placeholder misalignment
+    func typographyFont(_ style: Typography.Style) -> some View {
+        self.font(style.font)
     }
 }

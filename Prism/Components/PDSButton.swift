@@ -4,10 +4,13 @@ import SwiftUI
 
 /// Button style variants
 enum PDSButtonVariant {
-    case primary              // Filled accent background
-    case primaryDeemphasized  // Light accent background with accent text
-    case secondary            // Gray background
-    case destructive          // Red filled background
+    case primary                  // Filled accent background
+    case primaryDeemphasized      // Light accent background with accent text
+    case secondary                // Gray background
+    case destructive              // Red filled background
+    case destructiveDeemphasized  // Light red background with red text
+    case warning                  // Warning filled background
+    case warningDeemphasized      // Light warning background with warning text
 }
 
 /// Button context for specialized backgrounds
@@ -136,7 +139,19 @@ struct PDSButtonStyle: ButtonStyle {
             
         // Destructive
         case (.destructive, _):
-            return Colors.textPrimaryOnColor
+            return Colors.destructiveButtonText
+            
+        // Destructive Secondary
+        case (.destructiveDeemphasized, _):
+            return Colors.destructiveDeemphasizedButtonText
+            
+        // Warning
+        case (.warning, _):
+            return Colors.warningButtonText
+            
+        // Warning Secondary
+        case (.warningDeemphasized, _):
+            return Colors.warningDeemphasizedButtonText
         }
     }
     
@@ -152,7 +167,7 @@ struct PDSButtonStyle: ButtonStyle {
         // Primary variants
         case (.primary, .surface):
             baseColor = Colors.primaryButtonBackground
-            pressedColor = Colors.interactivePrimaryPressed
+            pressedColor = Colors.primaryButtonBackgroundPressed
         case (.primary, .onColor):
             baseColor = Colors.primaryButtonBackgroundOnColor
             pressedColor = Colors.primaryButtonBackgroundOnColor.opacity(0.8)
@@ -184,8 +199,23 @@ struct PDSButtonStyle: ButtonStyle {
             
         // Destructive
         case (.destructive, _):
-            baseColor = Colors.persistentNegative
-            pressedColor = Colors.persistentNegative.opacity(0.8)
+            baseColor = Colors.destructiveButtonBackground
+            pressedColor = Colors.destructiveButtonBackgroundPressed
+            
+        // Destructive Secondary
+        case (.destructiveDeemphasized, _):
+            baseColor = Colors.destructiveDeemphasizedButtonBackground
+            pressedColor = Colors.destructiveDeemphasizedButtonBackground.opacity(0.7)
+            
+        // Warning
+        case (.warning, _):
+            baseColor = Colors.warningButtonBackground
+            pressedColor = Colors.warningButtonBackgroundPressed
+            
+        // Warning Secondary
+        case (.warningDeemphasized, _):
+            baseColor = Colors.warningDeemphasizedButtonBackground
+            pressedColor = Colors.warningDeemphasizedButtonBackground.opacity(0.7)
         }
         
         return isPressed ? pressedColor : baseColor
@@ -193,10 +223,10 @@ struct PDSButtonStyle: ButtonStyle {
     
     private var disabledBackgroundColor: Color {
         switch variant {
-        case .primary, .primaryDeemphasized, .secondary:
+        case .primary, .primaryDeemphasized, .secondary, .destructiveDeemphasized, .warningDeemphasized:
             return Colors.disabledButtonBackground
-        case .destructive:
-            return Colors.persistentNegative.opacity(0.4)
+        case .destructive, .warning:
+            return Colors.disabledButtonBackground
         }
     }
 }
@@ -269,7 +299,16 @@ struct PDSIconOnlyButtonStyle: ButtonStyle {
         case (.secondary, .onMedia):
             return Colors.secondaryButtonIconOnMedia
         case (.destructive, _):
-            return Colors.textPrimaryOnColor
+            return Colors.destructiveButtonText
+            
+        case (.destructiveDeemphasized, _):
+            return Colors.destructiveDeemphasizedButtonText
+            
+        case (.warning, _):
+            return Colors.warningButtonText
+            
+        case (.warningDeemphasized, _):
+            return Colors.warningDeemphasizedButtonText
         }
     }
     
@@ -284,7 +323,7 @@ struct PDSIconOnlyButtonStyle: ButtonStyle {
         switch (variant, context) {
         case (.primary, .surface):
             baseColor = Colors.primaryButtonBackground
-            pressedColor = Colors.interactivePrimaryPressed
+            pressedColor = Colors.primaryButtonBackgroundPressed
         case (.primary, .onColor):
             baseColor = Colors.primaryButtonBackgroundOnColor
             pressedColor = Colors.primaryButtonBackgroundOnColor.opacity(0.8)
@@ -304,8 +343,17 @@ struct PDSIconOnlyButtonStyle: ButtonStyle {
             baseColor = Colors.secondaryButtonBackgroundOnMedia
             pressedColor = Colors.secondaryButtonBackgroundOnMedia.opacity(0.8)
         case (.destructive, _):
-            baseColor = Colors.persistentNegative
-            pressedColor = Colors.persistentNegative.opacity(0.8)
+            baseColor = Colors.destructiveButtonBackground
+            pressedColor = Colors.destructiveButtonBackgroundPressed
+        case (.destructiveDeemphasized, _):
+            baseColor = Colors.destructiveDeemphasizedButtonBackground
+            pressedColor = Colors.destructiveDeemphasizedButtonBackground.opacity(0.7)
+        case (.warning, _):
+            baseColor = Colors.warningButtonBackground
+            pressedColor = Colors.warningButtonBackgroundPressed
+        case (.warningDeemphasized, _):
+            baseColor = Colors.warningDeemphasizedButtonBackground
+            pressedColor = Colors.warningDeemphasizedButtonBackground.opacity(0.7)
         }
         
         return isPressed ? pressedColor : baseColor
@@ -313,10 +361,10 @@ struct PDSIconOnlyButtonStyle: ButtonStyle {
     
     private var disabledBackgroundColor: Color {
         switch variant {
-        case .primary, .primaryDeemphasized, .secondary:
+        case .primary, .primaryDeemphasized, .secondary, .destructiveDeemphasized, .warningDeemphasized:
             return Colors.disabledButtonBackground
-        case .destructive:
-            return Colors.persistentNegative.opacity(0.4)
+        case .destructive, .warning:
+            return Colors.disabledButtonBackground
         }
     }
 }
