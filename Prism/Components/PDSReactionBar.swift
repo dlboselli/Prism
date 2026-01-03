@@ -170,15 +170,10 @@ struct PDSReactionBar: View {
     }
     
     private var reactionIcons: some View {
-        HStack(spacing: -4) {
+        HStack(spacing: 2) {
             ForEach(summary.topThreeReactions, id: \.self) { reaction in
                 Text(reaction.icon)
                     .font(.system(size: 16))
-                    .background(
-                        Circle()
-                            .fill(Colors.backgroundSurface)
-                            .frame(width: 20, height: 20)
-                    )
             }
         }
     }
@@ -215,17 +210,20 @@ struct PDSReactionActors: View {
     let reactors: [PDSReactorInfo]
     let totalCount: Int
     let maxVisible: Int
+    let borderColor: Color
     let onTap: (() -> Void)?
     
     init(
         reactors: [PDSReactorInfo],
         totalCount: Int,
         maxVisible: Int = 3,
+        borderColor: Color = Colors.backgroundSurface,
         onTap: (() -> Void)? = nil
     ) {
         self.reactors = reactors
         self.totalCount = totalCount
         self.maxVisible = maxVisible
+        self.borderColor = borderColor
         self.onTap = onTap
     }
     
@@ -235,7 +233,8 @@ struct PDSReactionActors: View {
                 PDSActorStack(
                     urls: reactors.prefix(maxVisible).map { $0.url },
                     size: .xsmall,
-                    maxVisible: maxVisible
+                    maxVisible: maxVisible,
+                    borderColor: borderColor
                 )
                 
                 if totalCount > maxVisible {
@@ -464,7 +463,7 @@ struct PDSPostActions: View {
                 
                 Text(label)
                     .typography(Typography.button3)
-                    .foregroundColor(isActive ? Colors.persistentAccent : Colors.textSecondary)
+                    .foregroundColor(isActive ? Colors.textBlueLink : Colors.textSecondary)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
@@ -480,8 +479,8 @@ struct PDSPostActions: View {
         // Reaction bar with counts
         VStack(alignment: .leading, spacing: 8) {
             Text("Reaction Bar")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             PDSReactionBar(
                 summary: PDSReactionSummary(
@@ -501,8 +500,8 @@ struct PDSPostActions: View {
         // Reaction bar with names
         VStack(alignment: .leading, spacing: 8) {
             Text("With Reactor Names")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             PDSReactionBar(
                 summary: PDSReactionSummary(
@@ -524,10 +523,12 @@ struct PDSPostActions: View {
         // Post actions
         VStack(alignment: .leading, spacing: 8) {
             Text("Post Actions")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSPostActions(
                 onLike: {},
@@ -535,7 +536,9 @@ struct PDSPostActions: View {
                 onShare: {}
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSPostActions(
                 userReaction: .love,
@@ -548,8 +551,8 @@ struct PDSPostActions: View {
         // Reaction picker
         VStack(alignment: .leading, spacing: 8) {
             Text("Reaction Picker")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             PDSReactionPicker { reaction in
                 print("Selected: \(reaction.name)")

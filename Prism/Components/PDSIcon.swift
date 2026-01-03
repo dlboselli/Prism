@@ -325,7 +325,7 @@ extension View {
             // Size Scale
             VStack(alignment: .leading, spacing: 16) {
                 Text("Size Scale")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 HStack(spacing: 24) {
@@ -373,12 +373,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Color Variants
             VStack(alignment: .leading, spacing: 16) {
                 Text("Color Variants")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 LazyVGrid(columns: [
@@ -445,12 +447,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Rendering Modes
             VStack(alignment: .leading, spacing: 16) {
                 Text("Rendering Modes")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 HStack(spacing: 32) {
@@ -496,12 +500,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Variable Value Icons
             VStack(alignment: .leading, spacing: 16) {
                 Text("Variable Value")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 HStack(spacing: 24) {
@@ -519,12 +525,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // On Media
             VStack(alignment: .leading, spacing: 16) {
                 Text("On Media")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 ZStack {
@@ -576,7 +584,7 @@ struct AnimatedIconsPreview: View {
                 // Tab-style icons
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Tab Icons")
-                        .typography(Typography.headline3Emphasized)
+                        .typography(PDSTextScale.content.headline)
                         .foregroundColor(Colors.textPrimary)
                     
                     HStack(spacing: 32) {
@@ -607,12 +615,14 @@ struct AnimatedIconsPreview: View {
                     .pdsButton(variant: .secondary, size: .small)
                 }
                 
-                Divider()
+                Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
                 
                 // Animated state icons
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Animated State Icons")
-                        .typography(Typography.headline3Emphasized)
+                        .typography(PDSTextScale.content.headline)
                         .foregroundColor(Colors.textPrimary)
                     
                     HStack(spacing: 32) {
@@ -652,12 +662,14 @@ struct AnimatedIconsPreview: View {
                         .foregroundColor(Colors.textSecondary)
                 }
                 
-                Divider()
+                Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
                 
                 // Symbol Effects
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Symbol Effects (iOS 17+)")
-                        .typography(Typography.headline3Emphasized)
+                        .typography(PDSTextScale.content.headline)
                         .foregroundColor(Colors.textPrimary)
                     
                     HStack(spacing: 32) {

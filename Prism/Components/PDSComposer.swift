@@ -132,18 +132,31 @@ struct PDSCommentInput: View {
                 PDSActor(initials: initials, size: 36)
             }
             
-            TextField(placeholder, text: $text, axis: .vertical)
-                .font(Typography.Fonts.body3)
-                .foregroundColor(Colors.textPrimary)
-                .lineLimit(1...5)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 12)
-                .frame(height: 36)
-                .background(Colors.textInputBarBackground)
-                .clipShape(Capsule())
-                .onSubmit {
-                    onSubmit?()
+            HStack(spacing: 8) {
+                TextField(placeholder, text: $text, axis: .vertical)
+                    .font(Typography.Fonts.body3)
+                    .foregroundColor(Colors.textPrimary)
+                    .lineLimit(1...5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .onSubmit {
+                        onSubmit?()
+                    }
+                
+                if !text.isEmpty {
+                    Button {
+                        onSubmit?()
+                    } label: {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .font(.system(size: 24))
+                            .foregroundStyle(.white, Colors.persistentAccent)
+                    }
                 }
+            }
+            .padding(.leading, 12)
+            .padding(.trailing, 8)
+            .frame(minHeight: 36)
+            .background(Colors.textInputBarBackground)
+            .clipShape(Capsule())
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 8)
@@ -187,7 +200,7 @@ struct PDSMessageInput: View {
                 Button(action: action.action) {
                     Image(systemName: action.icon)
                         .font(.system(size: 28))
-                        .foregroundColor(Colors.persistentAccent)
+                        .foregroundStyle(.white, Colors.persistentAccent)
                 }
             }
             
@@ -211,7 +224,7 @@ struct PDSMessageInput: View {
                     Button(action: onSend) {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.system(size: 24))
-                            .foregroundColor(Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.persistentAccent)
                     }
                 }
             }
@@ -324,7 +337,9 @@ struct PDSComposeSheet: View {
                 )
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Comment Input
             VStack(alignment: .leading, spacing: 8) {
@@ -341,7 +356,9 @@ struct PDSComposeSheet: View {
                 .background(Colors.backgroundCard)
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Message Input
             VStack(alignment: .leading, spacing: 8) {

@@ -70,6 +70,7 @@ struct PDSIconButtonStyle: ButtonStyle {
     var renderingMode: PDSSymbolRenderingMode = .monochrome
     var effect: PDSIconButtonEffect = .bounce
     var isEnabled: Bool = true
+    var accessibilityLabel: String? = nil
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -82,6 +83,7 @@ struct PDSIconButtonStyle: ButtonStyle {
                 effect: effect,
                 isPressed: configuration.isPressed
             ))
+            .accessibilityLabel(accessibilityLabel ?? "Button")
     }
     
     private func foregroundColor(isPressed: Bool) -> Color {
@@ -172,6 +174,7 @@ struct PDSToggleIconButton: View {
     var defaultVariant: PDSIconButtonVariant = .secondary
     var activeVariant: PDSIconButtonVariant = .accent
     var renderingMode: PDSSymbolRenderingMode = .monochrome
+    var accessibilityLabel: String? = nil
     var action: (() -> Void)? = nil
     
     var body: some View {
@@ -188,9 +191,12 @@ struct PDSToggleIconButton: View {
             size: size,
             variant: isActive ? activeVariant : defaultVariant,
             renderingMode: renderingMode,
-            effect: .bounce
+            effect: .bounce,
+            accessibilityLabel: accessibilityLabel
         ))
         .symbolEffect(.bounce, value: isActive)
+        .accessibilityValue(isActive ? "On" : "Off")
+        .accessibilityHint("Double tap to toggle")
     }
 }
 
@@ -204,19 +210,22 @@ extension View {
     ///   - renderingMode: SF Symbol rendering mode
     ///   - effect: Animation effect on tap
     ///   - isEnabled: Whether the button is enabled
+    ///   - accessibilityLabel: VoiceOver label for the button
     func pdsIconButtonStyle(
         size: PDSIconButtonSize = .regular,
         variant: PDSIconButtonVariant = .primary,
         renderingMode: PDSSymbolRenderingMode = .monochrome,
         effect: PDSIconButtonEffect = .bounce,
-        isEnabled: Bool = true
+        isEnabled: Bool = true,
+        accessibilityLabel: String? = nil
     ) -> some View {
         self.buttonStyle(PDSIconButtonStyle(
             size: size,
             variant: variant,
             renderingMode: renderingMode,
             effect: effect,
-            isEnabled: isEnabled
+            isEnabled: isEnabled,
+            accessibilityLabel: accessibilityLabel
         ))
     }
     
@@ -224,12 +233,14 @@ extension View {
     func pdsIconButton(
         size: PDSIconButtonSize = .regular,
         variant: PDSIconButtonVariant = .primary,
-        isEnabled: Bool = true
+        isEnabled: Bool = true,
+        accessibilityLabel: String? = nil
     ) -> some View {
         self.buttonStyle(PDSIconButtonStyle(
             size: size,
             variant: variant,
-            isEnabled: isEnabled
+            isEnabled: isEnabled,
+            accessibilityLabel: accessibilityLabel
         ))
     }
 }
@@ -292,7 +303,9 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Color Variants
             VStack(alignment: .leading, spacing: 16) {
@@ -343,7 +356,9 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Rendering Modes
             VStack(alignment: .leading, spacing: 16) {
@@ -384,7 +399,9 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Common Action Icons
             VStack(alignment: .leading, spacing: 16) {
@@ -420,7 +437,9 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // On Media
             VStack(alignment: .leading, spacing: 16) {
@@ -479,7 +498,9 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Disabled
             VStack(alignment: .leading, spacing: 16) {
@@ -522,7 +543,7 @@ struct ToggleIconButtonPreview: View {
                 // Toggle Buttons
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Toggle Icon Buttons")
-                        .typography(Typography.headline3Emphasized)
+                        .typography(PDSTextScale.content.headline)
                         .foregroundColor(Colors.textPrimary)
                     
                     Text("Tap to toggle state with animated transitions")
@@ -579,12 +600,14 @@ struct ToggleIconButtonPreview: View {
                     }
                 }
                 
-                Divider()
+                Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
                 
                 // Action Effects
                 VStack(alignment: .leading, spacing: 16) {
                     Text("Animation Effects")
-                        .typography(Typography.headline3Emphasized)
+                        .typography(PDSTextScale.content.headline)
                         .foregroundColor(Colors.textPrimary)
                     
                     HStack(spacing: 24) {

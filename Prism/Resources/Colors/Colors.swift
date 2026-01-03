@@ -37,6 +37,7 @@ struct Colors {
     
     static var persistentAccent: Color { Color(light: accent600, dark: accent600) }
     static var persistentAccentDeemphasized: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
+    static var accentText: Color { Color(light: accent500, dark: accent400) }
     static var persistentAlwaysBlack: Color { black }
     static var persistentAlwaysBlackOverlay: Color { black.opacity(0.4) }
     static var persistentAlwaysTransparent: Color { .clear }
@@ -96,7 +97,7 @@ struct Colors {
     static var backgroundCardLegacyWeb: Color { Color(light: white, dark: gray900) }
     static var backgroundNavBar: Color { Color(light: white, dark: gray900) }
     static var backgroundPopover: Color { Color(light: white, dark: gray700) }
-    static var backgroundBottomSheet: Color { Color(light: gray100, dark: gray900) }
+    static var backgroundBottomSheet: Color { Color(light: white, dark: gray900) }
     static var backgroundDivider: Color { Color(light: gray200, dark: gray600) }
     static var backgroundDividerOnColor: Color { gray700 }
     static var backgroundDividerOnMedia: Color { gray700 }
@@ -147,8 +148,8 @@ struct Colors {
     
     // Primary Deemphasized Button
     static var primaryDeemphasizedButtonBackground: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
-    static var primaryDeemphasizedButtonIcon: Color { Color(light: accent600, dark: accent300) }
-    static var primaryDeemphasizedButtonText: Color { Color(light: accent600, dark: accent300) }
+    static var primaryDeemphasizedButtonIcon: Color { persistentAccent }
+    static var primaryDeemphasizedButtonText: Color { accentText }
     
     // Secondary Button
     static var secondaryButtonBackground: Color { Color(light: gray100, dark: white.opacity(0.1)) }
@@ -184,9 +185,9 @@ struct Colors {
     static var disabledButtonBackground: Color { Color(light: gray200, dark: white.opacity(0.1)) }
     
     // Text Input
-    static var textInputActiveInnerBorder: Color { Color(light: accent600, dark: accent600) }
+    static var textInputActiveInnerBorder: Color { Color(light: accent600, dark: accent500) }
     static var textInputActiveOuterBorder: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
-    static var textInputActiveText: Color { Color(light: accent600, dark: accent400) }
+    static var textInputActiveText: Color { Color(light: accent600, dark: accent500) }
     static var textInputInactiveInnerBorder: Color { Color(light: gray200, dark: gray700) }
     static var textInputInactiveOuterBorder: Color { .clear }
     static var textInputBarBackground: Color { Color(light: gray100, dark: white.opacity(0.1)) }
@@ -214,22 +215,22 @@ struct Colors {
     static var webLegacyTooltipBackground: Color { Color(light: gray800, dark: gray200) }
     
     // Indicators
-    static var stepperActive: Color { accent600 }
+    static var stepperActive: Color { persistentAccent }
     static var stepperInactive: Color { Color(light: gray200, dark: gray700) }
-    static var activeDot: Color { accent600 }
+    static var activeDot: Color { persistentAccent }
     static var activeDotOnColor: Color { white }
     static var activeDotOnMedia: Color { white }
     static var inactiveDot: Color { Color(light: gray300, dark: gray600) }
     static var inactiveDotOnColor: Color { white.opacity(0.5) }
     static var inactiveDotOnMedia: Color { white.opacity(0.5) }
-    static var dotBadgeBlue: Color { accent600 }
+    static var dotBadgeBlue: Color { persistentAccent }
     static var ratingStarActive: Color { Color(light: yellow400, dark: yellow300) }
     static var ratingStarActiveOnColor: Color { white }
     static var ratingStarActiveOnMedia: Color { white }
     
     // Actor (Profile Photos)
     static var actorPlaceholderBackground: Color { Color(light: gray200, dark: gray700) }
-    static var actorInitialsBackground: Color { Color(light: accent600, dark: accent600) }
+    static var actorInitialsBackground: Color { persistentAccent }
     static var actorOnlineIndicator: Color { Color(light: green500, dark: green400) }
     static var actorOfflineIndicator: Color { Color(light: gray400, dark: gray500) }
     static var actorBadgeBackground: Color { persistentAccent }
@@ -244,31 +245,12 @@ struct Colors {
     static var optimisticPostTint: Color { white.opacity(0.6) }
     static var placeholderImage: Color { Color(light: gray200, dark: gray700) }
     static var mapHighlightBackground: Color { Color(light: accent100, dark: accent800) }
-    static var mapHighlightBorder: Color { Color(light: accent600, dark: accent600) }
+    static var mapHighlightBorder: Color { persistentAccent }
     static var ufiTrayIconButtonBackground: Color { Color(light: gray100, dark: gray800) }
     
-    // ═══════════════════════════════════════════════════════════════════════════
-    // MARK: - Legacy Aliases
-    // ═══════════════════════════════════════════════════════════════════════════
-    
-    static var primaryText: Color { textPrimary }
-    static var secondaryText: Color { textSecondary }
-    static var tertiaryText: Color { gray400 }
-    static var surfaceBackground: Color { backgroundSurface }
-    static var surfaceSecondary: Color { Color(light: gray100, dark: gray900) }
-    static var surfaceTertiary: Color { Color(light: gray200, dark: gray900) }
-    static var cardBackground: Color { backgroundCard }
-    static var border: Color { Color(light: gray200, dark: gray700) }
-    static var divider: Color { backgroundDivider }
-    static var link: Color { textBlueLink }
-    static var success: Color { persistentPositive }
-    static var warning: Color { persistentWarning }
-    static var error: Color { persistentNegative }
-    static var info: Color { Color(light: cyan500, dark: cyan400) }
-    static var overlay: Color { backgroundOverlayOnSurface }
     static var overlayScrim: Color { Color(light: black.opacity(0.6), dark: black.opacity(0.8)) }
     static var tabBarBackground: Color { backgroundNavBar }
-    static var tabSelected: Color { Color(light: accent600, dark: accent600) }
+    static var tabSelected: Color { persistentAccent }
     static var tabUnselected: Color { Color(light: gray500, dark: gray400) }
     
     // ═══════════════════════════════════════════════════════════════════════════
@@ -515,4 +497,22 @@ extension Color {
 
 extension EnvironmentValues {
     var isDarkMode: Bool { colorScheme == .dark }
+}
+
+// MARK: - Surface Background Extension
+
+extension View {
+    /// Applies a full-bleed surface background that extends into safe areas
+    /// 
+    /// Use this instead of `.background(Colors.backgroundSurface)` to prevent edge gaps.
+    /// This is the standard SwiftUI pattern: `.background(color.ignoresSafeArea())`
+    ///
+    /// Usage:
+    /// ```swift
+    /// ScrollView { content }
+    ///     .pdsSurfaceBackground()
+    /// ```
+    func pdsSurfaceBackground(_ color: Color = Colors.backgroundSurface) -> some View {
+        self.background(color.ignoresSafeArea())
+    }
 }

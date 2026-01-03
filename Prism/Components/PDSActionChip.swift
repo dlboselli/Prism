@@ -34,12 +34,22 @@
 
 import SwiftUI
 
+// MARK: - Action Chip Context
+
+/// Context for action chip appearance
+enum PDSActionChipContext {
+    case standard   // Default on surface backgrounds
+    case onColor    // On colored backgrounds
+    case onMedia    // On images/videos
+}
+
 // MARK: - Action Chip Styles
 
 /// Standard action chip style - pill-shaped button for filters and selections
 struct PDSActionChipStyle: ButtonStyle {
     var isSelected: Bool = false
     var icon: String? = nil
+    var context: PDSActionChipContext = .standard
     
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 6) {
@@ -60,35 +70,82 @@ struct PDSActionChipStyle: ButtonStyle {
         )
         .overlay(
             Capsule()
-                .stroke(isSelected ? Color.clear : Colors.elevationBorderEmphasis, lineWidth: 1)
+                .stroke(borderColor, lineWidth: 1)
         )
         .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
         .animation(.easeInOut(duration: 0.15), value: configuration.isPressed)
     }
     
+    private var borderColor: Color {
+        // Selected chips have no border, unselected chips have border
+        if isSelected { return .clear }
+        
+        switch context {
+        case .standard:
+            return Colors.elevationBorderEmphasis
+        case .onColor:
+            return Colors.white.opacity(0.5)
+        case .onMedia:
+            return Colors.white.opacity(0.5)
+        }
+    }
+    
     private func foregroundColor(isPressed: Bool) -> Color {
         if isSelected {
-            // Light: accent blue, Dark: black (for white background)
-            return Color(light: Colors.persistentAccent, dark: Colors.gray950)
+            switch context {
+            case .standard:
+                // Selected: blue text on light blue (light mode), black text on white (dark mode)
+                return Color(light: Colors.accentText, dark: Colors.gray950)
+            case .onColor, .onMedia:
+                // Selected on color/media: black text on white background
+                return Colors.gray950
+            }
         }
-        return isPressed ? Colors.textPrimary : Colors.textSecondary
+        
+        switch context {
+        case .standard:
+            return isPressed ? Colors.textPrimary : Colors.textSecondary
+            
+        case .onColor:
+            return isPressed ? Colors.textPrimaryOnColor : Colors.textSecondaryOnColor
+            
+        case .onMedia:
+            return isPressed ? Colors.textPrimaryOnMedia : Colors.textSecondaryOnMedia
+        }
     }
     
     private func backgroundColor(isPressed: Bool) -> Color {
-        if isSelected {
-            // Light: light blue, Dark: white
-            let selectedBg = Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
-            return isPressed ? selectedBg.opacity(0.7) : selectedBg
+        switch context {
+        case .standard:
+            if isSelected {
+                let selectedBg = Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+                return isPressed ? selectedBg.opacity(0.7) : selectedBg
+            }
+            // Unselected: transparent background
+            return isPressed ? Colors.backgroundDeemphasized.opacity(0.5) : .clear
+            
+        case .onColor:
+            if isSelected {
+                return isPressed ? Colors.white.opacity(0.85) : Colors.white
+            }
+            // Unselected: transparent background
+            return isPressed ? Colors.white.opacity(0.15) : .clear
+            
+        case .onMedia:
+            if isSelected {
+                return isPressed ? Colors.white.opacity(0.85) : Colors.white
+            }
+            // Unselected: transparent background
+            return isPressed ? Colors.white.opacity(0.15) : .clear
         }
-        return isPressed ? Colors.backgroundDeemphasized : Colors.backgroundCard
     }
 }
 
 /// Dismissible chip style - includes an X button for removal
 struct PDSDismissibleChipStyle: ButtonStyle {
-    // Light: accent blue, Dark: black (for white background)
+    // Light: accent text, Dark: black (for white background)
     private var foregroundColor: Color {
-        Color(light: Colors.persistentAccent, dark: Colors.gray950)
+        Color(light: Colors.accentText, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
@@ -123,9 +180,9 @@ struct PDSAuthorChipStyle: ButtonStyle {
     var actorInitials: String? = nil
     var isSelected: Bool = false
     
-    // Light: accent blue, Dark: black (for white background)
+    // Selected text: blue (light mode), black (dark mode for white background)
     private var selectedTextColor: Color {
-        Color(light: Colors.persistentAccent, dark: Colors.gray950)
+        Color(light: Colors.accentText, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
@@ -157,7 +214,7 @@ struct PDSAuthorChipStyle: ButtonStyle {
         )
         .overlay(
             Capsule()
-                .stroke(isSelected ? Color.clear : Colors.elevationBorderEmphasis, lineWidth: 1)
+                .stroke(isSelected ? .clear : Colors.elevationBorderEmphasis, lineWidth: 1)
         )
         .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
         .animation(.easeInOut(duration: 0.15), value: configuration.isPressed)
@@ -174,7 +231,8 @@ struct PDSAuthorChipStyle: ButtonStyle {
         if isSelected {
             return isPressed ? selectedBgColor.opacity(0.7) : selectedBgColor
         }
-        return isPressed ? Colors.backgroundDeemphasized : Colors.backgroundCard
+        // Unselected: transparent background
+        return isPressed ? Colors.backgroundDeemphasized.opacity(0.5) : .clear
     }
 }
 
@@ -183,9 +241,9 @@ struct PDSEmojiChipStyle: ButtonStyle {
     var count: Int? = nil
     var isSelected: Bool = false
     
-    // Light: accent blue, Dark: black (for white background)
+    // Light: accent text, Dark: black (for white background)
     private var selectedTextColor: Color {
-        Color(light: Colors.persistentAccent, dark: Colors.gray950)
+        Color(light: Colors.accentText, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
@@ -226,8 +284,12 @@ struct PDSEmojiChipStyle: ButtonStyle {
 
 extension View {
     /// Applies PDS action chip style
-    func pdsActionChip(isSelected: Bool = false, icon: String? = nil) -> some View {
-        self.buttonStyle(PDSActionChipStyle(isSelected: isSelected, icon: icon))
+    func pdsActionChip(
+        isSelected: Bool = false,
+        icon: String? = nil,
+        context: PDSActionChipContext = .standard
+    ) -> some View {
+        self.buttonStyle(PDSActionChipStyle(isSelected: isSelected, icon: icon, context: context))
     }
     
     /// Applies PDS dismissible chip style
@@ -261,8 +323,8 @@ extension View {
         // Standard chips
         VStack(alignment: .leading, spacing: 12) {
             Text("Action Chips")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -284,8 +346,8 @@ extension View {
         // Chips with icons
         VStack(alignment: .leading, spacing: 12) {
             Text("With Icons")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -304,8 +366,8 @@ extension View {
         // Dismissible chips
         VStack(alignment: .leading, spacing: 12) {
             Text("Dismissible")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
@@ -324,8 +386,8 @@ extension View {
         // Emoji chips (reactions)
         VStack(alignment: .leading, spacing: 12) {
             Text("Emoji / Reactions")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             HStack(spacing: 8) {
                 Button("👍") { }
@@ -345,8 +407,8 @@ extension View {
         // Author chips
         VStack(alignment: .leading, spacing: 12) {
             Text("Author Chips")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {

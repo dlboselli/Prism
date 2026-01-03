@@ -149,8 +149,7 @@ struct PDSInstantFeedback: View {
                 .foregroundColor(Colors.textPrimaryOnColor)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-            
-            Spacer(minLength: 0)
+                .frame(maxWidth: .infinity, alignment: .leading)
             
             // Action Button
             if let actionText = actionText {
@@ -160,7 +159,7 @@ struct PDSInstantFeedback: View {
                 } label: {
                     Text(actionText)
                         .typography(Typography.button3)
-                        .foregroundColor(Colors.blue300)
+                        .foregroundColor(Colors.textBlueLink)
                 }
                 .buttonStyle(.plain)
             }
@@ -425,8 +424,8 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
                         // Feedback types
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Types")
-                                .typography(Typography.meta1)
-                                .foregroundColor(Colors.textSecondary)
+                                .typography(PDSTextScale.content.headline)
+                                .foregroundColor(Colors.textPrimary)
                             
                             Button("Neutral") { showNeutral = true }
                                 .pdsPrimaryButton()
@@ -445,14 +444,16 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
                                 .frame(maxWidth: .infinity)
                         }
                         
-                        Divider()
+                        Rectangle()
+                            .fill(Colors.backgroundDivider)
+                            .frame(height: 1)
                             .padding(.vertical, 8)
                         
                         // Variations
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Variations")
-                                .typography(Typography.meta1)
-                                .foregroundColor(Colors.textSecondary)
+                                .typography(PDSTextScale.content.headline)
+                                .foregroundColor(Colors.textPrimary)
                             
                             Button("With Action") { showWithAction = true }
                                 .pdsSecondaryButton()
@@ -558,7 +559,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
 #Preview("Inline Feedback") {
     VStack(spacing: 24) {
         Text("Static Examples")
-            .typography(Typography.headline3Emphasized)
+            .typography(PDSTextScale.content.headline)
             .foregroundColor(Colors.textPrimary)
         
         // Neutral

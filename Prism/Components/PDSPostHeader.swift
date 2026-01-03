@@ -109,12 +109,12 @@ struct PDSPostHeader: View {
             .buttonStyle(.plain)
             
             // Author info
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 0) {
                 // Name and verified badge
-                HStack(spacing: 4) {
+                HStack(alignment: .firstTextBaseline, spacing: 4) {
                     Button(action: { onAuthorTap?() }) {
                         Text(authorName)
-                            .typography(Typography.headline4Emphasized)
+                            .typography(Typography.headline4)
                             .foregroundColor(Colors.textPrimary)
                     }
                     .buttonStyle(.plain)
@@ -122,14 +122,15 @@ struct PDSPostHeader: View {
                     if isVerified {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.system(size: 14))
-                            .foregroundColor(Colors.persistentAccent)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.white, Colors.persistentAccent)
                     }
                 }
                 
                 // Subtitle (e.g., "is with John Doe at Location")
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta3)
+                        .typography(Typography.meta4)
                         .foregroundColor(Colors.textSecondary)
                         .lineLimit(1)
                 }
@@ -137,7 +138,7 @@ struct PDSPostHeader: View {
                 // Timestamp, privacy, and sponsored
                 HStack(spacing: 4) {
                     Text(timestamp)
-                        .typography(Typography.meta3)
+                        .typography(Typography.meta4)
                         .foregroundColor(Colors.textSecondary)
                     
                     if let privacy = privacy {
@@ -154,7 +155,7 @@ struct PDSPostHeader: View {
                             .foregroundColor(Colors.textSecondary)
                         
                         Text("Sponsored")
-                            .typography(Typography.meta3)
+                            .typography(Typography.meta4)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -239,14 +240,15 @@ struct PDSPostHeaderCompact: View {
                 if isVerified {
                     Image(systemName: "checkmark.seal.fill")
                         .font(.system(size: 12))
-                        .foregroundColor(Colors.persistentAccent)
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.white, Colors.persistentAccent)
                 }
                 
                 Text("·")
                     .foregroundColor(Colors.textSecondary)
                 
                 Text(timestamp)
-                    .typography(Typography.meta3)
+                    .typography(Typography.meta4)
                     .foregroundColor(Colors.textSecondary)
             }
         }
@@ -265,7 +267,9 @@ struct PDSPostHeaderCompact: View {
             onMoreTap: {}
         )
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
         
         PDSPostHeader(
             authorName: "Jane Smith",
@@ -278,7 +282,9 @@ struct PDSPostHeaderCompact: View {
             onCloseTap: {}
         )
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
         
         PDSPostHeader(
             authorName: "Prism Tech",
@@ -290,13 +296,15 @@ struct PDSPostHeaderCompact: View {
             onCloseTap: {}
         )
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
         
         // Compact variant
         VStack(alignment: .leading, spacing: 12) {
             Text("Compact Variant")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
                 .padding(.horizontal, 16)
             
             PDSPostHeaderCompact(

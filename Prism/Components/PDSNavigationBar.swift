@@ -100,7 +100,9 @@ struct PDSNavigationBar<TitleContent: View, LeadingContent: View, TrailingConten
             .background(backgroundColor)
             
             if showDivider && style == .standard {
-                Divider()
+                Rectangle()
+                    .fill(Colors.backgroundDivider)
+                    .frame(height: 1)
             }
         }
     }
@@ -347,7 +349,7 @@ struct PDSSearchNavigationBar: View {
                         onCancel?()
                     }
                     .typography(Typography.button2)
-                    .foregroundStyle(Colors.persistentAccent)
+                    .foregroundStyle(Colors.accentText)
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 } else {
                     ForEach(trailingActions) { action in
@@ -366,7 +368,9 @@ struct PDSSearchNavigationBar: View {
             .background(Colors.backgroundNavBar)
             .animation(.easeInOut(duration: 0.2), value: isSearchFocused)
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
         }
     }
 }
@@ -409,7 +413,7 @@ struct PDSProfileNavigationBar: View {
                         
                         VStack(alignment: .leading, spacing: 0) {
                             Text(title)
-                                .typography(Typography.meta1)
+                                .typography(PDSTextScale.content.headline)
                                 .foregroundStyle(Colors.textPrimary)
                             
                             if let subtitle = subtitle {

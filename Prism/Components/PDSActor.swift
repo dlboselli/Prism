@@ -400,11 +400,14 @@ struct PDSActorBadge: View {
 /// ```swift
 /// PDSActorStack(urls: [url1, url2, url3], size: .small, maxVisible: 3)
 /// PDSActorStack(sources: [.initials("JD"), .initials("AB")], size: .medium)
+/// // With custom border color to match background
+/// PDSActorStack(urls: urls, borderColor: Colors.backgroundSurface)
 /// ```
 struct PDSActorStack: View {
     let sources: [PDSActorSource]
     let size: PDSActorSize
     let maxVisible: Int
+    let borderColor: Color
     
     private var overlapOffset: CGFloat {
         size.rawValue * 0.24
@@ -419,24 +422,27 @@ struct PDSActorStack: View {
     }
     
     /// Creates a stack with source enums
-    init(sources: [PDSActorSource], size: PDSActorSize = .small, maxVisible: Int = 3) {
+    init(sources: [PDSActorSource], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
         self.sources = sources
         self.size = size
         self.maxVisible = maxVisible
+        self.borderColor = borderColor
     }
     
     /// Creates a stack with URLs
-    init(urls: [URL?], size: PDSActorSize = .small, maxVisible: Int = 3) {
+    init(urls: [URL?], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
         self.sources = urls.map { PDSActorSource.url($0) }
         self.size = size
         self.maxVisible = maxVisible
+        self.borderColor = borderColor
     }
     
     /// Creates a stack with initials
-    init(initials: [String], size: PDSActorSize = .small, maxVisible: Int = 3) {
+    init(initials: [String], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
         self.sources = initials.map { PDSActorSource.initials($0) }
         self.size = size
         self.maxVisible = maxVisible
+        self.borderColor = borderColor
     }
     
     var body: some View {
@@ -445,7 +451,7 @@ struct PDSActorStack: View {
                 PDSActor(source: source, size: size)
                     .overlay(
                         Circle()
-                            .stroke(Colors.backgroundSurface, lineWidth: 2)
+                            .stroke(borderColor, lineWidth: 2)
                     )
                     .zIndex(Double(visibleSources.count - index))
             }
@@ -477,7 +483,7 @@ struct PDSActorStack: View {
         .clipShape(Circle())
         .overlay(
             Circle()
-                .stroke(Colors.backgroundSurface, lineWidth: 2)
+                .stroke(borderColor, lineWidth: 2)
         )
     }
 }
@@ -528,10 +534,12 @@ struct PDSActorStack: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             Text("Source Types")
-                .typography(Typography.headline3Emphasized)
+                .typography(PDSTextScale.content.headline)
                 .foregroundColor(Colors.textPrimary)
             
             HStack(spacing: 16) {
@@ -564,10 +572,12 @@ struct PDSActorStack: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             Text("Badge Types")
-                .typography(Typography.headline3Emphasized)
+                .typography(PDSTextScale.content.headline)
                 .foregroundColor(Colors.textPrimary)
             
             HStack(spacing: 16) {
@@ -607,10 +617,12 @@ struct PDSActorStack: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             Text("Actor Stack")
-                .typography(Typography.headline3Emphasized)
+                .typography(PDSTextScale.content.headline)
                 .foregroundColor(Colors.textPrimary)
             
             VStack(alignment: .leading, spacing: 12) {

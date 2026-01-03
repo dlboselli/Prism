@@ -13,12 +13,12 @@ struct NotificationsTabView: View {
             VStack(spacing: 16) {
                 Text("Notifications")
                     .typography(Typography.headline1Emphasized)
-                    .foregroundColor(Colors.primaryText)
+                    .foregroundColor(Colors.textPrimary)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(20)
         }
-        .background(Colors.surfaceBackground)
+        .background(Colors.backgroundSurface)
         .navigationTitle("Notifications")
     }
 }

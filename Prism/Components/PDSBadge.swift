@@ -271,7 +271,7 @@ struct PDSStatusBadge: View {
             // Variants
             VStack(alignment: .leading, spacing: 12) {
                 Text("Variants")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 8) {
                     PDSBadge("Neutral", variant: .neutral)
@@ -282,12 +282,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Solid variants
             VStack(alignment: .leading, spacing: 12) {
                 Text("Solid Variants")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 8) {
                     PDSBadge("Neutral", variant: .neutral, isSolid: true)
@@ -298,12 +300,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Sizes
             VStack(alignment: .leading, spacing: 12) {
                 Text("Sizes")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 8) {
                     PDSBadge("Small", variant: .accent, size: .small)
@@ -312,12 +316,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // With icons
             VStack(alignment: .leading, spacing: 12) {
                 Text("With Icons")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 8) {
                     PDSBadge("Verified", icon: "checkmark.seal.fill", variant: .accent)
@@ -326,12 +332,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Count badges
             VStack(alignment: .leading, spacing: 12) {
                 Text("Count Badges")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 12) {
                     PDSBadge.count(3)
@@ -342,12 +350,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Dot indicators
             VStack(alignment: .leading, spacing: 12) {
                 Text("Dot Indicators")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 16) {
                     HStack(spacing: 4) {
@@ -370,12 +380,14 @@ struct PDSStatusBadge: View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Status badges
             VStack(alignment: .leading, spacing: 12) {
                 Text("Status Badges")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                 
                 HStack(spacing: 8) {
                     PDSStatusBadge(.active)

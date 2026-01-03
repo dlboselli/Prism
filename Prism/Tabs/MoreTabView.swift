@@ -81,30 +81,6 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
-                    TypographyShowcaseView()
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: "textformat")
-                            .font(.system(size: 16))
-                            .foregroundColor(Colors.iconPrimary)
-                            .frame(width: 24)
-                        Text("Typography")
-                    }
-                }
-                
-                NavigationLink {
-                    ShadowsShowcaseView()
-                } label: {
-                    HStack(spacing: 12) {
-                        Image(systemName: "square.stack.3d.up.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(Colors.iconPrimary)
-                            .frame(width: 24)
-                        Text("Shadows")
-                    }
-                }
-                
-                NavigationLink {
                     IconsShowcaseView()
                 } label: {
                     HStack(spacing: 12) {
@@ -127,45 +103,39 @@ struct MoreTabView: View {
                         Text("Motion")
                     }
                 }
+                
+                NavigationLink {
+                    ShadowsShowcaseView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "square.stack.3d.up.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
+                        Text("Shadows")
+                    }
+                }
+                
+                NavigationLink {
+                    TypographyShowcaseView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "textformat")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
+                        Text("Typography")
+                    }
+                }
             } header: {
                 Text("Foundations")
             }
             
             Section {
                 NavigationLink {
-                    ButtonsDetailView()
-                } label: {
-                    Text("Buttons")
-                }
-                
-                NavigationLink {
-                    IconButtonsDetailView()
-                } label: {
-                    Text("Icon Buttons")
-                }
-                
-                NavigationLink {
                     ActionChipsDetailView()
                 } label: {
                     Text("Action Chips")
-                }
-                
-                NavigationLink {
-                    BadgeDetailView()
-                } label: {
-                    Text("Badges")
-                }
-                
-                NavigationLink {
-                    ListCellsDetailView()
-                } label: {
-                    Text("List Cells")
-                }
-                
-                NavigationLink {
-                    InstantFeedbackDetailView()
-                } label: {
-                    Text("Instant Feedback")
                 }
                 
                 NavigationLink {
@@ -175,9 +145,63 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
+                    BadgeDetailView()
+                } label: {
+                    Text("Badges")
+                }
+                
+                NavigationLink {
+                    BottomSheetDetailView()
+                } label: {
+                    Text("Bottom Sheet")
+                }
+                
+                NavigationLink {
+                    ButtonsDetailView()
+                } label: {
+                    Text("Buttons")
+                }
+                
+                NavigationLink {
+                    ChartsDetailView()
+                } label: {
+                    Text("Charts")
+                }
+                
+                NavigationLink {
                     CommentDetailView()
                 } label: {
                     Text("Comment")
+                }
+                
+                NavigationLink {
+                    ComposerDetailView()
+                } label: {
+                    Text("Composers")
+                }
+                
+                NavigationLink {
+                    IconButtonsDetailView()
+                } label: {
+                    Text("Icon Buttons")
+                }
+                
+                NavigationLink {
+                    InstantFeedbackDetailView()
+                } label: {
+                    Text("Instant Feedback")
+                }
+                
+                NavigationLink {
+                    ListCellsDetailView()
+                } label: {
+                    Text("List Cells")
+                }
+                
+                NavigationLink {
+                    MediaDetailView()
+                } label: {
+                    Text("Media")
                 }
                 
                 NavigationLink {
@@ -193,9 +217,21 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
+                    ProgressDetailView()
+                } label: {
+                    Text("Progress")
+                }
+                
+                NavigationLink {
                     ReactionBarDetailView()
                 } label: {
                     Text("Reaction Bar")
+                }
+                
+                NavigationLink {
+                    SelectMenuDetailView()
+                } label: {
+                    Text("Select Menus")
                 }
                 
                 NavigationLink {
@@ -208,18 +244,6 @@ struct MoreTabView: View {
                     TextFieldDetailView()
                 } label: {
                     Text("Text Fields")
-                }
-                
-                NavigationLink {
-                    SelectMenuDetailView()
-                } label: {
-                    Text("Select Menus")
-                }
-                
-                NavigationLink {
-                    ComposerDetailView()
-                } label: {
-                    Text("Composers")
                 }
             } header: {
                 Text("Components")
@@ -245,7 +269,7 @@ struct ColorsShowcaseView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Semantic Colors
                 semanticColorsSection
                 
@@ -254,7 +278,7 @@ struct ColorsShowcaseView: View {
             }
             .padding(20)
         }
-        .background(Colors.surfaceBackground)
+        .background(Colors.backgroundSurface)
         .navigationTitle("Colors")
         .navigationBarTitleDisplayMode(.large)
     }
@@ -262,10 +286,10 @@ struct ColorsShowcaseView: View {
     // MARK: - Raw Color Palette
     
     private var rawColorPaletteSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 48) {
             // Header
             Text("Color Palette")
-                .typography(Typography.headline2Emphasized)
+                .typography(PDSTextScale.section.headline)
                 .foregroundColor(Colors.textPrimary)
             
             // Step Numbers + Color Rows
@@ -379,15 +403,15 @@ struct ColorsShowcaseView: View {
     }
     
     private var semanticColorsSection: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 48) {
             // Header
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.section.lineSpacing) {
             Text("Semantic Colors")
-                .typography(Typography.headline2Emphasized)
+                    .typography(PDSTextScale.section.headline)
                     .foregroundColor(Colors.textPrimary)
             
                 Text("Spectrum tokens - adaptive for light/dark mode")
-                .typography(Typography.body3)
+                    .typography(PDSTextScale.section.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -495,8 +519,11 @@ struct SemanticColorCard: View {
 struct TypographyShowcaseView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
-                typographySection(title: "Headlines", items: [
+            VStack(alignment: .leading, spacing: 48) {
+                // Text Pairings Section
+                textPairingsSection
+                
+                typographyList([
                     ("Headline 0 Emphasized", Typography.headline0Emphasized),
                     ("Headline 1 Emphasized", Typography.headline1Emphasized),
                     ("Headline 2 Emphasized", Typography.headline2Emphasized),
@@ -508,7 +535,7 @@ struct TypographyShowcaseView: View {
                     ("Headline 4 Deemphasized", Typography.headline4Deemphasized),
                 ])
                 
-                typographySection(title: "Body", items: [
+                typographyList([
                     ("Body 1", Typography.body1),
                     ("Body 2", Typography.body2),
                     ("Body 3", Typography.body3),
@@ -519,13 +546,13 @@ struct TypographyShowcaseView: View {
                     ("Body 4 Link", Typography.body4Link),
                 ])
                 
-                typographySection(title: "Button", items: [
+                typographyList([
                     ("Button 1", Typography.button1),
                     ("Button 2", Typography.button2),
                     ("Button 3", Typography.button3),
                 ])
                 
-                typographySection(title: "Meta", items: [
+                typographyList([
                     ("Meta 1", Typography.meta1),
                     ("Meta 2", Typography.meta2),
                     ("Meta 3", Typography.meta3),
@@ -538,29 +565,73 @@ struct TypographyShowcaseView: View {
             .padding(.horizontal, 16)
             .padding(.vertical, 20)
         }
-        .background(Colors.surfaceBackground)
+        .background(Colors.backgroundSurface)
         .navigationTitle("Typography")
         .navigationBarTitleDisplayMode(.large)
     }
     
-    private func typographySection(title: String, items: [(String, Typography.Style)]) -> some View {
+    // MARK: - Text Pairings
+    
+    private var textPairingsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(title)
-                .typography(Typography.headline2Emphasized)
-                .foregroundColor(Colors.primaryText)
+            VStack(alignment: .leading, spacing: PDSTextScale.section.lineSpacing) {
+                Text("Text Pairings")
+                    .typography(PDSTextScale.section.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text("Coordinated scales for visual hierarchy")
+                    .typography(PDSTextScale.section.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
             
-            VStack(alignment: .leading, spacing: 20) {
-                ForEach(items, id: \.0) { item in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(item.0)
-                            .typography(item.1)
-                            .foregroundColor(Colors.primaryText)
-                        
-                        Text(item.0)
-                            .typography(Typography.meta4)
-                            .foregroundColor(Colors.tertiaryText)
-                    }
-                }
+            VStack(spacing: 1) {
+                textPairingRow(scale: .hero)
+                
+                textPairingRow(scale: .section)
+                
+                textPairingRow(scale: .content)
+                
+                textPairingRow(scale: .compact)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.medium))
+        }
+    }
+    
+    private func textPairingRow(scale: PDSTextScale) -> some View {
+        let scaleName: String = {
+            switch scale {
+            case .hero: return "Hero"
+            case .section: return "Section"
+            case .content: return "Content"
+            case .compact: return "Compact"
+            }
+        }()
+        
+        return VStack(alignment: .leading, spacing: scale.lineSpacing) {
+            Text("\(scaleName) Headline")
+                .typography(scale.headline)
+                .foregroundColor(Colors.textPrimary)
+            
+            Text("\(scaleName) Body")
+                .typography(scale.body)
+                .foregroundColor(Colors.textSecondary)
+            
+            Text("\(scaleName) Meta")
+                .typography(scale.meta)
+                .foregroundColor(Colors.gray400)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .pdsTextPadding(scale)
+        .background(Colors.backgroundCardFlat)
+    }
+    
+    private func typographyList(_ items: [(String, Typography.Style)]) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            ForEach(items, id: \.0) { item in
+                Text(item.0)
+                    .typography(item.1)
+                    .foregroundColor(Colors.textPrimary)
             }
         }
     }
@@ -571,14 +642,16 @@ struct TypographyShowcaseView: View {
 struct ShadowsShowcaseView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: 48) {
+                VStack(alignment: .leading, spacing: PDSTextScale.section.lineSpacing) {
                 Text("Shadow Styles")
-                    .typography(Typography.headline2Emphasized)
-                    .foregroundColor(Colors.primaryText)
+                        .typography(PDSTextScale.section.headline)
+                        .foregroundColor(Colors.textPrimary)
                 
                 Text("Elevation and depth effects for UI elements")
-                    .typography(Typography.body3)
-                    .foregroundColor(Colors.secondaryText)
+                        .typography(PDSTextScale.section.body)
+                        .foregroundColor(Colors.textSecondary)
+                }
                 
                 // UI Emphasis
                 shadowCard(
@@ -586,7 +659,7 @@ struct ShadowsShowcaseView: View {
                     description: "Single shadow for elevated cards and floating elements",
                     content: {
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Colors.cardBackground)
+                            .fill(Color(light: Colors.white, dark: Colors.gray700))
                             .frame(height: 100)
                             .shadow(Shadow.uiEmphasis)
                     }
@@ -598,7 +671,7 @@ struct ShadowsShowcaseView: View {
                     description: "Stronger shadow for interactive/draggable elements",
                     content: {
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Colors.cardBackground)
+                            .fill(Color(light: Colors.white, dark: Colors.gray700))
                             .frame(height: 100)
                             .shadow(Shadow.responsiveUI)
                     }
@@ -612,7 +685,7 @@ struct ShadowsShowcaseView: View {
         VStack {
                             Spacer()
                             Rectangle()
-                                .fill(Colors.cardBackground)
+                                .fill(Color(light: Colors.white, dark: Colors.gray700))
                                 .frame(height: 60)
                                 .shadow(Shadow.persistentUI)
                         }
@@ -651,7 +724,7 @@ struct ShadowsShowcaseView: View {
             }
             .padding(20)
         }
-        .background(Colors.surfaceBackground)
+        .background(Colors.backgroundSurface)
         .navigationTitle("Shadows")
         .navigationBarTitleDisplayMode(.large)
     }
@@ -662,19 +735,19 @@ struct ShadowsShowcaseView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
-                    .foregroundColor(Colors.primaryText)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
-                    .foregroundColor(Colors.secondaryText)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
             }
             
             content()
                 .padding(16)
-                .background(Colors.surfaceSecondary)
+                .background(Colors.backgroundWash)
                 .cornerRadius(12)
         }
     }
@@ -686,12 +759,43 @@ struct MotionShowcaseView: View {
     @State private var animateDurations = false
     @State private var animateSprings = false
     @State private var animateInteractive = false
+    @State private var animateMotionTypes = false
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: 48) {
+                // Motion Types Section
+                VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                        Text("Motion Types")
+                            .typography(PDSTextScale.content.headline)
+                            .foregroundColor(Colors.textPrimary)
+                        
+                        Text("Tap to animate all")
+                            .typography(PDSTextScale.content.body)
+                            .foregroundColor(Colors.textSecondary)
+                    }
+                    
+                    VStack(spacing: 12) {
+                        MotionTypeRow(name: "Enter / Exit", description: "Appearing & disappearing", animation: Motion.enter, animationType: .enterExit, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Expand / Collapse", description: "Growing & shrinking", animation: Motion.expand, animationType: .expandCollapse, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Swap", description: "Exchanging positions", animation: Motion.swap, animationType: .swap, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Move", description: "Standard repositioning", animation: Motion.move, animationType: .move, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Quick Move", description: "Fast repositioning", animation: Motion.quickMove, animationType: .move, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Passive Move", description: "Subtle repositioning", animation: Motion.passiveMove, animationType: .move, isAnimating: animateMotionTypes)
+                        MotionTypeRow(name: "Fade", description: "Opacity transition", animation: Motion.fade, animationType: .fade, isAnimating: animateMotionTypes)
+                    }
+                }
+                .padding(16)
+                .background(Colors.backgroundDeemphasized)
+                .cornerRadius(12)
+                .onTapGesture {
+                    animateMotionTypes.toggle()
+                }
+                
                 // Durations Section
                 VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
                     Text("Durations")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(Colors.textPrimary)
@@ -699,6 +803,7 @@ struct MotionShowcaseView: View {
                     Text("Tap to animate all")
                         .font(.system(size: 13))
                         .foregroundColor(Colors.textSecondary)
+                    }
                     
                     VStack(spacing: 12) {
                         MotionDurationRow(name: "Instant", duration: Motion.instantDuration, durationLabel: "0.1s", isAnimating: animateDurations)
@@ -718,6 +823,7 @@ struct MotionShowcaseView: View {
                 
                 // Springs Section
                 VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
                     Text("Springs")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(Colors.textPrimary)
@@ -725,6 +831,7 @@ struct MotionShowcaseView: View {
                     Text("Tap to animate all")
                         .font(.system(size: 13))
                         .foregroundColor(Colors.textSecondary)
+                    }
                     
                     VStack(spacing: 12) {
                         MotionSpringRow(name: "Snappy", animation: Motion.springSnappy, description: "0.25s, 0.8 damping", isAnimating: animateSprings)
@@ -742,6 +849,7 @@ struct MotionShowcaseView: View {
                 
                 // Interactive Section
                 VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: 4) {
                     Text("Interactive")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundColor(Colors.textPrimary)
@@ -749,13 +857,14 @@ struct MotionShowcaseView: View {
                     Text("Tap to animate all")
                         .font(.system(size: 13))
                         .foregroundColor(Colors.textSecondary)
+                    }
                     
                     VStack(spacing: 12) {
-                        MotionInteractiveRow(name: "Button Press", animation: Motion.buttonPress, isAnimating: animateInteractive)
-                        MotionInteractiveRow(name: "Toggle", animation: Motion.toggle, isAnimating: animateInteractive)
-                        MotionInteractiveRow(name: "Card Transition", animation: Motion.cardTransition, isAnimating: animateInteractive)
-                        MotionInteractiveRow(name: "List Item", animation: Motion.listItem, isAnimating: animateInteractive)
-                        MotionInteractiveRow(name: "Fade", animation: Motion.fade, isAnimating: animateInteractive)
+                        MotionInteractiveRow(name: "Button Press", description: "Quick tap feedback", animation: Motion.buttonPress, isAnimating: animateInteractive)
+                        MotionInteractiveRow(name: "Toggle", description: "Switch state change", animation: Motion.toggle, isAnimating: animateInteractive)
+                        MotionInteractiveRow(name: "Card Transition", description: "Card animations", animation: Motion.cardTransition, isAnimating: animateInteractive)
+                        MotionInteractiveRow(name: "List Item", description: "Row interactions", animation: Motion.listItem, isAnimating: animateInteractive)
+                        MotionInteractiveRow(name: "Fade", description: "Opacity change", animation: Motion.fade, isAnimating: animateInteractive)
                     }
                 }
                 .padding(16)
@@ -795,6 +904,7 @@ private struct MotionDurationRow: View {
     let duration: Double
     let durationLabel: String
     let isAnimating: Bool
+    private let squareSize: CGFloat = 20
     
     var body: some View {
         HStack(spacing: 12) {
@@ -803,21 +913,21 @@ private struct MotionDurationRow: View {
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(Colors.textPrimary)
                 Text(durationLabel)
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .foregroundColor(Colors.textSecondary)
             }
-            .frame(width: 90, alignment: .leading)
+            .frame(width: 120, alignment: .leading)
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Colors.persistentAccent)
-                    .frame(width: 24, height: 24)
-                    .offset(x: isAnimating ? geometry.size.width - 24 : 0)
+                    .frame(width: squareSize, height: squareSize)
+                    .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(.easeInOut(duration: duration), value: isAnimating)
             }
-            .frame(height: 24)
+            .frame(height: 28)
             .background(Colors.backgroundSurface)
-            .cornerRadius(4)
+            .cornerRadius(6)
         }
     }
 }
@@ -827,6 +937,7 @@ private struct MotionSpringRow: View {
     let animation: Animation
     let description: String
     let isAnimating: Bool
+    private let squareSize: CGFloat = 20
     
     var body: some View {
         HStack(spacing: 12) {
@@ -835,47 +946,54 @@ private struct MotionSpringRow: View {
                     .font(.system(size: 15, weight: .medium))
                     .foregroundColor(Colors.textPrimary)
                 Text(description)
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .foregroundColor(Colors.textSecondary)
             }
             .frame(width: 120, alignment: .leading)
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentPositive)
-                    .frame(width: 24, height: 24)
-                    .offset(x: isAnimating ? geometry.size.width - 24 : 0)
+                    .fill(Colors.persistentAccent)
+                    .frame(width: squareSize, height: squareSize)
+                    .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(animation, value: isAnimating)
             }
-            .frame(height: 24)
+            .frame(height: 28)
             .background(Colors.backgroundSurface)
-            .cornerRadius(4)
+            .cornerRadius(6)
         }
     }
 }
 
 private struct MotionInteractiveRow: View {
     let name: String
+    let description: String
     let animation: Animation
     let isAnimating: Bool
+    private let squareSize: CGFloat = 20
     
     var body: some View {
         HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
             Text(name)
                 .font(.system(size: 15, weight: .medium))
                 .foregroundColor(Colors.textPrimary)
+                Text(description)
+                    .font(.system(size: 12))
+                    .foregroundColor(Colors.textSecondary)
+            }
                 .frame(width: 120, alignment: .leading)
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentWarning)
-                    .frame(width: 24, height: 24)
-                    .offset(x: isAnimating ? geometry.size.width - 24 : 0)
+                    .fill(Colors.persistentAccent)
+                    .frame(width: squareSize, height: squareSize)
+                    .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(animation, value: isAnimating)
             }
-            .frame(height: 24)
+            .frame(height: 28)
             .background(Colors.backgroundSurface)
-            .cornerRadius(4)
+            .cornerRadius(6)
         }
     }
 }
@@ -893,6 +1011,97 @@ private struct DelayRow: View {
             Text("\(delay, specifier: "%.2f")s")
                 .font(.system(size: 15, design: .monospaced))
                 .foregroundColor(Colors.textSecondary)
+        }
+    }
+}
+
+private enum MotionAnimationType {
+    case enterExit, expandCollapse, swap, move, fade
+}
+
+private struct MotionTypeRow: View {
+    let name: String
+    let description: String
+    let animation: Animation
+    let animationType: MotionAnimationType
+    let isAnimating: Bool
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(name)
+                    .font(.system(size: 15, weight: .medium))
+                    .foregroundColor(Colors.textPrimary)
+                Text(description)
+                    .font(.system(size: 12))
+                    .foregroundColor(Colors.textSecondary)
+            }
+            .frame(width: 120, alignment: .leading)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(Colors.backgroundSurface)
+                
+                animatedContent
+            }
+            .frame(height: 28)
+        }
+    }
+    
+    @ViewBuilder
+    private var animatedContent: some View {
+        let squareSize: CGFloat = 20
+        
+        switch animationType {
+        case .enterExit:
+            // Enter/Exit - opacity animation
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Colors.persistentAccent)
+                .frame(width: squareSize, height: squareSize)
+                .opacity(isAnimating ? 1 : 0)
+                .animation(animation, value: isAnimating)
+            
+        case .expandCollapse:
+            // Expand/Collapse - scale animation
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Colors.persistentAccent)
+                .frame(width: isAnimating ? 80 : squareSize, height: squareSize)
+                .animation(animation, value: isAnimating)
+            
+        case .swap:
+            // Two elements swapping with opacity change
+            HStack(spacing: 8) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Colors.persistentAccent)
+                    .frame(width: squareSize, height: squareSize)
+                    .opacity(isAnimating ? 0.4 : 1.0)
+                    .offset(x: isAnimating ? 28 : 0)
+                
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Colors.persistentAccent)
+                    .frame(width: squareSize, height: squareSize)
+                    .opacity(isAnimating ? 1.0 : 0.4)
+                    .offset(x: isAnimating ? -28 : 0)
+            }
+            .animation(animation, value: isAnimating)
+            
+        case .move:
+            // Position animation
+            GeometryReader { geometry in
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Colors.persistentAccent)
+                    .frame(width: squareSize, height: squareSize)
+                    .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
+                    .animation(animation, value: isAnimating)
+            }
+            
+        case .fade:
+            // Crossfade opacity
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Colors.persistentAccent)
+                .frame(width: squareSize, height: squareSize)
+                .opacity(isAnimating ? 0.3 : 1)
+                .animation(animation, value: isAnimating)
         }
     }
 }
@@ -1034,7 +1243,7 @@ struct IconsShowcaseView: View {
     
     var body: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 24) {
+            LazyVStack(alignment: .leading, spacing: 48) {
                 // Show flat grid when searching, categories when not
                 if !searchText.isEmpty {
                     LazyVGrid(columns: columns, spacing: 8) {
@@ -1148,7 +1357,7 @@ struct ComponentsShowcaseView: View {
 struct ButtonsDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
+            VStack(spacing: 48) {
                 // Standard Variants
                 buttonSection(title: "Standard Variants") {
                     VStack(spacing: 12) {
@@ -1175,8 +1384,6 @@ struct ButtonsDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // On Color Context
                 buttonSection(title: "On Color") {
                     VStack(spacing: 12) {
@@ -1193,17 +1400,8 @@ struct ButtonsDetailView: View {
                     )
                 }
                 
-                Divider()
-                
                 // On Media Context
                 buttonSection(title: "On Media") {
-                    ZStack {
-                        Image("Posts/SampleMedia")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 140)
-                            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
-                        
                         VStack(spacing: 12) {
                             Button("Primary on Media") { }
                                 .pdsButton(variant: .primary, context: .onMedia, width: .fullWidth)
@@ -1212,10 +1410,14 @@ struct ButtonsDetailView: View {
                                 .pdsButton(variant: .secondary, context: .onMedia, width: .fullWidth)
                         }
                         .padding(16)
-                    }
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Image("Posts/SampleMedia")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
                 }
-                
-                Divider()
                 
                 // Icon + Label
                 buttonSection(title: "Icon + Label") {
@@ -1228,34 +1430,30 @@ struct ButtonsDetailView: View {
                     }
                 }
                 
-                Divider()
-                
-                // Icon Only
-                buttonSection(title: "Icon Only") {
+                // Icon Only (Circular)
+                buttonSection(title: "Icon Only (Circular)") {
                     HStack(spacing: 16) {
                         Button { } label: {
                             Image(systemName: "plus")
                         }
-                        .pdsIconButton(variant: .primary)
+                        .pdsCircularButton(variant: .primary)
                         
                         Button { } label: {
                             Image(systemName: "heart")
                         }
-                        .pdsIconButton(variant: .primaryDeemphasized)
+                        .pdsCircularButton(variant: .primaryDeemphasized)
                         
                         Button { } label: {
                             Image(systemName: "ellipsis")
                         }
-                        .pdsIconButton(variant: .secondary)
+                        .pdsCircularButton(variant: .secondary)
                         
                         Button { } label: {
                             Image(systemName: "trash")
                         }
-                        .pdsIconButton(variant: .destructive)
+                        .pdsCircularButton(variant: .destructive)
                     }
                 }
-                
-                Divider()
                 
                 // Size Variants
                 buttonSection(title: "Size Variants") {
@@ -1285,8 +1483,6 @@ struct ButtonsDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Width Modes
                 buttonSection(title: "Width Modes") {
                     VStack(alignment: .leading, spacing: 12) {
@@ -1306,8 +1502,6 @@ struct ButtonsDetailView: View {
                             .pdsButton(variant: .primary, width: .fullWidth)
                     }
                 }
-                
-                Divider()
                 
                 // Disabled State
                 buttonSection(title: "Disabled") {
@@ -1342,7 +1536,7 @@ struct ButtonsDetailView: View {
 struct IconButtonsDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
+            VStack(spacing: 48) {
                 // Size Variants
                 iconSection(title: "Size Variants") {
                     HStack(spacing: 24) {
@@ -1370,8 +1564,6 @@ struct IconButtonsDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Primary Color (Default)
                 iconSection(title: "Primary (Default)") {
                     HStack(spacing: 16) {
@@ -1396,8 +1588,6 @@ struct IconButtonsDetailView: View {
                         .pdsIconButton(variant: .primary)
                     }
                 }
-                
-                Divider()
                 
                 // Secondary Color
                 iconSection(title: "Secondary") {
@@ -1424,16 +1614,8 @@ struct IconButtonsDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // On Media
                 iconSection(title: "On Media") {
-                    ZStack(alignment: .leading) {
-                        Image("Posts/SampleMedia")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
-                        
                         VStack(alignment: .leading, spacing: 20) {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Primary")
@@ -1483,10 +1665,14 @@ struct IconButtonsDetailView: View {
                         }
                         .padding(.horizontal, 16)
                         .padding(.vertical, 12)
-                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        Image("Posts/SampleMedia")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
                 }
-                
-                Divider()
                 
                 // Disabled
                 iconSection(title: "Disabled") {
@@ -1558,13 +1744,10 @@ struct TogglesDetailView: View {
 struct ActionChipsDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Standard chips
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Selection")
-                        .typography(Typography.meta3)
-                        .foregroundColor(Colors.textSecondary)
-                    
+            VStack(alignment: .leading, spacing: 48) {
+                // Horizontal Scroll Example
+                chipSection(title: "Horizontal Scroll", description: "Scrollable chip row for many options") {
+                    ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
                         Button("All") { }
                             .pdsActionChip(isSelected: true)
@@ -1574,46 +1757,102 @@ struct ActionChipsDetailView: View {
                             .pdsActionChip()
                         Button("Links") { }
                             .pdsActionChip()
+                            Button("Documents") { }
+                                .pdsActionChip()
+                            Button("Audio") { }
+                                .pdsActionChip()
+                            Button("Archives") { }
+                            .pdsActionChip()
                     }
+                        .padding(.horizontal, 21) // 20 + 1 for border
+                    }
+                    .scrollClipDisabled(true)
+                    .padding(.horizontal, -20)
                 }
                 
                 // With icons
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("With Icons")
-                        .typography(Typography.meta3)
-                        .foregroundColor(Colors.textSecondary)
-                    
-                    HStack(spacing: 8) {
+                chipSection(title: "With Icons", description: "Chips with leading SF Symbols") {
+                    FlowLayout(spacing: 8) {
                         Button("Filter") { }
                             .pdsActionChip(icon: "slider.horizontal.3")
                         Button("Sort") { }
                             .pdsActionChip(icon: "arrow.up.arrow.down")
                         Button("Date") { }
                             .pdsActionChip(isSelected: true, icon: "calendar")
+                        Button("Location") { }
+                            .pdsActionChip(icon: "location")
                     }
                 }
                 
-                // Dismissible
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Dismissible")
-                        .typography(Typography.meta3)
-                        .foregroundColor(Colors.textSecondary)
-                    
+                // On Color
+                chipSection(title: "On Color", description: "Chips on colored backgrounds") {
+                    VStack(spacing: 0) {
+                        ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
+                                Button("Featured") { }
+                                    .pdsActionChip(isSelected: true, context: .onColor)
+                                Button("Popular") { }
+                                    .pdsActionChip(context: .onColor)
+                                Button("Recent") { }
+                                    .pdsActionChip(context: .onColor)
+                                Button("Trending") { }
+                                    .pdsActionChip(context: .onColor)
+                            }
+                            .padding(16)
+                        }
+                    }
+                    .background(Colors.persistentAccent)
+                    .cornerRadius(12)
+                }
+                
+                // On Media
+                chipSection(title: "On Media", description: "Chips on images or video") {
+                    ZStack(alignment: .bottom) {
+                        Image("Posts/SampleMedia")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(height: 160)
+                            .clipped()
+                        
+                        LinearGradient(
+                            colors: [.clear, .black.opacity(0.6)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .frame(height: 80)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 8) {
+                                Button("Nature") { }
+                                    .pdsActionChip(isSelected: true, context: .onMedia)
+                                Button("Landscape") { }
+                                    .pdsActionChip(context: .onMedia)
+                                Button("Photography") { }
+                                    .pdsActionChip(context: .onMedia)
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.bottom, 16)
+                        }
+                        .scrollClipDisabled(true)
+                    }
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                
+                // Dismissible
+                chipSection(title: "Dismissible", description: "Removable filter chips") {
+                    FlowLayout(spacing: 8) {
                         Button("San Francisco") { }
                             .pdsDismissibleChip()
                         Button("Photography") { }
+                            .pdsDismissibleChip()
+                        Button("2024") { }
                             .pdsDismissibleChip()
                     }
                 }
                 
                 // Emoji reactions
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Reactions")
-                        .typography(Typography.meta3)
-                        .foregroundColor(Colors.textSecondary)
-                    
-                    HStack(spacing: 8) {
+                chipSection(title: "Reactions", description: "Emoji chips with counts") {
+                    FlowLayout(spacing: 8) {
                         Button("👍") { }
                             .pdsEmojiChip(count: 12, isSelected: true)
                         Button("❤️") { }
@@ -1622,15 +1861,13 @@ struct ActionChipsDetailView: View {
                             .pdsEmojiChip(count: 3)
                         Button("😮") { }
                             .pdsEmojiChip()
+                        Button("🎉") { }
+                            .pdsEmojiChip(count: 2)
                     }
                 }
                 
                 // Author chips
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Author")
-                        .typography(Typography.meta3)
-                        .foregroundColor(Colors.textSecondary)
-                    
+                chipSection(title: "Author", description: "Chips with avatar and name") {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
                             Button("John Doe") { }
@@ -1639,17 +1876,42 @@ struct ActionChipsDetailView: View {
                                 .pdsAuthorChip(actorInitials: "JS")
                             Button("Alex Chen") { }
                                 .pdsAuthorChip(actorInitials: "AC")
+                            Button("Sam Wilson") { }
+                                .pdsAuthorChip(actorInitials: "SW")
                         }
+                        .padding(.horizontal, 21) // 20 + 1 for border
                     }
+                    .scrollClipDisabled(true)
+                    .padding(.horizontal, -20)
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 20)
+            .padding(20)
         }
         .background(Colors.backgroundSurface)
         .navigationTitle("Action Chips")
         .navigationBarTitleDisplayMode(.large)
+    }
+    
+    private func chipSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            .zIndex(1)
+            .background(Colors.backgroundSurface)
+            
+            content()
+        }
     }
 }
 
@@ -1658,7 +1920,7 @@ struct ActionChipsDetailView: View {
 struct BadgeDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Variants
                 badgeSection(title: "Variants", description: "Different badge styles for various contexts") {
                     FlowLayout(spacing: 8) {
@@ -1669,8 +1931,6 @@ struct BadgeDetailView: View {
                         PDSBadge("Warning", variant: .warning)
                     }
                 }
-                
-                Divider()
                 
                 // Solid variants
                 badgeSection(title: "Solid Variants", description: "High-contrast badges for emphasis") {
@@ -1683,8 +1943,6 @@ struct BadgeDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Sizes
                 badgeSection(title: "Sizes", description: "Available badge sizes") {
                     FlowLayout(spacing: 8) {
@@ -1694,8 +1952,6 @@ struct BadgeDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // With icons
                 badgeSection(title: "With Icons", description: "Badges with leading icons") {
                     FlowLayout(spacing: 8) {
@@ -1704,8 +1960,6 @@ struct BadgeDetailView: View {
                         PDSBadge("Urgent", icon: "exclamationmark.triangle.fill", variant: .negative)
                     }
                 }
-                
-                Divider()
                 
                 // Count badges
                 badgeSection(title: "Count Badges", description: "Notification counts with max overflow") {
@@ -1717,8 +1971,6 @@ struct BadgeDetailView: View {
                         PDSBadge.count(5, variant: .accent)
                     }
                 }
-                
-                Divider()
                 
                 // Dot indicators
                 badgeSection(title: "Dot Indicators", description: "Minimal status indicators") {
@@ -1743,21 +1995,20 @@ struct BadgeDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Status badges
                 badgeSection(title: "Status Badges", description: "Pre-configured status indicators") {
                     FlowLayout(spacing: 8) {
-                        PDSStatusBadge(.active)
-                        PDSStatusBadge(.pending)
-                        PDSStatusBadge(.inactive)
-                        PDSStatusBadge(.success)
-                        PDSStatusBadge(.warning)
-                        PDSStatusBadge(.error)
+                            PDSStatusBadge(.active)
+                            PDSStatusBadge(.pending)
+                            PDSStatusBadge(.inactive)
+                            PDSStatusBadge(.success)
+                            PDSStatusBadge(.warning)
+                            PDSStatusBadge(.error)
+                        }
                     }
                 }
-            }
-            .padding(20)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 20)
         }
         .background(Colors.backgroundSurface)
         .navigationTitle("Badges")
@@ -1770,13 +2021,243 @@ struct BadgeDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            
+            content()
+        }
+    }
+}
+
+// MARK: - Bottom Sheet Detail View
+
+struct BottomSheetDetailView: View {
+    @State private var showBasicSheet = false
+    @State private var showTitledSheet = false
+    @State private var showSmallSheet = false
+    @State private var showLargeSheet = false
+    @State private var showCustomSheet = false
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                // Basic Sheet
+                sheetSection(
+                    title: "Basic Sheet",
+                    description: "Default bottom sheet with medium and large detents"
+                ) {
+                    Button("Show Basic Sheet") {
+                        showBasicSheet = true
+                    }
+                    .pdsButton(variant: .primary, size: .medium)
+                }
+                
+                // With Title & Close
+                sheetSection(
+                    title: "With Header",
+                    description: "Sheet with title and close button"
+                ) {
+                    Button("Show Sheet with Header") {
+                        showTitledSheet = true
+                    }
+                    .pdsButton(variant: .secondary, size: .medium)
+                }
+                
+                // Small Sheet
+                sheetSection(
+                    title: "Small Detent",
+                    description: "Compact sheet for quick actions"
+                ) {
+                    Button("Show Small Sheet") {
+                        showSmallSheet = true
+                    }
+                    .pdsButton(variant: .secondary, size: .medium)
+                }
+                
+                // Large Only
+                sheetSection(
+                    title: "Large Only",
+                    description: "Full-height sheet without resize option"
+                ) {
+                    Button("Show Large Sheet") {
+                        showLargeSheet = true
+                    }
+                    .pdsButton(variant: .secondary, size: .medium)
+                }
+                
+                // Custom Height
+                sheetSection(
+                    title: "Custom Height",
+                    description: "Sheet with custom fractional height (40%)"
+                ) {
+                    Button("Show Custom Sheet") {
+                        showCustomSheet = true
+                    }
+                    .pdsButton(variant: .secondary, size: .medium)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(20)
+        }
+        .background(Colors.backgroundSurface)
+        .navigationTitle("Bottom Sheet")
+        .navigationBarTitleDisplayMode(.large)
+        // Basic sheet
+        .pdsBottomSheet(isPresented: $showBasicSheet) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Basic Bottom Sheet")
+                    .typography(Typography.headline2)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text("This is a default bottom sheet with medium and large detents. Drag the sheet up or down to resize it.")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                Rectangle()
+                    .fill(Colors.backgroundDivider)
+                    .frame(height: 1)
+                    .padding(.vertical, 8)
+                
+                Text("The sheet uses the native iOS presentation with PDS styling applied for background color, corner radius, and drag indicator.")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                Spacer()
+            }
+            .padding(20)
+        }
+        // Sheet with header
+        .pdsBottomSheet(
+            isPresented: $showTitledSheet,
+            showCloseButton: true,
+            title: "Options"
+        ) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("This sheet has a header with title and close button. Useful for modal selections or settings.")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                PDSCellGroup {
+                    PDSNavigationCell(title: "Account Settings") {}
+                    PDSNavigationCell(title: "Privacy") {}
+                    PDSNavigationCell(title: "Notifications") {}
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+        }
+        // Small sheet
+        .pdsBottomSheet(
+            isPresented: $showSmallSheet,
+            detents: [.small]
+        ) {
+            VStack(spacing: 16) {
+                Text("Confirm Action")
+                    .typography(Typography.headline3)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text("Are you sure you want to continue?")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                HStack(spacing: 12) {
+                    Button("Cancel") {
+                        showSmallSheet = false
+                    }
+                    .pdsButton(variant: .secondary, size: .medium, width: .fullWidth)
+                    
+                    Button("Confirm") {
+                        showSmallSheet = false
+                    }
+                    .pdsButton(variant: .primary, size: .medium, width: .fullWidth)
+                }
+            }
+            .padding(20)
+        }
+        // Large only sheet
+        .pdsBottomSheet(
+            isPresented: $showLargeSheet,
+            detents: [.large],
+            showCloseButton: true,
+            title: "Full Screen Content"
+        ) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("This sheet opens to full height and cannot be resized to a smaller detent.")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                ForEach(1..<10) { index in
+                    HStack {
+                        Circle()
+                            .fill(Colors.backgroundDeemphasized)
+                            .frame(width: 40, height: 40)
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Item \(index)")
+                                .typography(Typography.headline4)
+                                .foregroundColor(Colors.textPrimary)
+                            
+                            Text("Description text goes here")
+                                .typography(Typography.meta4)
+                                .foregroundColor(Colors.textSecondary)
+                        }
+                        
+                        Spacer()
+                    }
+                    .padding(.vertical, 8)
+                }
+                
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+        }
+        // Custom height sheet
+        .pdsBottomSheet(
+            isPresented: $showCustomSheet,
+            detents: [.fraction(0.4)],
+            showDragIndicator: true
+        ) {
+            VStack(alignment: .leading, spacing: 16) {
+                Text("Custom Height")
+                    .typography(Typography.headline2)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text("This sheet uses a custom fractional height of 40% of the screen.")
+                    .typography(Typography.body3)
+                    .foregroundColor(Colors.textSecondary)
+                
+                Button("Close") {
+                    showCustomSheet = false
+                }
+                .pdsButton(variant: .primary, size: .medium, width: .fullWidth)
+                
+                Spacer()
+            }
+            .padding(20)
+        }
+    }
+    
+    private func sheetSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -1792,7 +2273,9 @@ private struct FlowLayout: Layout {
     
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let result = arrangeSubviews(proposal: proposal, subviews: subviews)
-        return result.size
+        // Use full proposed width to prevent layout gaps
+        let width = proposal.width ?? result.size.width
+        return CGSize(width: width, height: result.size.height)
     }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
@@ -1809,7 +2292,6 @@ private struct FlowLayout: Layout {
         var currentY: CGFloat = 0
         var lineHeight: CGFloat = 0
         var totalHeight: CGFloat = 0
-        var totalWidth: CGFloat = 0
         
         for subview in subviews {
             let size = subview.sizeThatFits(.unspecified)
@@ -1823,80 +2305,256 @@ private struct FlowLayout: Layout {
             positions.append(CGPoint(x: currentX, y: currentY))
             lineHeight = max(lineHeight, size.height)
             currentX += size.width + spacing
-            totalWidth = max(totalWidth, currentX - spacing)
         }
         
         totalHeight = currentY + lineHeight
-        return (CGSize(width: totalWidth, height: totalHeight), positions)
+        return (CGSize(width: maxWidth, height: totalHeight), positions)
     }
 }
 
 // MARK: - List Cells Detail View
 
 struct ListCellsDetailView: View {
+    @State private var toggleValue1 = true
+    @State private var toggleValue2 = false
+    @State private var checkmark1 = true
+    @State private var checkmark2 = false
+    @State private var checkmark3 = false
+    @State private var selectedRadio = 0
+    
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                // Basic
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Basic Cell")
-                        .typography(Typography.body2)
-                        .foregroundColor(Colors.textPrimary)
-                }
-                
-                // With subtitle
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("With Subtitle")
-                        .typography(Typography.body2)
-                        .foregroundColor(Colors.textPrimary)
-                    Text("Secondary information here")
-                        .typography(Typography.body4)
-                        .foregroundColor(Colors.textSecondary)
-                }
-                
-                // Navigation
-                HStack {
-                    Text("Navigation Cell")
-                        .typography(Typography.body2)
-                        .foregroundColor(Colors.textPrimary)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(Colors.iconSecondary)
-                }
-                
-                // With icon
-                HStack(spacing: 12) {
-                    PDSIconLeading(systemName: "globe")
-                    Text("With Icon")
-                        .typography(Typography.body2)
-                        .foregroundColor(Colors.textPrimary)
-                }
-                
-                // With avatar
-                HStack(spacing: 12) {
-                    PDSActor(systemImage: "person.fill", size: .medium)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("With Avatar")
-                            .typography(Typography.body2)
-                            .foregroundColor(Colors.textPrimary)
-                        Text("Online now")
-                            .typography(Typography.body4)
-                            .foregroundColor(Colors.textSecondary)
+            VStack(alignment: .leading, spacing: 48) {
+                // Basic Cells - Using new PDSCell with PDSCellGroup
+                listCellSection(title: "Basic Cells", description: "Standard list items with optional subtitle and icon") {
+                    PDSCellGroup {
+                        PDSCell("Profile")
+                        PDSCell("Account", subtitle: "john@example.com")
+                        PDSCell("Language", subtitle: "English") {
+                            PDSCellIcon(systemName: "globe")
+                        }
                     }
                 }
                 
-                // Toggle
-                Toggle("Toggle Cell", isOn: .constant(true))
-                    .pdsToggle()
+                // Navigation Cells
+                listCellSection(title: "Navigation Cells", description: "Cells with chevron indicating drill-down navigation") {
+                    PDSCellGroup {
+                        PDSNavigationCell(title: "Privacy") { }
+                        PDSNavigationCell(title: "Notifications", subtitle: "Push, Email, SMS") { }
+                        PDSNavigationCell(
+                            title: "Appearance",
+                            leadingIcon: "paintbrush",
+                            leadingIconColor: Colors.persistentAccent
+                        ) { }
+                    }
+                }
+                
+                // Toggle Cells
+                listCellSection(title: "Toggle Cells", description: "Cells with toggle switch for on/off settings") {
+                    PDSCellGroup {
+                        PDSToggleCell(title: "Dark Mode", isOn: $toggleValue1)
+                        PDSToggleCell(
+                            title: "Notifications",
+                            subtitle: "Receive push notifications",
+                            isOn: $toggleValue2
+                        )
+                    }
+                }
+                
+                // Avatar Cells
+                listCellSection(title: "Avatar Cells", description: "Cells with user avatar for contact lists") {
+                    PDSCellGroup {
+                        PDSAvatarCell(
+                            title: "John Doe",
+                            subtitle: "Last seen 5 min ago",
+                            avatarInitials: "JD",
+                            avatarBadge: .offline,
+                            action: { }
+                        )
+                        PDSAvatarCell(
+                            title: "Jane Smith",
+                            subtitle: "Active now",
+                            avatarInitials: "JS",
+                            avatarBadge: .online,
+                            showChevron: true,
+                            action: { }
+                        )
+                    }
+                }
+                
+                // Detail Cells
+                listCellSection(title: "Detail Cells", description: "iOS Settings style with right-aligned detail value") {
+                    PDSCellGroup {
+                        PDSDetailCell(title: "Language", detail: "English")
+                        PDSDetailCell(title: "Region", detail: "United States", showChevron: true, action: { })
+                        PDSDetailCell(
+                            title: "Storage",
+                            detail: "45.2 GB",
+                            leadingIcon: "internaldrive",
+                            showChevron: true,
+                            action: { }
+                        )
+                    }
+                }
+                
+                // Badge Cells
+                listCellSection(title: "Badge Cells", description: "Cells with count badges for notifications") {
+                    PDSCellGroup {
+                        PDSBadgeCell(
+                            title: "Messages",
+                            leadingIcon: "message.fill",
+                            leadingIconColor: Colors.persistentAccent,
+                            count: 12,
+                            showChevron: true,
+                            action: { }
+                        )
+                        PDSBadgeCell(
+                            title: "Notifications",
+                            subtitle: "3 unread",
+                            leadingIcon: "bell.fill",
+                            leadingIconColor: Colors.persistentWarning,
+                            count: 3,
+                            badgeVariant: .warning,
+                            action: { }
+                        )
+                        PDSBadgeCell(
+                            title: "Updates",
+                            leadingIcon: "arrow.down.circle.fill",
+                            leadingIconColor: Colors.persistentPositive,
+                            count: 5,
+                            badgeVariant: .positive
+                        )
+                    }
+                }
+                
+                // Status Cells
+                listCellSection(title: "Status Cells", description: "Cells with colored status dot indicators") {
+                    PDSCellGroup {
+                        PDSStatusCell(title: "Alex Johnson", status: .online, action: { })
+                        PDSStatusCell(
+                            title: "Sarah Williams",
+                            subtitle: "In a meeting",
+                            status: .busy,
+                            action: { }
+                        )
+                        PDSStatusCell(
+                            title: "Mike Brown",
+                            subtitle: "Back in 30 min",
+                            status: .away,
+                            showChevron: true,
+                            action: { }
+                        )
+                        PDSStatusCell(title: "Emily Davis", status: .offline)
+                    }
+                }
+                
+                // Checkmark Cells
+                listCellSection(title: "Checkmark Cells", description: "Multi-selection with checkmark indicator") {
+                    PDSCellGroup {
+                        PDSCheckmarkCell(title: "Email notifications", isSelected: $checkmark1)
+                        PDSCheckmarkCell(
+                            title: "Push notifications",
+                            subtitle: "Receive alerts on your device",
+                            isSelected: $checkmark2
+                        )
+                        PDSCheckmarkCell(title: "SMS notifications", isSelected: $checkmark3)
+                    }
+                }
+                
+                // Radio Cells
+                listCellSection(title: "Radio Cells", description: "Single-selection with radio button indicator") {
+                    PDSCellGroup {
+                        PDSRadioCell(
+                            title: "Light",
+                            leadingIcon: "sun.max",
+                            isSelected: selectedRadio == 0,
+                            action: { selectedRadio = 0 }
+                        )
+                        PDSRadioCell(
+                            title: "Dark",
+                            leadingIcon: "moon",
+                            isSelected: selectedRadio == 1,
+                            action: { selectedRadio = 1 }
+                        )
+                        PDSRadioCell(
+                            title: "System",
+                            subtitle: "Match device settings",
+                            leadingIcon: "circle.lefthalf.filled",
+                            isSelected: selectedRadio == 2,
+                            action: { selectedRadio = 2 }
+                        )
+                    }
+                }
+                
+                // Destructive Cells
+                listCellSection(title: "Destructive Cells", description: "Red styling for dangerous actions") {
+                    PDSCellGroup {
+                        PDSDestructiveCell(title: "Delete Account", action: { })
+                        PDSDestructiveCell(
+                            title: "Block User",
+                            subtitle: "They won't be able to contact you",
+                            leadingIcon: "nosign",
+                            action: { }
+                        )
+                        PDSDestructiveCell(
+                            title: "Sign Out",
+                            leadingIcon: "rectangle.portrait.and.arrow.right",
+                            action: { }
+                        )
+                    }
+                }
+                
+                // Action Cells
+                listCellSection(title: "Action Cells", description: "Cells with action button on the right") {
+                    PDSCellGroup {
+                        PDSActionCell(
+                            title: "Sarah Johnson",
+                            subtitle: "5 mutual friends",
+                            actionTitle: "Follow",
+                            onAction: { }
+                        )
+                        PDSActionCell(
+                            title: "Mike Wilson",
+                            subtitle: "Suggested for you",
+                            actionTitle: "Invite",
+                            actionVariant: .secondary,
+                            onAction: { }
+                        )
+                        PDSActionCell(
+                            title: "Premium Features",
+                            subtitle: "Unlock all features",
+                            leadingIcon: "star.fill",
+                            leadingIconColor: Colors.persistentWarning,
+                            actionTitle: "Upgrade",
+                            onAction: { }
+                        )
+                    }
+                }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 20)
+            .padding(20)
         }
         .background(Colors.backgroundSurface)
         .navigationTitle("List Cells")
         .navigationBarTitleDisplayMode(.large)
+    }
+    
+    private func listCellSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: Spacing.sm) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            
+            content()
+        }
     }
 }
 
@@ -1908,69 +2566,114 @@ struct InstantFeedbackDetailView: View {
     @State private var showError = false
     @State private var showWarning = false
     @State private var showWithAction = false
-    @State private var showCustomIcon = false
+    @State private var showWithActor = false
     @State private var showTopPosition = false
     
     var body: some View {
         ZStack {
             ScrollView {
-                VStack(spacing: 24) {
-                    // Types section
+                VStack(alignment: .leading, spacing: 48) {
+                    // Static Variants Section
+                    feedbackSection(title: "Variants", description: "Different feedback types for various contexts") {
                     VStack(spacing: 12) {
-                        Text("Types")
-                            .typography(Typography.meta1)
-                            .foregroundColor(Colors.textSecondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
+                            // Neutral
+                            staticFeedbackRow(
+                                message: "This is a neutral message",
+                                type: .neutral
+                            )
+                            
+                            // Success
+                            staticFeedbackRow(
+                                message: "Changes saved successfully",
+                                type: .success
+                            )
+                            
+                            // Error
+                            staticFeedbackRow(
+                                message: "Unable to save changes",
+                                type: .error
+                            )
+                            
+                            // Warning
+                            staticFeedbackRow(
+                                message: "Your connection is unstable",
+                                type: .warning
+                            )
+                        }
+                    }
+                    
+                    // Static Variations Section
+                    feedbackSection(title: "Variations", description: "Additional configurations") {
+                        VStack(spacing: 12) {
+                            // With Action
+                            staticFeedbackRowWithAction(
+                                message: "Item removed from list",
+                                actionText: "Undo"
+                            )
+                            
+                            // Custom Icon
+                            staticFeedbackRowWithIcon(
+                                message: "Link copied to clipboard",
+                                icon: "doc.on.doc.fill"
+                            )
+                            
+                            // With Actor
+                            staticFeedbackRowWithActor(
+                                message: "John liked your post",
+                                initials: "JD"
+                            )
+                        }
+                    }
+                    
+                    // Interactive Section
+                    feedbackSection(title: "Try It", description: "Tap to trigger feedback") {
+                        VStack(spacing: 12) {
+                            HStack(spacing: 12) {
                         Button(action: { showNeutral = true }) {
                             Text("Neutral").frame(maxWidth: .infinity)
                         }
-                        .pdsPrimaryButton()
+                                .pdsSecondaryButton()
                         
                         Button(action: { showSuccess = true }) {
                             Text("Success").frame(maxWidth: .infinity)
                         }
-                        .pdsPrimaryButton()
+                                .pdsSecondaryButton()
+                            }
                         
+                            HStack(spacing: 12) {
                         Button(action: { showError = true }) {
                             Text("Error").frame(maxWidth: .infinity)
                         }
-                        .pdsPrimaryButton()
+                                .pdsSecondaryButton()
                         
                         Button(action: { showWarning = true }) {
                             Text("Warning").frame(maxWidth: .infinity)
                         }
-                        .pdsPrimaryButton()
-                    }
-                    
-                    Divider()
-                    
-                    // Variations section
-                    VStack(spacing: 12) {
-                        Text("Variations")
-                            .typography(Typography.meta1)
-                            .foregroundColor(Colors.textSecondary)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
+                                .pdsSecondaryButton()
+                            }
+                            
+                            HStack(spacing: 12) {
                         Button(action: { showWithAction = true }) {
-                            Text("With Action Button").frame(maxWidth: .infinity)
+                                    Text("With Action").frame(maxWidth: .infinity)
                         }
                         .pdsSecondaryButton()
                         
-                        Button(action: { showCustomIcon = true }) {
-                            Text("Custom Icon").frame(maxWidth: .infinity)
+                                Button(action: { showWithActor = true }) {
+                                    Text("With Actor").frame(maxWidth: .infinity)
                         }
                         .pdsSecondaryButton()
+                            }
                         
                         Button(action: { showTopPosition = true }) {
                             Text("Top Position").frame(maxWidth: .infinity)
                         }
                         .pdsSecondaryButton()
+                        }
                     }
                     
                     Spacer().frame(height: 80)
                 }
-                .padding(24)
+                .padding(20)
             }
             .background(Colors.backgroundSurface)
         }
@@ -2000,13 +2703,13 @@ struct InstantFeedbackDetailView: View {
             message: "Post deleted",
             type: .neutral,
             actionText: "Undo",
-            action: { print("Undo tapped") },
+            action: { },
             isPresented: $showWithAction
         )
         .pdsInstantFeedback(
-            message: "Link copied to clipboard",
-            icon: "link",
-            isPresented: $showCustomIcon
+            message: "John liked your post",
+            actorInitials: "JD",
+            isPresented: $showWithActor
         )
         .pdsInstantFeedback(
             message: "New notification received",
@@ -2016,6 +2719,114 @@ struct InstantFeedbackDetailView: View {
             position: .top
         )
     }
+    
+    private func feedbackSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            
+            content()
+        }
+    }
+    
+    private func staticFeedbackRow(message: String, type: PDSInstantFeedbackType) -> some View {
+        HStack(spacing: 12) {
+            if let icon = type.icon {
+                Image(systemName: icon)
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(type.iconColor)
+            }
+            
+            Text(message)
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textPrimaryOnColor)
+                .lineLimit(2)
+            
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: CornerRadius.card)
+                .fill(Colors.backgroundCardDark)
+        )
+        .environment(\.colorScheme, .dark)
+    }
+    
+    private func staticFeedbackRowWithAction(message: String, actionText: String) -> some View {
+        HStack(spacing: 12) {
+            Text(message)
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textPrimaryOnColor)
+                .lineLimit(2)
+            
+            Spacer(minLength: 0)
+            
+            Text(actionText)
+                .typography(Typography.button3)
+                .foregroundColor(Colors.textBlueLink)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: CornerRadius.card)
+                .fill(Colors.backgroundCardDark)
+        )
+        .environment(\.colorScheme, .dark)
+    }
+    
+    private func staticFeedbackRowWithIcon(message: String, icon: String) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 18, weight: .medium))
+                .foregroundColor(Colors.iconPrimaryOnColor)
+            
+            Text(message)
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textPrimaryOnColor)
+                .lineLimit(2)
+            
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: CornerRadius.card)
+                .fill(Colors.backgroundCardDark)
+        )
+        .environment(\.colorScheme, .dark)
+    }
+    
+    private func staticFeedbackRowWithActor(message: String, initials: String) -> some View {
+        HStack(spacing: 12) {
+            PDSActor(initials: initials, size: .small)
+            
+            Text(message)
+                .typography(Typography.body3)
+                .foregroundColor(Colors.textPrimaryOnColor)
+                .lineLimit(2)
+            
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 14)
+        .background(
+            RoundedRectangle(cornerRadius: CornerRadius.card)
+                .fill(Colors.backgroundCardDark)
+        )
+        .environment(\.colorScheme, .dark)
+    }
 }
 
 // MARK: - Actor Detail View
@@ -2023,7 +2834,7 @@ struct InstantFeedbackDetailView: View {
 struct ActorDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 32) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Sizes
                 actorSection(title: "Sizes", description: "Standard size variants for different contexts") {
                     HStack(spacing: 20) {
@@ -2064,8 +2875,6 @@ struct ActorDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Image Sources
                 actorSection(title: "Image Sources", description: "Different ways to display actor content") {
                     HStack(spacing: 20) {
@@ -2098,8 +2907,6 @@ struct ActorDetailView: View {
                         }
                     }
                 }
-                
-                Divider()
                 
                 // Badge Types
                 actorSection(title: "Badges", description: "Status indicators and notification counts") {
@@ -2140,8 +2947,6 @@ struct ActorDetailView: View {
                         }
                     }
                 }
-                
-                Divider()
                 
                 // Actor Stack
                 actorSection(title: "Actor Stack", description: "Overlapping avatars for group displays") {
@@ -2185,13 +2990,13 @@ struct ActorDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2207,7 +3012,7 @@ struct CommentDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Basic Comments
                 commentSection(title: "Basic Comments", description: "Standard comment display with author info") {
                     VStack(spacing: 0) {
@@ -2220,8 +3025,6 @@ struct CommentDetailView: View {
                             isLiked: true
                         )
                         
-                        Divider()
-                        
                         PDSComment(
                             authorName: "Jane Smith",
                             authorInitials: "JS",
@@ -2231,8 +3034,6 @@ struct CommentDetailView: View {
                             likeCount: 5
                         )
                         
-                        Divider()
-                        
                         PDSComment(
                             authorName: "Alex Chen",
                             authorInitials: "AC",
@@ -2240,11 +3041,11 @@ struct CommentDetailView: View {
                             timestamp: "30m"
                         )
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // Comments with Images
                 commentSection(title: "Comments with Images", description: "Comments with attached photos") {
@@ -2253,28 +3054,26 @@ struct CommentDetailView: View {
                             authorName: "David Kim",
                             authorInitials: "DK",
                             text: "Check out this view from my hike today!",
-                            image: Image("SampleMedia"),
+                            image: Image("Posts/SampleMedia"),
                             timestamp: "45m",
                             likeCount: 24,
                             isLiked: true
                         )
                         
-                        Divider()
-                        
                         PDSComment(
                             authorName: "Lisa Park",
                             authorInitials: "LP",
                             text: "",
-                            image: Image("SampleMedia"),
+                            image: Image("Posts/SampleMedia"),
                             timestamp: "2h",
                             likeCount: 8
                         )
                     }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // Threaded Comments
                 commentSection(title: "Threaded Comments", description: "Comments with nested replies") {
@@ -2327,13 +3126,13 @@ struct CommentDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2347,7 +3146,7 @@ struct CommentDetailView: View {
 struct NotificationCellDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Social Notifications
                 notificationSection(title: "Social", description: "Likes, comments, and follows") {
                     VStack(spacing: 0) {
@@ -2359,8 +3158,6 @@ struct NotificationCellDetailView: View {
                             timestamp: "2h"
                         )
                         
-                        Divider()
-                        
                         PDSNotificationCell(
                             type: .comment,
                             actorName: "Jane Smith",
@@ -2369,8 +3166,6 @@ struct NotificationCellDetailView: View {
                             timestamp: "1h",
                             isRead: true
                         )
-                        
-                        Divider()
                         
                         PDSNotificationCell(
                             type: .follow,
@@ -2383,8 +3178,6 @@ struct NotificationCellDetailView: View {
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // With Actions
                 notificationSection(title: "With Actions", description: "Friend requests and invites") {
@@ -2400,8 +3193,6 @@ struct NotificationCellDetailView: View {
                                 PDSNotificationAction(title: "Decline", action: {})
                             ]
                         )
-                        
-                        Divider()
                         
                         PDSNotificationCell(
                             type: .groupInvite,
@@ -2419,8 +3210,6 @@ struct NotificationCellDetailView: View {
                     .cornerRadius(CornerRadius.medium)
                 }
                 
-                Divider()
-                
                 // Other Types
                 notificationSection(title: "Other Types", description: "Various notification types") {
                     VStack(spacing: 0) {
@@ -2432,8 +3221,6 @@ struct NotificationCellDetailView: View {
                             timestamp: "Today"
                         )
                         
-                        Divider()
-                        
                         PDSNotificationCell(
                             type: .mention,
                             actorName: "David Lee",
@@ -2442,8 +3229,6 @@ struct NotificationCellDetailView: View {
                             timestamp: "3h",
                             isRead: true
                         )
-                        
-                        Divider()
                         
                         PDSNotificationCell(
                             type: .share,
@@ -2470,13 +3255,13 @@ struct NotificationCellDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2490,7 +3275,7 @@ struct NotificationCellDetailView: View {
 struct PostHeaderDetailView: View {
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Standard Headers
                 headerSection(title: "Standard", description: "Basic post header with author info") {
                     VStack(spacing: 0) {
@@ -2501,8 +3286,6 @@ struct PostHeaderDetailView: View {
                             privacy: .public,
                             onMoreTap: {}
                         )
-                        
-                        Divider()
                         
                         PDSPostHeader(
                             authorName: "Jane Smith",
@@ -2518,8 +3301,6 @@ struct PostHeaderDetailView: View {
                     .cornerRadius(CornerRadius.medium)
                 }
                 
-                Divider()
-                
                 // With Subtitle
                 headerSection(title: "With Subtitle", description: "Location and context information") {
                     VStack(spacing: 0) {
@@ -2531,8 +3312,6 @@ struct PostHeaderDetailView: View {
                             privacy: .public,
                             onMoreTap: {}
                         )
-                        
-                        Divider()
                         
                         PDSPostHeader(
                             authorName: "Sarah Wilson",
@@ -2546,8 +3325,6 @@ struct PostHeaderDetailView: View {
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // Sponsored
                 headerSection(title: "Sponsored", description: "Promoted content header") {
@@ -2564,16 +3341,15 @@ struct PostHeaderDetailView: View {
                     .cornerRadius(CornerRadius.medium)
                 }
                 
-                Divider()
-                
                 // Compact Variant
                 headerSection(title: "Compact", description: "Smaller header for feeds") {
-                    VStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 0) {
                         PDSPostHeaderCompact(
                             authorName: "John Doe",
                             authorInitials: "JD",
                             timestamp: "2h"
                         )
+                        .padding(16)
                         
                         PDSPostHeaderCompact(
                             authorName: "Jane Smith",
@@ -2581,8 +3357,9 @@ struct PostHeaderDetailView: View {
                             timestamp: "5h",
                             isVerified: true
                         )
-                    }
                     .padding(16)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
@@ -2600,13 +3377,13 @@ struct PostHeaderDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2618,13 +3395,17 @@ struct PostHeaderDetailView: View {
 // MARK: - Reaction Bar Detail View
 
 struct ReactionBarDetailView: View {
-    @State private var userReaction: PDSReactionType? = nil
-    @State private var customEmoji: String? = nil
-    @State private var showPicker = false
+    // Post Actions state (independent)
+    @State private var postActionsReaction: PDSReactionType? = nil
+    @State private var showPostActionsPicker = false
+    
+    // Reaction Picker demo state (independent)
+    @State private var pickerDemoReaction: PDSReactionType? = nil
+    @State private var pickerDemoEmoji: String? = nil
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Reaction Bar
                 reactionSection(title: "Reaction Bar", description: "Summary of reactions, comments, and shares") {
                     VStack(spacing: 16) {
@@ -2660,63 +3441,78 @@ struct ReactionBarDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Post Actions
-                reactionSection(title: "Post Actions", description: "Interactive buttons for engagement") {
-                    VStack(spacing: 0) {
-                        Divider()
+                reactionSection(title: "Post Actions", description: "Tap to toggle, long-press for more reactions") {
+                    VStack(spacing: 12) {
+                        if showPostActionsPicker {
+                            PDSReactionPicker(
+                                onSelect: { reaction in
+                                    postActionsReaction = reaction
+                                    withAnimation(.easeOut(duration: 0.2)) {
+                                        showPostActionsPicker = false
+                                    }
+                                },
+                                onCustomEmoji: { emoji in
+                                    postActionsReaction = nil
+                                    withAnimation(.easeOut(duration: 0.2)) {
+                                        showPostActionsPicker = false
+                                    }
+                                }
+                            )
+                            .transition(.scale.combined(with: .opacity))
+                        }
                         
                         PDSPostActions(
-                            onLike: { userReaction = .like },
+                            userReaction: postActionsReaction,
+                            onLike: {
+                                if showPostActionsPicker {
+                                    withAnimation(.easeOut(duration: 0.2)) {
+                                        showPostActionsPicker = false
+                                    }
+                                } else if postActionsReaction == nil {
+                                    postActionsReaction = .like
+                                } else {
+                                    postActionsReaction = nil
+                                }
+                            },
                             onComment: {},
-                            onShare: {}
+                            onShare: {},
+                            onLongPressLike: {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                                    showPostActionsPicker = true
+                                }
+                            }
                         )
-                        
-                        Divider()
-                        
-                        PDSPostActions(
-                            userReaction: .love,
-                            onLike: {},
-                            onComment: {},
-                            onShare: {}
-                        )
-                        
-                        Divider()
-                    }
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
+                    }
                 }
                 
-                Divider()
-                
                 // Reaction Picker
-                reactionSection(title: "Reaction Picker", description: "Long-press selector for reactions") {
+                reactionSection(title: "Reaction Picker", description: "Tap any reaction to select") {
                     VStack(spacing: 16) {
                         PDSReactionPicker(
                             onSelect: { reaction in
-                                userReaction = reaction
-                                customEmoji = nil
+                                pickerDemoReaction = reaction
+                                pickerDemoEmoji = nil
                             },
                             onCustomEmoji: { emoji in
-                                customEmoji = emoji
-                                userReaction = nil
+                                pickerDemoEmoji = emoji
+                                pickerDemoReaction = nil
                             }
                         )
                         
-                        if let reaction = userReaction {
+                        if let reaction = pickerDemoReaction {
                             Text("Selected: \(reaction.name) \(reaction.icon)")
                                 .typography(Typography.body3)
                                 .foregroundColor(Colors.textSecondary)
-                        } else if let emoji = customEmoji {
+                        } else if let emoji = pickerDemoEmoji {
                             Text("Selected: \(emoji)")
                                 .typography(Typography.body3)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
                 }
-                
-                Divider()
                 
                 // Reaction Actors
                 reactionSection(title: "Reaction Actors", description: "Who reacted with avatars") {
@@ -2728,7 +3524,8 @@ struct ReactionBarDetailView: View {
                                     PDSReactorInfo(name: "Jane", url: nil, initials: "JS"),
                                     PDSReactorInfo(name: "Alex", url: nil, initials: "AC")
                                 ],
-                                totalCount: 3
+                                totalCount: 3,
+                                borderColor: Colors.backgroundCard
                             )
                             
                             Spacer()
@@ -2746,7 +3543,8 @@ struct ReactionBarDetailView: View {
                                     PDSReactorInfo(name: "Alex", url: nil, initials: "AC")
                                 ],
                                 totalCount: 15,
-                                maxVisible: 3
+                                maxVisible: 3,
+                                borderColor: Colors.backgroundCard
                             )
                             
                             Spacer()
@@ -2774,13 +3572,13 @@ struct ReactionBarDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2800,7 +3598,7 @@ struct ComposerDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Text Area
                 composerSection(title: "Text Area", description: "Multi-line text input with character limit") {
                     PDSTextArea(
@@ -2810,8 +3608,6 @@ struct ComposerDetailView: View {
                         maxLength: 280
                     )
                 }
-                
-                Divider()
                 
                 // Comment Input
                 composerSection(title: "Comment Input", description: "Compact inline input with avatar") {
@@ -2823,8 +3619,6 @@ struct ComposerDetailView: View {
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // Message Input
                 composerSection(title: "Message Input", description: "Chat-style with action buttons") {
@@ -2842,8 +3636,6 @@ struct ComposerDetailView: View {
                     .background(Colors.backgroundCard)
                     .cornerRadius(CornerRadius.medium)
                 }
-                
-                Divider()
                 
                 // Compose Sheet
                 composerSection(title: "Compose Sheet", description: "Full-screen compose modal") {
@@ -2875,13 +3667,13 @@ struct ComposerDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -2914,7 +3706,7 @@ struct SelectMenuDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Native Menu
                 selectSection(title: "Native Menu", description: "Uses system Menu component") {
                     PDSSelectMenu(
@@ -2929,8 +3721,6 @@ struct SelectMenuDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Native Picker (Menu style)
                 selectSection(title: "Picker (Menu)", description: "Native Picker with menu style") {
                     PDSPicker(label: "Country", selection: $selectedCountry, style: .menu) {
@@ -2939,8 +3729,6 @@ struct SelectMenuDetailView: View {
                         }
                     }
                 }
-                
-                Divider()
                 
                 // Native Picker (Segmented)
                 selectSection(title: "Picker (Segmented)", description: "Native segmented control") {
@@ -2951,10 +3739,8 @@ struct SelectMenuDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Multi-Select List
-                selectSection(title: "Multi-Select", description: "Native list with circular checkboxes") {
+                selectSection(title: "Multi-Select", description: "Native list with checkboxes") {
                     PDSMultiSelectList(
                         options: tags,
                         selections: $selectedTags,
@@ -2968,8 +3754,6 @@ struct SelectMenuDetailView: View {
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
-                
-                Divider()
                 
                 // With Error
                 selectSection(title: "Validation", description: "Error state example") {
@@ -2997,13 +3781,13 @@ struct SelectMenuDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -3023,7 +3807,7 @@ struct TextFieldDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 48) {
                 // Standard Inputs
                 fieldSection(title: "Standard", description: "Basic input with label") {
                     VStack(spacing: 16) {
@@ -3033,19 +3817,14 @@ struct TextFieldDetailView: View {
                             text: $email
                         )
                         
-                        PDSTextField(
+                        PDSPasswordField(
                             label: "Password",
                             placeholder: "Enter password",
                             text: $password,
-                            helpText: "Must be at least 8 characters",
-                            trailingIcon: "eye.slash.fill",
-                            isSecure: true,
-                            onTrailingTap: {}
+                            helpText: "Must be at least 8 characters"
                         )
                     }
                 }
-                
-                Divider()
                 
                 // Validation States
                 fieldSection(title: "Validation", description: "Error and disabled states") {
@@ -3066,8 +3845,6 @@ struct TextFieldDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // With Icons
                 fieldSection(title: "With Icons", description: "Leading and trailing icons") {
                     VStack(spacing: 16) {
@@ -3087,8 +3864,6 @@ struct TextFieldDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Search Field
                 fieldSection(title: "Search Field", description: "Pill-shaped with clear button") {
                     PDSSearchField(text: $search)
@@ -3107,13 +3882,13 @@ struct TextFieldDetailView: View {
         @ViewBuilder content: () -> Content
     ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
                 Text(title)
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Text(description)
-                    .typography(Typography.body4)
+                    .typography(PDSTextScale.content.body)
                     .foregroundColor(Colors.textSecondary)
             }
             
@@ -3133,7 +3908,7 @@ struct SubNavigationDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 32) {
+            VStack(spacing: 48) {
                 // Standard Navigation
                 subNavSection(title: "Standard") {
                     PDSSubNavigationBar(
@@ -3146,8 +3921,6 @@ struct SubNavigationDetailView: View {
                         selectedId: $selectedStandard
                     )
                 }
-                
-                Divider()
                 
                 // With Callback Action
                 subNavSection(title: "With Callback") {
@@ -3173,8 +3946,6 @@ struct SubNavigationDetailView: View {
                     }
                 }
                 
-                Divider()
-                
                 // Scrollable (Many Items)
                 subNavSection(title: "Scrollable") {
                     PDSSubNavigationBar(
@@ -3192,17 +3963,8 @@ struct SubNavigationDetailView: View {
                     )
                 }
                 
-                Divider()
-                
                 // On Media
                 subNavSection(title: "On Media") {
-                    ZStack {
-                        Image("Posts/SampleMedia")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 80)
-                            .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
-                        
                         PDSSubNavigationBar(
                             items: [
                                 PDSSubNavItem(id: "photos", title: "Photos"),
@@ -3212,8 +3974,16 @@ struct SubNavigationDetailView: View {
                             selectedId: $selectedOnMedia,
                             context: .onMedia
                         )
-                    }
+                    .padding(.vertical, 16)
                     .padding(.horizontal, 24)
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        Image("Posts/SampleMedia")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
+                    .padding(.horizontal, 20)
                 }
                 
                 Spacer().frame(height: 40)
@@ -3229,9 +3999,528 @@ struct SubNavigationDetailView: View {
     private func subNavSection<Content: View>(title: String, @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Text(title)
-                .typography(Typography.headline4Emphasized)
+                .typography(PDSTextScale.content.headline)
                 .foregroundColor(Colors.textPrimary)
-                .padding(.horizontal, 24)
+                .padding(.horizontal, 20)
+            
+            content()
+        }
+    }
+}
+
+// MARK: - Media Detail View
+
+struct MediaDetailView: View {
+    private let sampleImage = Image("Posts/SampleMedia")
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                // Landscape Ratios
+                mediaSection(title: "Landscape Ratios", description: "Wide aspect ratios for video and photography") {
+                    VStack(spacing: 20) {
+                        ForEach([PDSMediaRatio.ratio16x9, .ratio3x2, .ratio4x3, .ratio5x4], id: \.label) { ratio in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(ratio.label)
+                                    .typography(Typography.meta2)
+                                    .foregroundColor(Colors.textSecondary)
+                                
+                                PDSMedia(ratio: ratio) {
+                                    sampleImage
+                                        .resizable()
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Square
+                mediaSection(title: "Square", description: "1:1 ratio for profile images and thumbnails") {
+                    PDSMedia(ratio: .ratio1x1) {
+                        sampleImage
+                            .resizable()
+                    }
+                }
+                
+                // Portrait Ratios
+                mediaSection(title: "Portrait Ratios", description: "Tall aspect ratios for stories and portraits") {
+                    HStack(alignment: .top, spacing: 12) {
+                        ForEach([PDSMediaRatio.ratio4x5, .ratio3x5, .ratio9x16], id: \.label) { ratio in
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(ratio.label)
+                                    .typography(Typography.meta2)
+                                    .foregroundColor(Colors.textSecondary)
+                                
+                                PDSMedia(ratio: ratio) {
+                                    sampleImage
+                                        .resizable()
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Custom Ratio
+                mediaSection(title: "Custom Ratio", description: "Define any aspect ratio") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("21:9 (Ultrawide)")
+                            .typography(Typography.meta2)
+                            .foregroundColor(Colors.textSecondary)
+                        
+                        PDSMedia(ratio: .custom(width: 21, height: 9)) {
+                            sampleImage
+                                .resizable()
+                        }
+                    }
+                }
+                
+                // Placeholder States
+                mediaSection(title: "Placeholder States", description: "Loading and empty states") {
+                    HStack(spacing: 12) {
+                        PDSMediaPlaceholder(ratio: .ratio1x1, icon: "photo")
+                        PDSMediaPlaceholder(ratio: .ratio1x1, icon: "video")
+                        PDSMediaPlaceholder(ratio: .ratio1x1, icon: "music.note")
+                    }
+                }
+                
+                // Async Loading
+                mediaSection(title: "Async Loading", description: "Remote image with loading state") {
+                    PDSAsyncMedia(
+                        url: URL(string: "https://picsum.photos/800/450"),
+                        ratio: .ratio16x9
+                    )
+                }
+                
+                Spacer().frame(height: 20)
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 24)
+        }
+        .background(Colors.backgroundSurface)
+        .navigationTitle("Media")
+        .navigationBarTitleDisplayMode(.large)
+    }
+    
+    private func mediaSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            
+            content()
+        }
+    }
+}
+
+// MARK: - Progress Detail View
+
+struct ProgressDetailView: View {
+    @State private var animatedProgress: Double = 0.0
+    @State private var currentStep: Int = 1
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                // Progress Bar
+                progressSection(title: "Progress Bar", description: "Linear progress indicators") {
+                    VStack(spacing: 20) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Variants")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSProgressBar(progress: 0.65, variant: .accent)
+                            PDSProgressBar(progress: 0.8, variant: .positive)
+                            PDSProgressBar(progress: 0.45, variant: .warning)
+                            PDSProgressBar(progress: 0.3, variant: .negative)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Sizes")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSProgressBar(progress: 0.6, size: .small)
+                            PDSProgressBar(progress: 0.6, size: .medium)
+                            PDSProgressBar(progress: 0.6, size: .large)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("With Label")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSProgressBar(progress: animatedProgress, showLabel: true)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Indeterminate")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSProgressBar(progress: 0, isIndeterminate: true)
+                        }
+                    }
+                }
+                
+                // Progress Ring
+                progressSection(title: "Progress Ring", description: "Circular progress indicators") {
+                    VStack(spacing: 24) {
+                        HStack(spacing: 24) {
+                            PDSProgressRing(progress: animatedProgress, size: .small)
+                            PDSProgressRing(progress: animatedProgress, size: .medium)
+                            PDSProgressRing(progress: animatedProgress, size: .large)
+                        }
+                        
+                        HStack(spacing: 24) {
+                            PDSProgressRing(progress: 0.65, variant: .accent, size: .medium)
+                            PDSProgressRing(progress: 0.8, variant: .positive, size: .medium)
+                            PDSProgressRing(progress: 0.45, variant: .warning, size: .medium)
+                        }
+                        
+                        HStack(spacing: 24) {
+                            PDSProgressRing(progress: 0.6, size: .large, labelStyle: .fraction(current: 6, total: 10))
+                            PDSProgressRing(progress: 1.0, variant: .positive, size: .large, labelStyle: .custom("Done!"))
+                        }
+                    }
+                }
+                
+                // Progress Steps
+                progressSection(title: "Progress Steps", description: "Multi-step flow indicators") {
+                    VStack(spacing: 32) {
+                        PDSProgressSteps(
+                            steps: ["Account", "Profile", "Settings", "Done"],
+                            currentStep: currentStep
+                        )
+                        
+                        HStack(spacing: 12) {
+                            Button("Back") {
+                                if currentStep > 0 { currentStep -= 1 }
+                            }
+                            .pdsButton(variant: .secondary, size: .small)
+                            .disabled(currentStep == 0)
+                            
+                            Button("Next") {
+                                if currentStep < 3 { currentStep += 1 }
+                            }
+                            .pdsButton(variant: .primary, size: .small)
+                            .disabled(currentStep == 3)
+                        }
+                        .fixedSize()
+                        
+                        PDSProgressSteps(
+                            steps: ["Create account", "Set up profile", "Choose preferences", "Start exploring"],
+                            currentStep: currentStep,
+                            orientation: .vertical
+                        )
+                    }
+                }
+                
+                // Progress Stepper
+                progressSection(title: "Progress Stepper", description: "Segmented progress indicator") {
+                    VStack(spacing: 24) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("4 sections, 2 complete")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            PDSProgressStepper(totalSections: 4, completedSections: 2)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("5 sections, 3 complete")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            PDSProgressStepper(totalSections: 5, completedSections: 3, variant: .positive)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Interactive")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            PDSProgressStepper(totalSections: 4, completedSections: currentStep + 1)
+                        }
+                    }
+                }
+                
+                // Streak Indicator
+                progressSection(title: "Streak Indicator", description: "Habit tracking displays") {
+                    VStack(alignment: .leading, spacing: 24) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Styles")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            HStack(spacing: 12) {
+                                PDSStreakIndicator(count: 14, style: .flame)
+                                PDSStreakIndicator(count: 7, style: .lightning)
+                                PDSStreakIndicator(count: 30, style: .star)
+                            }
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Sizes")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            HStack(spacing: 12) {
+                                PDSStreakIndicator(count: 14, size: .small)
+                                PDSStreakIndicator(count: 14, size: .medium)
+                                PDSStreakIndicator(count: 14, size: .large)
+                            }
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("States")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            HStack(spacing: 12) {
+                                PDSStreakIndicator(count: 14, isActive: true)
+                                PDSStreakIndicator(count: 0, isActive: false)
+                            }
+                        }
+                    }
+                }
+                
+                // Interactive
+                progressSection(title: "Interactive", description: "Tap to animate progress") {
+                    VStack(spacing: 16) {
+                        PDSProgressBar(progress: animatedProgress, variant: .accent, size: .large, showLabel: true)
+                        
+                        HStack(spacing: 12) {
+                            Button("0%") { withAnimation { animatedProgress = 0 } }
+                                .pdsButton(variant: .secondary, size: .small)
+                            Button("50%") { withAnimation { animatedProgress = 0.5 } }
+                                .pdsButton(variant: .secondary, size: .small)
+                            Button("100%") { withAnimation { animatedProgress = 1.0 } }
+                                .pdsButton(variant: .primary, size: .small)
+                        }
+                    }
+                }
+            }
+            .padding(20)
+        }
+        .background(Colors.backgroundSurface)
+        .navigationTitle("Progress")
+        .navigationBarTitleDisplayMode(.large)
+        .onAppear {
+            withAnimation(.easeOut(duration: 1.0)) {
+                animatedProgress = 0.72
+            }
+        }
+    }
+    
+    private func progressSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+            
+            content()
+        }
+    }
+}
+
+// MARK: - Charts Detail View
+
+struct ChartsDetailView: View {
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                // Stat Cards
+                chartSection(title: "Stat Cards", description: "Key metric displays with trends") {
+                    VStack(spacing: 16) {
+                        HStack(spacing: 12) {
+                            PDSStatCard(value: "1,234", label: "Steps")
+                            PDSStatCard(value: "87%", label: "Complete", variant: .positive)
+                        }
+                        
+                        HStack(spacing: 12) {
+                            PDSStatCard(
+                                value: "2,847",
+                                label: "Followers",
+                                trend: .up(0.12)
+                            )
+                            PDSStatCard(
+                                value: "$1,450",
+                                label: "Expenses",
+                                trend: .down(0.08, isGood: true)
+                            )
+                        }
+                        
+                        PDSStatCard(
+                            value: "4.2K",
+                            label: "Weekly views",
+                            sparklineData: [10, 25, 18, 32, 28, 45, 38],
+                            variant: .accent
+                        )
+                    }
+                }
+                
+                // Sparklines
+                chartSection(title: "Sparklines", description: "Inline trend indicators") {
+                    VStack(spacing: 16) {
+                        HStack(spacing: 8) {
+                            Text("Revenue")
+                                .typography(Typography.body3)
+                                .foregroundColor(Colors.textSecondary)
+                                .frame(width: 70, alignment: .leading)
+                            PDSSparkline(data: [10, 25, 18, 32, 28, 45, 38], variant: .positive)
+                                .frame(height: 32)
+                        }
+                        
+                        HStack(spacing: 8) {
+                            Text("Churn")
+                                .typography(Typography.body3)
+                                .foregroundColor(Colors.textSecondary)
+                                .frame(width: 70, alignment: .leading)
+                            PDSSparkline(data: [38, 32, 35, 28, 30, 22, 18], variant: .negative)
+                                .frame(height: 32)
+                        }
+                        
+                        HStack(spacing: 8) {
+                            Text("Users")
+                                .typography(Typography.body3)
+                                .foregroundColor(Colors.textSecondary)
+                                .frame(width: 70, alignment: .leading)
+                            PDSSparkline(data: [10, 15, 25, 35, 40, 42, 48], variant: .accent)
+                                .frame(height: 32)
+                        }
+                    }
+                }
+                
+                // Bar Chart
+                chartSection(title: "Bar Chart", description: "Vertical and horizontal comparisons") {
+                    VStack(spacing: 32) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Daily Activity")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSBarChart(data: [
+                                PDSBarChartData(label: "Mon", value: 120),
+                                PDSBarChartData(label: "Tue", value: 180),
+                                PDSBarChartData(label: "Wed", value: 95),
+                                PDSBarChartData(label: "Thu", value: 210),
+                                PDSBarChartData(label: "Fri", value: 165),
+                                PDSBarChartData(label: "Sat", value: 85),
+                                PDSBarChartData(label: "Sun", value: 140)
+                            ])
+                            .frame(height: 180)
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Skills")
+                                .typography(Typography.meta3)
+                                .foregroundColor(Colors.textSecondary)
+                            
+                            PDSBarChart(data: [
+                                PDSBarChartData(label: "React", value: 4500, color: Colors.persistentAccent),
+                                PDSBarChartData(label: "Swift", value: 3200, color: Colors.persistentWarning),
+                                PDSBarChartData(label: "Python", value: 2800, color: Colors.persistentPositive),
+                                PDSBarChartData(label: "Go", value: 1900, color: Colors.blue400)
+                            ], orientation: .horizontal)
+                            .frame(height: 140)
+                        }
+                    }
+                }
+                
+                // Line Chart
+                chartSection(title: "Line Chart", description: "Trends over time") {
+                    PDSLineChart(data: [
+                        PDSLineChartData(label: "Mon", value: 120),
+                        PDSLineChartData(label: "Tue", value: 180),
+                        PDSLineChartData(label: "Wed", value: 145),
+                        PDSLineChartData(label: "Thu", value: 210),
+                        PDSLineChartData(label: "Fri", value: 195),
+                        PDSLineChartData(label: "Sat", value: 165),
+                        PDSLineChartData(label: "Sun", value: 230)
+                    ])
+                    .frame(height: 200)
+                }
+                
+                // Donut Chart
+                chartSection(title: "Donut Chart", description: "Proportional breakdowns") {
+                    VStack(spacing: 16) {
+                        PDSDonutChart(
+                            data: [
+                                PDSDonutChartData(label: "Food", value: 450, color: Colors.persistentAccent),
+                                PDSDonutChartData(label: "Transport", value: 280, color: Colors.persistentPositive),
+                                PDSDonutChartData(label: "Shopping", value: 320, color: Colors.persistentWarning),
+                                PDSDonutChartData(label: "Other", value: 150, color: Colors.gray400)
+                            ],
+                            centerLabel: "Total",
+                            centerValue: "$1.2K"
+                        )
+                        
+                        VStack(spacing: 8) {
+                            legendRow(color: Colors.persistentAccent, label: "Food", value: "$450")
+                            legendRow(color: Colors.persistentPositive, label: "Transport", value: "$280")
+                            legendRow(color: Colors.persistentWarning, label: "Shopping", value: "$320")
+                            legendRow(color: Colors.gray400, label: "Other", value: "$150")
+                        }
+                    }
+                }
+            }
+            .padding(20)
+        }
+        .background(Colors.backgroundSurface)
+        .navigationTitle("Charts")
+        .navigationBarTitleDisplayMode(.large)
+    }
+    
+    private func legendRow(color: Color, label: String, value: String) -> some View {
+        HStack(spacing: 8) {
+            Circle()
+                .fill(color)
+                .frame(width: 10, height: 10)
+            
+            Text(label)
+                .typography(Typography.body4)
+                .foregroundColor(Colors.textSecondary)
+                .lineLimit(1)
+            
+            Spacer()
+            
+            Text(value)
+                .typography(Typography.body4)
+                .foregroundColor(Colors.textPrimary)
+                .lineLimit(1)
+        }
+    }
+    
+    private func chartSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+                
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
             
             content()
         }

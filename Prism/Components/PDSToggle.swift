@@ -30,23 +30,29 @@ struct PDSSwitch: View {
     private let thumbPadding: CGFloat = 2
     
     var body: some View {
-        ZStack(alignment: isOn ? .trailing : .leading) {
-            // Track
-            RoundedRectangle(cornerRadius: trackHeight / 2)
-                .fill(trackColor)
-                .frame(width: trackWidth, height: trackHeight)
-            
-            // Thumb
-            thumbView
-                .padding(thumbPadding)
-        }
-        .animation(.easeInOut(duration: 0.2), value: isOn)
-        .onTapGesture {
+        Button {
             if isEnabled {
                 isOn.toggle()
             }
+        } label: {
+            ZStack(alignment: isOn ? .trailing : .leading) {
+                // Track
+                RoundedRectangle(cornerRadius: trackHeight / 2)
+                    .fill(trackColor)
+                    .frame(width: trackWidth, height: trackHeight)
+                
+                // Thumb
+                thumbView
+                    .padding(thumbPadding)
+            }
+            .animation(.easeInOut(duration: 0.2), value: isOn)
         }
-        .opacity(isEnabled ? 1.0 : 1.0) // Keep full opacity, colors handle disabled state
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Toggle")
+        .accessibilityValue(isOn ? "On" : "Off")
+        .accessibilityAddTraits(isEnabled ? .isButton : [.isButton, .isStaticText])
+        .accessibilityHint(isEnabled ? "Double tap to toggle" : "Disabled")
     }
     
     private var trackColor: Color {
@@ -139,10 +145,10 @@ extension View {
 #Preview("Toggle Styles") {
     VStack(spacing: 32) {
         // Standard toggle
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
             Text("Standard Toggle")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             Toggle("Notifications", isOn: .constant(true))
                 .pdsToggle()
@@ -151,27 +157,31 @@ extension View {
                 .pdsToggle()
         }
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
             .background(Colors.backgroundDivider)
         
         // Toggle with description
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
             Text("With Description")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             Toggle("Push Notifications", isOn: .constant(true))
                 .pdsToggle(description: "Receive notifications about activity on your posts")
         }
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
             .background(Colors.backgroundDivider)
         
         // Compact toggle
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
             Text("Compact (Switch Only)")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             HStack {
                 Text("Wi-Fi")
@@ -185,14 +195,16 @@ extension View {
             }
         }
         
-        Divider()
+        Rectangle()
+            .fill(Colors.backgroundDivider)
+            .frame(height: 1)
             .background(Colors.backgroundDivider)
         
         // Disabled toggles
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
             Text("Disabled")
-                .typography(Typography.meta1)
-                .foregroundColor(Colors.textSecondary)
+                .typography(PDSTextScale.content.headline)
+                .foregroundColor(Colors.textPrimary)
             
             Toggle("Disabled On", isOn: .constant(true))
                 .pdsToggle(isEnabled: false)

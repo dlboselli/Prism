@@ -93,6 +93,29 @@ struct Motion {
     /// Fade in/out
     static let fade: Animation = .easeInOut(duration: quickDuration)
     
+    // MARK: - Motion Types
+    
+    /// Enter/Exit - Elements appearing or disappearing from the screen
+    static let enter: Animation = .easeOut(duration: moderateDuration)
+    static let exit: Animation = .easeIn(duration: standardDuration)
+    
+    /// Expand/Collapse - Elements growing or shrinking in place
+    static let expand: Animation = .spring(response: 0.35, dampingFraction: 0.75)
+    static let collapse: Animation = .spring(response: 0.3, dampingFraction: 0.8)
+    
+    /// Swap/Shuffle - Elements exchanging positions
+    static let swap: Animation = .spring(response: 0.4, dampingFraction: 0.7)
+    static let shuffle: Animation = .spring(response: 0.5, dampingFraction: 0.65)
+    
+    /// Move - Standard repositioning of elements
+    static let move: Animation = .spring(response: 0.35, dampingFraction: 0.8)
+    
+    /// Quick Move - Fast repositioning for responsive feedback
+    static let quickMove: Animation = .spring(response: 0.25, dampingFraction: 0.85)
+    
+    /// Passive Move - Subtle repositioning that shouldn't draw attention
+    static let passiveMove: Animation = .easeInOut(duration: slowDuration)
+    
     // MARK: - Delays
     
     /// No delay

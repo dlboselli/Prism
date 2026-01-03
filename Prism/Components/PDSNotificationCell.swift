@@ -105,8 +105,17 @@ struct PDSNotificationCell: View {
     let thumbnailURL: URL?
     let thumbnailImage: String?
     let actionButtons: [PDSNotificationAction]?
+    let customBadgeBorderColor: Color?
     let onTap: (() -> Void)?
     let onActorTap: (() -> Void)?
+    
+    /// Computed border color based on read state
+    private var badgeBorderColor: Color {
+        if let custom = customBadgeBorderColor {
+            return custom
+        }
+        return isRead ? Colors.backgroundSurface : Colors.backgroundCard
+    }
     
     init(
         type: PDSNotificationType,
@@ -119,6 +128,7 @@ struct PDSNotificationCell: View {
         thumbnailURL: URL? = nil,
         thumbnailImage: String? = nil,
         actionButtons: [PDSNotificationAction]? = nil,
+        badgeBorderColor: Color? = nil,
         onTap: (() -> Void)? = nil,
         onActorTap: (() -> Void)? = nil
     ) {
@@ -132,22 +142,23 @@ struct PDSNotificationCell: View {
         self.thumbnailURL = thumbnailURL
         self.thumbnailImage = thumbnailImage
         self.actionButtons = actionButtons
+        self.customBadgeBorderColor = badgeBorderColor
         self.onTap = onTap
         self.onActorTap = onActorTap
     }
     
     var body: some View {
         Button(action: { onTap?() }) {
-            HStack(alignment: .top, spacing: 12) {
+            HStack(alignment: .center, spacing: 12) {
                 // Actor with notification type badge
                 actorWithBadge
                 
                 // Content
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: PDSTextScale.compact.lineSpacing) {
                     // Message
                     HStack(alignment: .top) {
                         Text(attributedMessage)
-                            .typography(Typography.body3)
+                            .typography(Typography.body4)
                             .foregroundColor(Colors.textPrimary)
                             .lineLimit(3)
                             .fixedSize(horizontal: false, vertical: true)
@@ -178,7 +189,7 @@ struct PDSNotificationCell: View {
                     
                     // Timestamp
                     Text(timestamp)
-                        .typography(Typography.meta3)
+                        .typography(Typography.meta4)
                         .foregroundColor(Colors.textSecondary)
                     
                     // Action buttons
@@ -232,7 +243,7 @@ struct PDSNotificationCell: View {
                 )
                 .overlay(
                     Circle()
-                        .stroke(Colors.backgroundSurface, lineWidth: 2)
+                        .stroke(badgeBorderColor, lineWidth: 2)
                 )
                 .offset(x: 4, y: 4)
         }
@@ -244,7 +255,7 @@ struct PDSNotificationCell: View {
         // Bold the actor name if it appears at the start
         if message.hasPrefix(actorName) {
             if let range = result.range(of: actorName) {
-                result[range].font = Typography.body3Link.font
+                result[range].font = Typography.body4Link.font
             }
         }
         
@@ -279,7 +290,9 @@ struct PDSNotificationAction {
                 timestamp: "2h"
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSNotificationCell(
                 type: .comment,
@@ -290,7 +303,9 @@ struct PDSNotificationAction {
                 isRead: true
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSNotificationCell(
                 type: .follow,
@@ -300,7 +315,9 @@ struct PDSNotificationAction {
                 timestamp: "30m"
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSNotificationCell(
                 type: .friendRequest,
@@ -314,7 +331,9 @@ struct PDSNotificationAction {
                 ]
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSNotificationCell(
                 type: .birthday,
@@ -324,7 +343,9 @@ struct PDSNotificationAction {
                 timestamp: "Today"
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSNotificationCell(
                 type: .mention,

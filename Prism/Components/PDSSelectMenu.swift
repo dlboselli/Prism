@@ -199,7 +199,7 @@ extension View {
 
 // MARK: - PDSMultiSelectList
 
-/// Multi-selection using native List selection with circular checkboxes
+/// Multi-selection list with square checkboxes
 struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable {
     let options: [T]
     @Binding var selections: Set<T.ID>
@@ -231,52 +231,48 @@ struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable
                     }
                 } label: {
                     HStack(spacing: 12) {
-                        // Checkbox
-                        ZStack {
-                            Circle()
-                                .stroke(isSelected ? Colors.persistentAccent : Colors.textInputInactiveInnerBorder, lineWidth: 2)
-                                .frame(width: 22, height: 22)
-                            
-                            if isSelected {
-                                Circle()
-                                    .fill(Colors.persistentAccent)
-                                    .frame(width: 22, height: 22)
-                                
+                        // Checkbox - square with rounded corners
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(isSelected ? Colors.persistentAccent : Color.clear)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 4)
+                                    .stroke(isSelected ? Colors.persistentAccent : Colors.iconSecondary, lineWidth: 1.5)
+                            )
+                            .overlay(
                                 Image(systemName: "checkmark")
-                                    .font(.system(size: 12, weight: .bold))
+                                    .font(.system(size: 11, weight: .bold))
                                     .foregroundColor(.white)
-                            }
-                        }
+                                    .opacity(isSelected ? 1 : 0)
+                            )
+                            .frame(width: 20, height: 20)
                         
                         // Label
-                        VStack(alignment: .leading, spacing: 2) {
+                        VStack(alignment: .leading, spacing: 0) {
                             Text(optionLabel(option))
-                                .typography(Typography.body2)
+                                .typography(Typography.body3)
                                 .foregroundColor(Colors.textPrimary)
                             
                             if let subtitle = optionSubtitle?(option) {
                                 Text(subtitle)
-                                    .typography(Typography.meta3)
+                                    .typography(Typography.meta4)
                                     .foregroundColor(Colors.textSecondary)
                             }
                         }
                         
                         Spacer()
                     }
-                    .padding(.horizontal, 16)
                     .padding(.vertical, 12)
-                    .background(isSelected ? Colors.persistentAccentDeemphasized : Color.clear)
                 }
                 .buttonStyle(.plain)
                 
                 if option.id != options.last?.id {
-                    Divider()
-                        .padding(.leading, 50)
+                    Rectangle()
+                        .fill(Colors.backgroundDivider)
+                        .frame(height: 1)
+                        .padding(.leading, 32)
                 }
             }
         }
-        .background(Colors.backgroundCard)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 }
 
@@ -289,12 +285,16 @@ struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable
                 // Simple Menu
                 SimpleMenuPreview()
                 
-                Divider()
+                Rectangle()
+                    .fill(Colors.backgroundDivider)
+                    .frame(height: 1)
                 
                 // Picker styles
                 PickerPreview()
                 
-                Divider()
+                Rectangle()
+                    .fill(Colors.backgroundDivider)
+                    .frame(height: 1)
                 
                 // Multi-select
                 MultiSelectPreview()

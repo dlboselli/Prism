@@ -393,8 +393,8 @@ extension View {
         ))
     }
     
-    /// Applies PDS icon-only button style
-    func pdsIconButton(
+    /// Applies PDS circular icon-only button style (filled background)
+    func pdsCircularButton(
         variant: PDSButtonVariant = .secondary,
         context: PDSButtonContext = .surface,
         size: PDSButtonSize = .medium,
@@ -454,7 +454,7 @@ extension View {
             // Standard Variants
             VStack(alignment: .leading, spacing: 16) {
                 Text("Standard Variants")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 VStack(spacing: 12) {
@@ -472,12 +472,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // On Color Context
             VStack(alignment: .leading, spacing: 16) {
                 Text("On Color")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 VStack(spacing: 12) {
@@ -494,12 +496,14 @@ extension View {
                 )
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // On Media Context
             VStack(alignment: .leading, spacing: 16) {
                 Text("On Media")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 ZStack {
@@ -523,12 +527,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Icon + Label
             VStack(alignment: .leading, spacing: 16) {
                 Text("Icon + Label")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 VStack(spacing: 12) {
@@ -540,43 +546,47 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Icon Only
             VStack(alignment: .leading, spacing: 16) {
                 Text("Icon Only")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 HStack(spacing: 16) {
                     Button { } label: {
                         Image(systemName: "plus")
                     }
-                    .pdsIconButton(variant: .primary)
+                    .pdsCircularButton(variant: .primary)
                     
                     Button { } label: {
                         Image(systemName: "heart")
                     }
-                    .pdsIconButton(variant: .primaryDeemphasized)
+                    .pdsCircularButton(variant: .primaryDeemphasized)
                     
                     Button { } label: {
                         Image(systemName: "ellipsis")
                     }
-                    .pdsIconButton(variant: .secondary)
+                    .pdsCircularButton(variant: .secondary)
                     
                     Button { } label: {
                         Image(systemName: "trash")
                     }
-                    .pdsIconButton(variant: .destructive)
+                    .pdsCircularButton(variant: .destructive)
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Size Variants
             VStack(alignment: .leading, spacing: 16) {
                 Text("Size Variants")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 VStack(alignment: .leading, spacing: 12) {
@@ -605,12 +615,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Width Modes
             VStack(alignment: .leading, spacing: 16) {
                 Text("Width Modes")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 VStack(alignment: .leading, spacing: 12) {
@@ -630,12 +642,14 @@ extension View {
                 }
             }
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             // Disabled State
             VStack(alignment: .leading, spacing: 16) {
                 Text("Disabled")
-                    .typography(Typography.headline3Emphasized)
+                    .typography(PDSTextScale.content.headline)
                     .foregroundColor(Colors.textPrimary)
                 
                 Button("Submit") { }

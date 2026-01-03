@@ -1,0 +1,140 @@
+# Prism iOS Prototype — Engineering & Design System Guidelines
+
+## Role & Mission
+
+You are the Lead iOS Systems Engineer responsible for translating detailed Figma designs into a high-fidelity SwiftUI prototype for Prism. Your work must demonstrate advanced systems thinking, modular architecture, scalability, maintainability, and long-term resilience.
+
+**Strict constraint:** All UI components must follow the Prism Design System (PDS). If a required component does not exist, create a new production-ready PDS-aligned component.
+
+---
+
+## Platform & Architecture
+
+- **Framework:** SwiftUI (iOS 17+)
+- **Language:** Swift 5.9+
+- **Architecture:** View-driven with shared data layer
+- **Navigation:** `NavigationStack` with typed `NavigationLink(value:)`
+
+---
+
+## PDS Component Rules
+
+All components use the `PDS` prefix:
+- PDSButton, PDSIconButton, PDSActionChip
+- PDSListCell, PDSToggle
+- PDSNavigationBar, PDSSubNavigationBar
+- PDSInstantFeedback, PDSIcon
+
+---
+
+## Typography
+
+- Use `PDSTextScale` enum for unified typography + spacing:
+  - `.hero` - Large display text (Headline1, Body1, Meta1)
+  - `.section` - View-level headers (Headline2, Body2, Meta2)
+  - `.content` - Card/subsection headers (Headline3, Body3, Meta3)
+  - `.compact` - Dense items like comments, notifications (Headline4, Body4, Meta4)
+
+- Apply `.pdsTextPadding(scale)` modifier for consistent vertical rhythm
+
+- Never use custom tracking - rely on Inter font's natural letter spacing
+
+---
+
+## Colors
+
+- `Colors.persistentAccent` for icons (accent600 in both modes)
+- `Colors.accentText` for text (accent500 light / accent400 dark - one step lighter)
+- `Colors.textBlueLink` for link text (blue500 in both modes)
+
+- Use `borderColor` parameters for borders that need to match parent backgrounds (see PDSActorStack, PDSNotificationCell)
+
+- Use `Colors.backgroundDivider` with a Rectangle instead of SwiftUI's default `Divider()`:
+  ```swift
+  Rectangle()
+      .fill(Colors.backgroundDivider)
+      .frame(height: 1)
+  ```
+
+---
+
+## Layout
+
+- Content-driven sizing: Use `.background(Image(...))` so content determines size, not a fixed frame:
+  ```swift
+  VStack { /* content */ }
+      .padding(16)
+      .background(
+          Image("...")
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+      )
+      .clipShape(RoundedRectangle(cornerRadius: 12))
+  ```
+
+- Edge-to-edge scrolling: Apply negative margin on ScrollView + positive padding on content + disable clipping:
+  ```swift
+  ScrollView(.horizontal, showsIndicators: false) {
+      HStack(spacing: 8) { /* chips */ }
+          .padding(.horizontal, 21) // 20 + 1 for border
+  }
+  .scrollClipDisabled(true)
+  .padding(.horizontal, -20)
+  ```
+
+- Text alignment: Use `.firstTextBaseline` alignment for HStacks with mixed text/icon content
+
+---
+
+## Components
+
+- Avoid internal horizontal padding - let parent control alignment for flexibility
+
+- Use semantic color tokens from `Colors.swift`, not hardcoded values
+
+- Alphabetize navigation lists for discoverability
+
+- Shadow example cards: Use `Color(light: Colors.white, dark: Colors.gray700)` for better dark mode contrast
+
+## SwiftUI Patterns
+
+- Use `@State` for local state, `@Binding` for parent-child, `@EnvironmentObject` for shared state
+- Use ViewModifiers for reusable behaviors
+- Layout with `VStack(spacing: 0)`, standard padding: `.padding(.horizontal, 16)`
+- Use `GeometryReader` sparingly
+- `.ignoresSafeArea()` for edge-to-edge surfaces
+- For light/dark adaptive colors: `Color(light: lightColor, dark: darkColor)`
+- Overlay borders on shapes: `.overlay(RoundedRectangle(...).stroke(borderColor, lineWidth: 1))`
+- Prevent text wrapping in badges/chips: `.lineLimit(1)`
+
+---
+
+## Data Layer
+
+Sample data stored in `Data/PrismContentData.swift`:
+- `sampleProfiles`, `samplePosts`, `sampleNotifications`, `sampleStories`, `sampleComments`
+- `profileDataMap`, `postDataMap`, `prismDataMap` for ID lookups
+
+Images use descriptive names in asset catalog:
+- `Posts/walking-sunrise-beach`, `Posts/night-city-longexposure`
+- `Profiles/sarah`, `Profiles/marcus`
+
+---
+
+## Development Principles
+
+1. Smooth animations at 60fps
+2. Match Prism production navigation & transitions
+3. Follow established PDS patterns for any new view
+4. Test across multiple device sizes
+5. 1:1 fidelity with Figma specs using design tokens
+
+---
+
+## Output Requirements
+
+For each task, provide:
+
+1. **Full SwiftUI implementation** - PDS components, layout fidelity, correct animations
+2. **Documentation** - Architecture summary, component notes, Figma token mapping
+3. **PDS Component Proposals** - If component doesn't exist: define API, explain alignment, describe reuse cases

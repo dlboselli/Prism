@@ -95,7 +95,7 @@ struct PDSSubNavigationBar: View {
     private func standardForegroundColor(isSelected: Bool) -> Color {
         switch context {
         case .surface:
-            return isSelected ? Colors.persistentAccent : Colors.textPrimary
+            return isSelected ? Colors.primaryDeemphasizedButtonText : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
             return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
@@ -116,7 +116,7 @@ struct PDSSubNavigationBar: View {
     private func badgeTextColor(isSelected: Bool) -> Color {
         switch context {
         case .surface:
-            return isSelected ? Colors.persistentAccent : Colors.textPrimary
+            return isSelected ? Colors.primaryDeemphasizedButtonText : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
             return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
@@ -190,7 +190,9 @@ extension PDSSubNavigationBar {
                         .background(Colors.backgroundSurface)
                     }
                     
-                    Divider()
+                    Rectangle()
+                        .fill(Colors.backgroundDivider)
+                        .frame(height: 1)
                     
                     // With Callback Action
                     sectionView(title: "With Callback") {
@@ -217,7 +219,9 @@ extension PDSSubNavigationBar {
                         }
                     }
                     
-                    Divider()
+                    Rectangle()
+                        .fill(Colors.backgroundDivider)
+                        .frame(height: 1)
                     
                     // Scrollable (Many Items)
                     sectionView(title: "Scrollable") {
@@ -237,7 +241,9 @@ extension PDSSubNavigationBar {
                         .background(Colors.backgroundSurface)
                     }
                     
-                    Divider()
+                    Rectangle()
+                        .fill(Colors.backgroundDivider)
+                        .frame(height: 1)
                     
                     // On Media
                     sectionView(title: "On Media") {

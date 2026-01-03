@@ -42,54 +42,54 @@ struct Typography {
     // MARK: - Headlines
     
     // Headline 0 (28pt)
-    static let headline0 = Style(Inter.medium, size: 28, leading: 32, tracking: 0.36)
-    static let headline0Emphasized = Style(Inter.bold, size: 28, leading: 32, tracking: 0.36)
-    static let headline0Deemphasized = Style(Inter.light, size: 28, leading: 32, tracking: 0.36)
+    static let headline0 = Style(Inter.medium, size: 28, leading: 32)
+    static let headline0Emphasized = Style(Inter.bold, size: 28, leading: 32)
+    static let headline0Deemphasized = Style(Inter.light, size: 28, leading: 32)
     
     // Headline 1 (24pt)
-    static let headline1 = Style(Inter.medium, size: 24, leading: 28, tracking: 0.36)
-    static let headline1Emphasized = Style(Inter.bold, size: 24, leading: 28, tracking: 0.36)
-    static let headline1Deemphasized = Style(Inter.light, size: 24, leading: 28, tracking: 0.36)
+    static let headline1 = Style(Inter.medium, size: 24, leading: 28)
+    static let headline1Emphasized = Style(Inter.bold, size: 24, leading: 28)
+    static let headline1Deemphasized = Style(Inter.light, size: 24, leading: 28)
     
     // Headline 2 (20pt)
-    static let headline2 = Style(Inter.medium, size: 20, leading: 24, tracking: 0.38)
-    static let headline2Emphasized = Style(Inter.bold, size: 20, leading: 24, tracking: 0.38)
-    static let headline2Deemphasized = Style(Inter.light, size: 20, leading: 24, tracking: 0.38)
+    static let headline2 = Style(Inter.medium, size: 20, leading: 24)
+    static let headline2Emphasized = Style(Inter.bold, size: 20, leading: 24)
+    static let headline2Deemphasized = Style(Inter.light, size: 20, leading: 24)
     
     // Headline 3 (17pt)
-    static let headline3 = Style(Inter.medium, size: 17, leading: 20, tracking: -0.41)
-    static let headline3Emphasized = Style(Inter.bold, size: 17, leading: 20, tracking: -0.41)
-    static let headline3Deemphasized = Style(Inter.regular, size: 17, leading: 20, tracking: -0.41)
+    static let headline3 = Style(Inter.medium, size: 17, leading: 20)
+    static let headline3Emphasized = Style(Inter.bold, size: 17, leading: 20)
+    static let headline3Deemphasized = Style(Inter.regular, size: 17, leading: 20)
     
     // Headline 4 (15pt)
-    static let headline4 = Style(Inter.medium, size: 15, leading: 20, tracking: -0.24)
-    static let headline4Emphasized = Style(Inter.bold, size: 15, leading: 20, tracking: -0.24)
-    static let headline4Deemphasized = Style(Inter.regular, size: 15, leading: 20, tracking: -0.24)
+    static let headline4 = Style(Inter.medium, size: 15, leading: 20)
+    static let headline4Emphasized = Style(Inter.bold, size: 15, leading: 20)
+    static let headline4Deemphasized = Style(Inter.regular, size: 15, leading: 20)
     
     // MARK: - Body
     
-    static let body1 = Style(Inter.regular, size: 20, leading: 24, tracking: 0.38)
-    static let body2 = Style(Inter.regular, size: 17, leading: 20, tracking: -0.41)
-    static let body3 = Style(Inter.regular, size: 15, leading: 20, tracking: -0.24)
-    static let body4 = Style(Inter.regular, size: 13, leading: 16, tracking: -0.08)
+    static let body1 = Style(Inter.regular, size: 20, leading: 24)
+    static let body2 = Style(Inter.regular, size: 17, leading: 20)
+    static let body3 = Style(Inter.regular, size: 15, leading: 20)
+    static let body4 = Style(Inter.regular, size: 13, leading: 16)
     
-    static let body1Link = Style(Inter.semibold, size: 20, leading: 24, tracking: 0.38)
-    static let body2Link = Style(Inter.semibold, size: 17, leading: 20, tracking: -0.41)
-    static let body3Link = Style(Inter.semibold, size: 15, leading: 20, tracking: -0.24)
-    static let body4Link = Style(Inter.semibold, size: 13, leading: 16, tracking: -0.08)
+    static let body1Link = Style(Inter.semibold, size: 20, leading: 24)
+    static let body2Link = Style(Inter.semibold, size: 17, leading: 20)
+    static let body3Link = Style(Inter.semibold, size: 15, leading: 20)
+    static let body4Link = Style(Inter.semibold, size: 13, leading: 16)
     
     // MARK: - Button
     
-    static let button1 = Style(Inter.semibold, size: 17, leading: 20, tracking: -0.41)
-    static let button2 = Style(Inter.semibold, size: 15, leading: 20, tracking: -0.24)
-    static let button3 = Style(Inter.semibold, size: 13, leading: 16, tracking: -0.08)
+    static let button1 = Style(Inter.semibold, size: 17, leading: 20)
+    static let button2 = Style(Inter.semibold, size: 15, leading: 20)
+    static let button3 = Style(Inter.semibold, size: 13, leading: 16)
     
     // MARK: - Meta
     
-    static let meta1 = Style(Inter.semibold, size: 13, leading: 16, tracking: -0.08)
-    static let meta2 = Style(Inter.semibold, size: 13, leading: 16, tracking: -0.08)
-    static let meta3 = Style(Inter.regular, size: 13, leading: 16, tracking: -0.08)
-    static let meta3Link = Style(Inter.semibold, size: 13, leading: 16, tracking: -0.08)
+    static let meta1 = Style(Inter.semibold, size: 13, leading: 16)
+    static let meta2 = Style(Inter.semibold, size: 13, leading: 16)
+    static let meta3 = Style(Inter.regular, size: 13, leading: 16)
+    static let meta3Link = Style(Inter.semibold, size: 13, leading: 16)
     static let meta4 = Style(Inter.regular, size: 12, leading: 16)
     static let meta4Link = Style(Inter.semibold, size: 12, leading: 16)
     

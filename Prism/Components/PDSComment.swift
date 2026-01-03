@@ -89,12 +89,12 @@ struct PDSComment: View {
             }
             .buttonStyle(.plain)
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: PDSTextScale.compact.lineSpacing) {
                 // Author name and verified badge
                 HStack(spacing: 4) {
                     Button(action: { onAuthorTap?() }) {
                         Text(authorName)
-                            .typography(Typography.headline4Emphasized)
+                            .typography(Typography.body4Link)
                             .foregroundColor(Colors.textPrimary)
                     }
                     .buttonStyle(.plain)
@@ -102,21 +102,22 @@ struct PDSComment: View {
                     if isVerified {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.system(size: 12))
-                            .foregroundColor(Colors.persistentAccent)
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(.white, Colors.persistentAccent)
                     }
                     
                     Text("·")
                         .foregroundColor(Colors.textSecondary)
                     
                     Text(timestamp)
-                        .typography(Typography.meta3)
+                        .typography(Typography.meta4)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 // Comment text
                 if !text.isEmpty {
                     Text(text)
-                        .typography(Typography.body2)
+                        .typography(Typography.body4)
                         .foregroundColor(Colors.textPrimary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -144,7 +145,7 @@ struct PDSComment: View {
                             
                             if likeCount > 0 {
                                 Text("\(likeCount)")
-                                    .typography(Typography.meta3)
+                                    .typography(Typography.meta4)
                                     .foregroundColor(Colors.textSecondary)
                             }
                         }
@@ -159,7 +160,7 @@ struct PDSComment: View {
                                 .foregroundColor(Colors.iconSecondary)
                             
                             Text("Reply")
-                                .typography(Typography.meta3)
+                                .typography(Typography.meta4)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -170,7 +171,7 @@ struct PDSComment: View {
                 .padding(.top, 4)
             }
         }
-        .padding(.vertical, 8)
+        .pdsTextPadding(.compact)
     }
 }
 
@@ -190,7 +191,7 @@ struct PDSCommentThread: View {
             if !replies.isEmpty {
                 Button(action: { onToggleReplies?() }) {
                     Text(showReplies ? "Hide replies" : "View \(replies.count) \(replies.count == 1 ? "reply" : "replies")")
-                        .typography(Typography.meta2)
+                        .typography(Typography.meta4Link)
                         .foregroundColor(Colors.textBlueLink)
                 }
                 .buttonStyle(.plain)
@@ -223,7 +224,9 @@ struct PDSCommentThread: View {
                 isLiked: true
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSComment(
                 authorName: "Jane Smith",
@@ -234,7 +237,23 @@ struct PDSCommentThread: View {
                 likeCount: 5
             )
             
-            Divider()
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
+            
+            PDSComment(
+                authorName: "David Kim",
+                authorInitials: "DK",
+                text: "Check out this view from my hike today!",
+                image: Image("Posts/SampleMedia"),
+                timestamp: "45m",
+                likeCount: 24,
+                isLiked: true
+            )
+            
+            Rectangle()
+                .fill(Colors.backgroundDivider)
+                .frame(height: 1)
             
             PDSComment(
                 authorName: "Alex Chen",
