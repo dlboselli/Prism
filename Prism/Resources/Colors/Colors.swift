@@ -249,6 +249,12 @@ struct Colors {
     static var reactionTrayIconBackground: Color { Color(light: gray100, dark: gray800) }
     
     static var overlayScrim: Color { Color(light: black.opacity(0.6), dark: black.opacity(0.8)) }
+
+    // Surface-colored legibility scrim for titles/chrome over busy content
+    // (maps, media). Use as gradient stops from scrimSurface → scrimSurfaceClear.
+    static var scrimSurface: Color { backgroundSurface.opacity(0.95) }
+    static var scrimSurfaceSoft: Color { backgroundSurface.opacity(0.8) }
+    static var scrimSurfaceClear: Color { backgroundSurface.opacity(0.0) }
     static var tabBarBackground: Color { backgroundNavBar }
     static var tabSelected: Color { Color(light: gray950, dark: gray100) }
     static var tabUnselected: Color { Color(light: gray500, dark: gray400) }

@@ -21,9 +21,9 @@ struct ExploreTabView: View {
             // Legibility scrim behind the large title over busy map content
             LinearGradient(
                 stops: [
-                    .init(color: Colors.backgroundSurface.opacity(0.95), location: 0.0),
-                    .init(color: Colors.backgroundSurface.opacity(0.8), location: 0.5),
-                    .init(color: Colors.backgroundSurface.opacity(0.0), location: 1.0)
+                    .init(color: Colors.scrimSurface, location: 0.0),
+                    .init(color: Colors.scrimSurfaceSoft, location: 0.5),
+                    .init(color: Colors.scrimSurfaceClear, location: 1.0)
                 ],
                 startPoint: .top,
                 endPoint: .bottom
