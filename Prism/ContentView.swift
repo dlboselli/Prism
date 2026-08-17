@@ -18,25 +18,29 @@ struct ContentView: View {
                 HomeTabView()
                     .tabItem {
                         Image(systemName: selectedTab == .home ? "house.fill" : "house")
+                            .environment(\.symbolVariants, .none)
                     }
                     .tag(Tab.home)
 
                 ExploreTabView()
                     .tabItem {
                         Image(systemName: selectedTab == .explore ? "map.fill" : "map")
+                            .environment(\.symbolVariants, .none)
                     }
                     .tag(Tab.explore)
 
                 ActivityTabView()
                     .tabItem {
-                        Image(systemName: selectedTab == .activity ? "bell.fill" : "bell")
+                        Image(systemName: selectedTab == .activity ? "heart.fill" : "heart")
+                            .environment(\.symbolVariants, .none)
                     }
                     .tag(Tab.activity)
                     .badge(showActivityBadge ? unreadNotificationCount : 0)
 
                 ProfileTabView()
                     .tabItem {
-                        Image(systemName: selectedTab == .profile ? "person.circle.fill" : "person.circle")
+                        Image(systemName: selectedTab == .profile ? "person.fill" : "person")
+                            .environment(\.symbolVariants, .none)
                     }
                     .tag(Tab.profile)
             }

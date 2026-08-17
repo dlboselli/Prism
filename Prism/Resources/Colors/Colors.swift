@@ -87,14 +87,12 @@ struct Colors {
     static var backgroundSurface: Color { Color(light: white, dark: gray900) }
     static var backgroundDeemphasized: Color { Color(light: gray100, dark: white.opacity(0.1)) }
     static var backgroundWash: Color { Color(light: gray200, dark: gray950) }
-    static var backgroundWebWash: Color { Color(light: gray100, dark: gray900) }
     static var backgroundCard: Color { Color(light: white, dark: gray800) }
     static var backgroundCardFlat: Color { Color(light: gray50, dark: gray800) }
     static var backgroundCardDark: Color { gray800 }
     static var backgroundCardOnColor: Color { white.opacity(0.15) }
     static var backgroundCardOnMedia: Color { gray900.opacity(0.6) }
     static var backgroundCardOnMediaExtraLight: Color { black.opacity(0.2) }
-    static var backgroundCardLegacyWeb: Color { Color(light: white, dark: gray900) }
     static var backgroundNavBar: Color { Color(light: white, dark: gray900) }
     static var backgroundPopover: Color { Color(light: white, dark: gray700) }
     static var backgroundBottomSheet: Color { Color(light: white, dark: gray900) }
@@ -212,7 +210,6 @@ struct Colors {
     // Tooltip
     static var tooltipBackground: Color { Color(light: black.opacity(0.8), dark: white.opacity(0.8)) }
     static var tooltipText: Color { Color(light: gray200, dark: gray950) }
-    static var webLegacyTooltipBackground: Color { Color(light: gray800, dark: gray200) }
     
     // Indicators
     static var stepperActive: Color { persistentAccent }
@@ -250,7 +247,7 @@ struct Colors {
     
     static var overlayScrim: Color { Color(light: black.opacity(0.6), dark: black.opacity(0.8)) }
     static var tabBarBackground: Color { backgroundNavBar }
-    static var tabSelected: Color { persistentAccent }
+    static var tabSelected: Color { Color(light: gray950, dark: gray100) }
     static var tabUnselected: Color { Color(light: gray500, dark: gray400) }
     
     // ═══════════════════════════════════════════════════════════════════════════
