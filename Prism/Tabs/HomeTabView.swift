@@ -9,24 +9,11 @@ import SwiftUI
 
 struct HomeTabView: View {
     var body: some View {
-        VStack(spacing: 16) {
-            Spacer()
-            
-            Image(systemName: "house.fill")
-                .font(.system(size: 48, weight: .light))
-                .foregroundStyle(Colors.iconSecondary)
-                .frame(width: 64, height: 64)
-            
-            Text("Home")
-                .typography(Typography.headline2Emphasized)
-                .foregroundColor(Colors.textPrimary)
-            
-            Text("Your feed will appear here")
-                .typography(Typography.body3)
-                .foregroundColor(Colors.textSecondary)
-            
-            Spacer()
-        }
+        PDSEmptyState(
+            icon: "house.fill",
+            title: "Home",
+            message: "Your feed will appear here"
+        )
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Colors.backgroundSurface)
     }

@@ -305,7 +305,7 @@ let samplePosts: [PostData] = [
         id: "post-1",
         author: sampleProfiles[0],
         content: "Just finished a morning walk on the beach. Nothing beats watching the sunrise! 🌅",
-        mediaImages: ["Posts/walking-sunrise-beach"],
+        mediaImages: ["Posts/SampleMedia"],
         timestamp: Date().addingTimeInterval(-3600), // 1 hour ago
         reactions: [
             ReactionData(emoji: "👍", count: 42, isSelected: true),
@@ -320,7 +320,7 @@ let samplePosts: [PostData] = [
         id: "post-2",
         author: sampleProfiles[1],
         content: "City lights never get old. Shot this last night with my new lens. What do you think?",
-        mediaImages: ["Posts/night-city-longexposure"],
+        mediaImages: ["Posts/SampleMedia"],
         timestamp: Date().addingTimeInterval(-7200), // 2 hours ago
         reactions: [
             ReactionData(emoji: "😮", count: 156),
@@ -421,13 +421,13 @@ let sampleNotifications: [NotificationData] = [
 let sampleStories: [StoryData] = [
     StoryData(
         author: sampleProfiles[0],
-        mediaImage: "Posts/walking-sunrise-beach",
+        mediaImage: "Posts/SampleMedia",
         timestamp: Date().addingTimeInterval(-1800),
         viewerCount: 156
     ),
     StoryData(
         author: sampleProfiles[1],
-        mediaImage: "Posts/night-city-longexposure",
+        mediaImage: "Posts/SampleMedia",
         timestamp: Date().addingTimeInterval(-3600),
         isViewed: true,
         viewerCount: 89

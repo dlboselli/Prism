@@ -197,6 +197,26 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
+                    EmptyStateDetailView()
+                } label: {
+                    HStack {
+                        Text("Empty State")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
+                    FilterBarDetailView()
+                } label: {
+                    HStack {
+                        Text("Filter Bar")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
                     IconButtonsDetailView()
                 } label: {
                     Text("Icon Buttons")
@@ -221,6 +241,16 @@ struct MoreTabView: View {
                 }
 
                 NavigationLink {
+                    MapCalloutDetailView()
+                } label: {
+                    HStack {
+                        Text("Map Callout")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
                     MediaDetailView()
                 } label: {
                     Text("Media")
@@ -233,9 +263,49 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
+                    PermissionPromptDetailView()
+                } label: {
+                    HStack {
+                        Text("Permission Prompt")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
+                    PlaceCardDetailView()
+                } label: {
+                    HStack {
+                        Text("Place Card")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
+                    PostCardDetailView()
+                } label: {
+                    HStack {
+                        Text("Post Card")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
                     PostHeaderDetailView()
                 } label: {
                     Text("Post Header")
+                }
+
+                NavigationLink {
+                    ProfileHeaderDetailView()
+                } label: {
+                    HStack {
+                        Text("Profile Header")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
                 }
                 
                 NavigationLink {
@@ -251,9 +321,49 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
+                    SectionHeaderDetailView()
+                } label: {
+                    HStack {
+                        Text("Section Header")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
                     SelectMenuDetailView()
                 } label: {
                     Text("Select Menus")
+                }
+
+                NavigationLink {
+                    SkeletonDetailView()
+                } label: {
+                    HStack {
+                        Text("Skeleton")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
+                    StatTileDetailView()
+                } label: {
+                    HStack {
+                        Text("Stat Tile")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
+                }
+
+                NavigationLink {
+                    StoryRingDetailView()
+                } label: {
+                    HStack {
+                        Text("Story Ring")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
                 }
                 
                 NavigationLink {
@@ -266,6 +376,16 @@ struct MoreTabView: View {
                     TextFieldDetailView()
                 } label: {
                     Text("Text Fields")
+                }
+
+                NavigationLink {
+                    ToastDetailView()
+                } label: {
+                    HStack {
+                        Text("Toast")
+                        Spacer()
+                        PDSBadge("New", variant: .accent, size: .small)
+                    }
                 }
             } header: {
                 Text("Components")
