@@ -50,7 +50,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        navigationPath.append(NavigationDestination.more)
+                        navigationPath.append(NavigationDestination.components)
                     } label: {
                         Image(systemName: "square.grid.2x2")
                             .font(.system(size: 20, weight: .medium))
@@ -61,10 +61,10 @@ struct ContentView: View {
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
-                case .more:
-                    MoreTabView()
-                        .navigationTitle("More")
-                        .navigationBarTitleDisplayMode(.inline)
+                case .components:
+                    ComponentsView()
+                        .navigationTitle("Components")
+                        .navigationBarTitleDisplayMode(.large)
                 }
             }
         }
@@ -74,7 +74,7 @@ struct ContentView: View {
 // MARK: - Navigation Destination
 
 enum NavigationDestination: Hashable {
-    case more
+    case components
 }
 
 // MARK: - Tab Enum

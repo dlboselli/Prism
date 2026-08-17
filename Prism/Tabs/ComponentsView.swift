@@ -1,5 +1,5 @@
 //
-//  MoreTabView.swift
+//  ComponentsView.swift
 //  Prism
 //
 //  Created by David Boselli on 11/22/25.
@@ -39,7 +39,7 @@ enum AppearanceMode: String, CaseIterable {
     }
 }
 
-struct MoreTabView: View {
+struct ComponentsView: View {
     @State private var toggleState1 = true
     @State private var toggleState3 = true
     @AppStorage("appearanceMode") private var appearanceMode: String = AppearanceMode.auto.rawValue
@@ -388,7 +388,7 @@ struct MoreTabView: View {
                     }
                 }
             } header: {
-                Text("Components")
+                Text("Library")
             }
             
             Section {
@@ -4753,7 +4753,7 @@ struct ChartsDetailView: View {
 
 #Preview {
     NavigationStack {
-        MoreTabView()
+        ComponentsView()
             .navigationTitle("More")
     }
 }
