@@ -66,7 +66,7 @@ struct PDSStatTile: View {
                     .foregroundColor(Colors.textPrimary)
 
                 Text(label)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
 
@@ -77,7 +77,7 @@ struct PDSStatTile: View {
                     .foregroundColor(Colors.textPrimary)
 
                 Text(label)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)

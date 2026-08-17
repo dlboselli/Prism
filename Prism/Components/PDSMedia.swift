@@ -234,7 +234,7 @@ struct PDSMediaPlaceholder: View {
             ForEach([PDSMediaRatio.ratio16x9, .ratio3x2, .ratio4x3, .ratio5x4], id: \.label) { ratio in
                 VStack(alignment: .leading, spacing: 8) {
                     Text(ratio.label)
-                        .typography(Typography.meta2)
+                        .typography(Typography.caption1Emphasized)
                         .foregroundColor(Colors.textSecondary)
                     
                     PDSMediaPlaceholder(ratio: ratio)
@@ -251,7 +251,7 @@ struct PDSMediaPlaceholder: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("1:1")
-                    .typography(Typography.meta2)
+                    .typography(Typography.caption1Emphasized)
                     .foregroundColor(Colors.textSecondary)
                 
                 PDSMediaPlaceholder(ratio: .ratio1x1)
@@ -269,7 +269,7 @@ struct PDSMediaPlaceholder: View {
                 ForEach([PDSMediaRatio.ratio4x5, .ratio3x5, .ratio9x16], id: \.label) { ratio in
                     VStack(alignment: .leading, spacing: 8) {
                         Text(ratio.label)
-                            .typography(Typography.meta2)
+                            .typography(Typography.caption1Emphasized)
                             .foregroundColor(Colors.textSecondary)
                         
                         PDSMediaPlaceholder(ratio: ratio)
@@ -287,7 +287,7 @@ struct PDSMediaPlaceholder: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 Text("21:9 (Ultrawide)")
-                    .typography(Typography.meta2)
+                    .typography(Typography.caption1Emphasized)
                     .foregroundColor(Colors.textSecondary)
                 
                 PDSMediaPlaceholder(ratio: .custom(width: 21, height: 9))

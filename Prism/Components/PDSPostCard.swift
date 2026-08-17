@@ -103,7 +103,7 @@ struct PDSPostCard: View {
         }
         .background(Colors.backgroundCard)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
-        .shadow(Shadow.uiEmphasis)
+        .shadow(Shadows.uiEmphasis)
     }
 
     // MARK: - Action Row
@@ -113,7 +113,7 @@ struct PDSPostCard: View {
             actionButton(
                 icon: isLiked ? "hand.thumbsup.fill" : "hand.thumbsup",
                 title: "Like",
-                tint: isLiked ? Colors.persistentAccent : Colors.iconSecondary,
+                tint: isLiked ? Colors.fixedAccent : Colors.iconSecondary,
                 action: onLike
             )
             actionButton(icon: "bubble.left", title: "Comment", tint: Colors.iconSecondary, action: onComment)
@@ -201,5 +201,5 @@ extension PDSPostCard {
         }
         .padding(.vertical, 12)
     }
-    .background(Colors.backgroundWash)
+    .background(Colors.backgroundCanvas)
 }

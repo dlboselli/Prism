@@ -75,7 +75,7 @@ struct PDSSwitch: View {
             Circle()
                 .fill(thumbColor)
                 .frame(width: thumbSize, height: thumbSize)
-                .shadow(Shadow.uiEmphasis)
+                .shadow(Shadows.uiEmphasis)
         } else {
             Circle()
                 .fill(thumbColor)

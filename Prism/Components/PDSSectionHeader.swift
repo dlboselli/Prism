@@ -38,8 +38,8 @@ struct PDSSectionHeader: View {
 
             if let actionTitle = actionTitle {
                 Button(actionTitle) { action?() }
-                    .typography(Typography.meta3Link)
-                    .foregroundColor(Colors.accentText)
+                    .typography(Typography.caption1Emphasized)
+                    .foregroundColor(Colors.textAccent)
             }
         }
         .padding(.horizontal, 16)

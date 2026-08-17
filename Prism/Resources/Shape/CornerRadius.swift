@@ -20,15 +20,15 @@ struct CornerRadius {
     static let large: CGFloat = 12
     static let xLarge: CGFloat = 16
     static let xxLarge: CGFloat = 24
-    static let round: CGFloat = 255
+    static let pill: CGFloat = 255  // Larger than any control; clamps to a capsule
     
     // MARK: - Components
     
     // Actions & Buttons
     static let action: CGFloat = small
     static let button: CGFloat = medium
-    static let iconAction: CGFloat = round
-    static let subNavAction: CGFloat = round
+    static let iconAction: CGFloat = pill
+    static let subNavAction: CGFloat = pill
     
     // Cards & Containers
     static let card: CGFloat = large
@@ -48,16 +48,16 @@ struct CornerRadius {
     
     // Inputs & Controls
     static let inputField: CGFloat = large
-    static let inputBar: CGFloat = round
+    static let inputBar: CGFloat = pill
     static let selectionControl: CGFloat = xSmall
-    static let selectionControlLarge: CGFloat = round
+    static let selectionControlLarge: CGFloat = pill
     static let checkbox: CGFloat = xSmall
-    static let handle: CGFloat = round
-    static let progress: CGFloat = round
+    static let handle: CGFloat = pill
+    static let progress: CGFloat = pill
     
     // Chips & Badges
-    static let chip: CGFloat = round
-    static let badge: CGFloat = round
+    static let chip: CGFloat = pill
+    static let badge: CGFloat = pill
     static let infochipLarge: CGFloat = medium
     static let infochipMedium: CGFloat = xSmall
     static let infochipSmall: CGFloat = xSmall
@@ -82,7 +82,7 @@ struct CornerRadius {
     static let pressedStateMedium: CGFloat = medium
     static let pressedStateLarge: CGFloat = large
     static let pressedStateXLarge: CGFloat = xLarge
-    static let pressedStateRounded: CGFloat = round
+    static let pressedStateRounded: CGFloat = pill
 }
 
 // MARK: - View Extension

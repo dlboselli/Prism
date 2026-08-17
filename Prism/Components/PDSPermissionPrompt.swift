@@ -53,12 +53,12 @@ struct PDSPermissionPrompt: View {
         VStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Colors.persistentAccentDeemphasized)
+                    .fill(Colors.fixedAccentDeemphasized)
                     .frame(width: 56, height: 56)
 
                 Image(systemName: icon)
                     .font(.system(size: 24, weight: .medium))
-                    .foregroundColor(Colors.persistentAccent)
+                    .foregroundColor(Colors.fixedAccent)
             }
             .accessibilityHidden(true)
 
@@ -87,7 +87,7 @@ struct PDSPermissionPrompt: View {
         .padding(24)
         .background(Colors.backgroundCard)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.cardLarge))
-        .shadow(Shadow.responsiveUI)
+        .shadow(Shadows.responsiveUI)
     }
 }
 
@@ -104,5 +104,5 @@ struct PDSPermissionPrompt: View {
     )
     .padding(24)
     .frame(maxHeight: .infinity)
-    .background(Colors.backgroundWash)
+    .background(Colors.backgroundCanvas)
 }

@@ -1,5 +1,5 @@
 //
-//  PDSInstantFeedback.swift
+//  PDSBanner.swift
 //  Prism
 //
 //  Part of the Prism Design System (PDS)
@@ -13,7 +13,7 @@ import SwiftUI
 // MARK: - Instant Feedback Types
 
 /// Defines the semantic type of instant feedback
-enum PDSInstantFeedbackType {
+enum PDSBannerType {
     case neutral     // Default informational feedback
     case success     // Positive confirmation (action completed)
     case error       // Error or failure state
@@ -33,15 +33,15 @@ enum PDSInstantFeedbackType {
     var iconColor: Color {
         switch self {
         case .neutral: return Colors.iconPrimaryOnColor
-        case .success: return Colors.persistentPositive
-        case .error: return Colors.persistentNegative
-        case .warning: return Colors.persistentWarning
+        case .success: return Colors.fixedPositive
+        case .error: return Colors.fixedNegative
+        case .warning: return Colors.fixedWarning
         }
     }
 }
 
 /// Position of the instant feedback on screen
-enum PDSInstantFeedbackPosition {
+enum PDSBannerPosition {
     case top
     case bottom
 }
@@ -52,29 +52,29 @@ enum PDSInstantFeedbackPosition {
 ///
 /// Usage:
 /// ```swift
-/// PDSInstantFeedback(
+/// PDSBanner(
 ///     message: "Post shared successfully",
 ///     type: .success,
 ///     isPresented: $showFeedback
 /// )
 /// ```
-struct PDSInstantFeedback: View {
+struct PDSBanner: View {
     // MARK: - Properties
     
     /// The message to display
     let message: String
     
     /// The type of feedback (determines icon and color)
-    var type: PDSInstantFeedbackType = .neutral
+    var type: PDSBannerType = .neutral
     
     /// Optional custom icon (overrides type icon)
     var icon: String? = nil
     
     /// Optional actor URL (displays avatar before message)
-    var actorURL: URL? = nil
+    var avatarURL: URL? = nil
     
     /// Optional actor initials (displays avatar before message, used if no URL)
-    var actorInitials: String? = nil
+    var avatarInitials: String? = nil
     
     /// Optional action button text
     var actionText: String? = nil
@@ -89,11 +89,11 @@ struct PDSInstantFeedback: View {
     var autoDismissAfter: TimeInterval? = 3.0
     
     /// Position on screen
-    var position: PDSInstantFeedbackPosition = .bottom
+    var position: PDSBannerPosition = .bottom
     
     /// Whether to show an actor (computed)
-    private var hasActor: Bool {
-        actorURL != nil || actorInitials != nil
+    private var hasAvatar: Bool {
+        avatarURL != nil || avatarInitials != nil
     }
     
     // MARK: - Private State
@@ -130,11 +130,11 @@ struct PDSInstantFeedback: View {
     private var feedbackContent: some View {
         HStack(spacing: 12) {
             // Actor (takes precedence over icon)
-            if hasActor {
-                if let url = actorURL {
-                    PDSActor(url: url, size: .small)
-                } else if let initials = actorInitials {
-                    PDSActor(initials: initials, size: .small)
+            if hasAvatar {
+                if let url = avatarURL {
+                    PDSAvatar(url: url, size: .small)
+                } else if let initials = avatarInitials {
+                    PDSAvatar(initials: initials, size: .small)
                 }
             } else if let iconName = icon ?? type.icon {
                 // Icon (only shown if no actor)
@@ -160,7 +160,7 @@ struct PDSInstantFeedback: View {
                 } label: {
                     Text(actionText)
                         .typography(Typography.button3)
-                        .foregroundColor(Colors.textBlueLink)
+                        .foregroundColor(Colors.textAccent)
                 }
                 .buttonStyle(.plain)
             }
@@ -170,8 +170,8 @@ struct PDSInstantFeedback: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Colors.backgroundCardDark)
-                .shadow(Shadow.responsiveUI)
+                .fill(Colors.backgroundCardInverse)
+                .shadow(Shadows.responsiveUI)
         )
         .padding(.horizontal, 16)
         .gesture(
@@ -209,17 +209,17 @@ struct PDSInstantFeedback: View {
 // MARK: - Instant Feedback Container
 
 /// A container modifier that displays instant feedback overlaid on content
-struct PDSInstantFeedbackModifier: ViewModifier {
+struct PDSBannerModifier: ViewModifier {
     let message: String
-    var type: PDSInstantFeedbackType = .neutral
+    var type: PDSBannerType = .neutral
     var icon: String? = nil
-    var actorURL: URL? = nil
-    var actorInitials: String? = nil
+    var avatarURL: URL? = nil
+    var avatarInitials: String? = nil
     var actionText: String? = nil
     var action: (() -> Void)? = nil
     @Binding var isPresented: Bool
     var autoDismissAfter: TimeInterval? = 3.0
-    var position: PDSInstantFeedbackPosition = .bottom
+    var position: PDSBannerPosition = .bottom
     
     func body(content: Content) -> some View {
         ZStack {
@@ -230,12 +230,12 @@ struct PDSInstantFeedbackModifier: ViewModifier {
                     Spacer()
                 }
                 
-                PDSInstantFeedback(
+                PDSBanner(
                     message: message,
                     type: type,
                     icon: icon,
-                    actorURL: actorURL,
-                    actorInitials: actorInitials,
+                    avatarURL: avatarURL,
+                    avatarInitials: avatarInitials,
                     actionText: actionText,
                     action: action,
                     isPresented: $isPresented,
@@ -274,31 +274,31 @@ extension View {
     ///   - message: The message to display
     ///   - type: The type of feedback (neutral, success, error, warning)
     ///   - icon: Optional custom icon name (overrides type icon)
-    ///   - actorURL: Optional actor URL for user-context messages
-    ///   - actorInitials: Optional actor initials (used if no URL)
+    ///   - avatarURL: Optional actor URL for user-context messages
+    ///   - avatarInitials: Optional actor initials (used if no URL)
     ///   - actionText: Optional action button text
     ///   - action: Optional action callback
     ///   - isPresented: Binding to control visibility
     ///   - autoDismissAfter: Duration before auto-dismiss (nil = no auto-dismiss)
     ///   - position: Position on screen (top or bottom)
-    func pdsInstantFeedback(
+    func pdsBanner(
         message: String,
-        type: PDSInstantFeedbackType = .neutral,
+        type: PDSBannerType = .neutral,
         icon: String? = nil,
-        actorURL: URL? = nil,
-        actorInitials: String? = nil,
+        avatarURL: URL? = nil,
+        avatarInitials: String? = nil,
         actionText: String? = nil,
         action: (() -> Void)? = nil,
         isPresented: Binding<Bool>,
         autoDismissAfter: TimeInterval? = 3.0,
-        position: PDSInstantFeedbackPosition = .bottom
+        position: PDSBannerPosition = .bottom
     ) -> some View {
-        modifier(PDSInstantFeedbackModifier(
+        modifier(PDSBannerModifier(
             message: message,
             type: type,
             icon: icon,
-            actorURL: actorURL,
-            actorInitials: actorInitials,
+            avatarURL: avatarURL,
+            avatarInitials: avatarInitials,
             actionText: actionText,
             action: action,
             isPresented: isPresented,
@@ -312,34 +312,34 @@ extension View {
 
 /// Observable manager for displaying instant feedback programmatically
 @MainActor
-class PDSInstantFeedbackManager: ObservableObject {
+class PDSBannerManager: ObservableObject {
     @Published var isPresented: Bool = false
     @Published var message: String = ""
-    @Published var type: PDSInstantFeedbackType = .neutral
+    @Published var type: PDSBannerType = .neutral
     @Published var icon: String? = nil
-    @Published var actorURL: URL? = nil
-    @Published var actorInitials: String? = nil
+    @Published var avatarURL: URL? = nil
+    @Published var avatarInitials: String? = nil
     @Published var actionText: String? = nil
-    @Published var position: PDSInstantFeedbackPosition = .bottom
+    @Published var position: PDSBannerPosition = .bottom
     
     private var action: (() -> Void)? = nil
     
     /// Shows instant feedback
     func show(
         _ message: String,
-        type: PDSInstantFeedbackType = .neutral,
+        type: PDSBannerType = .neutral,
         icon: String? = nil,
-        actorURL: URL? = nil,
-        actorInitials: String? = nil,
+        avatarURL: URL? = nil,
+        avatarInitials: String? = nil,
         actionText: String? = nil,
         action: (() -> Void)? = nil,
-        position: PDSInstantFeedbackPosition = .bottom
+        position: PDSBannerPosition = .bottom
     ) {
         self.message = message
         self.type = type
         self.icon = icon
-        self.actorURL = actorURL
-        self.actorInitials = actorInitials
+        self.avatarURL = avatarURL
+        self.avatarInitials = avatarInitials
         self.actionText = actionText
         self.action = action
         self.position = position
@@ -365,14 +365,14 @@ class PDSInstantFeedbackManager: ObservableObject {
 
 // MARK: - Instant Feedback Container View
 
-/// A view that observes an InstantFeedbackManager and displays feedback
-struct PDSInstantFeedbackContainer<Content: View>: View {
-    @ObservedObject var manager: PDSInstantFeedbackManager
+/// A view that observes an BannerManager and displays feedback
+struct PDSBannerContainer<Content: View>: View {
+    @ObservedObject var manager: PDSBannerManager
     let content: Content
     var autoDismissAfter: TimeInterval? = 3.0
     
     init(
-        manager: PDSInstantFeedbackManager,
+        manager: PDSBannerManager,
         autoDismissAfter: TimeInterval? = 3.0,
         @ViewBuilder content: () -> Content
     ) {
@@ -383,12 +383,12 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
     
     var body: some View {
         content
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: manager.message,
                 type: manager.type,
                 icon: manager.icon,
-                actorURL: manager.actorURL,
-                actorInitials: manager.actorInitials,
+                avatarURL: manager.avatarURL,
+                avatarInitials: manager.avatarInitials,
                 actionText: manager.actionText,
                 action: manager.performAction,
                 isPresented: $manager.isPresented,
@@ -474,39 +474,39 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
                     .padding(24)
                 }
             }
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "This is a neutral message",
                 type: .neutral,
                 isPresented: $showNeutral
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "Post shared successfully!",
                 type: .success,
                 isPresented: $showSuccess
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "Unable to connect. Check your network.",
                 type: .error,
                 isPresented: $showError
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "Your session will expire soon",
                 type: .warning,
                 isPresented: $showWarning
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "Post deleted",
                 type: .neutral,
                 actionText: "Undo",
                 action: { print("Undo tapped") },
                 isPresented: $showWithAction
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "Link copied to clipboard",
                 icon: "link",
                 isPresented: $showCustomIcon
             )
-            .pdsInstantFeedback(
+            .pdsBanner(
                 message: "New notification received",
                 type: .neutral,
                 icon: "bell.fill",
@@ -521,10 +521,10 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
 
 #Preview("Instant Feedback Manager") {
     struct ManagerPreviewContainer: View {
-        @StateObject private var feedbackManager = PDSInstantFeedbackManager()
+        @StateObject private var feedbackManager = PDSBannerManager()
         
         var body: some View {
-            PDSInstantFeedbackContainer(manager: feedbackManager) {
+            PDSBannerContainer(manager: feedbackManager) {
                 ZStack {
                     Colors.backgroundSurface.ignoresSafeArea()
                     
@@ -533,7 +533,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
                             .typography(Typography.headline2Emphasized)
                             .foregroundColor(Colors.textPrimary)
                         
-                        Text("Use PDSInstantFeedbackManager for programmatic control")
+                        Text("Use PDSBannerManager for programmatic control")
                             .typography(Typography.body3)
                             .foregroundColor(Colors.textSecondary)
                             .multilineTextAlignment(.center)
@@ -564,7 +564,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
             .foregroundColor(Colors.textPrimary)
         
         // Neutral
-        PDSInstantFeedback(
+        PDSBanner(
             message: "This is a neutral message",
             type: .neutral,
             isPresented: .constant(true),
@@ -572,7 +572,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
         )
         
         // Success
-        PDSInstantFeedback(
+        PDSBanner(
             message: "Changes saved successfully",
             type: .success,
             isPresented: .constant(true),
@@ -580,7 +580,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
         )
         
         // Error
-        PDSInstantFeedback(
+        PDSBanner(
             message: "Unable to save changes",
             type: .error,
             isPresented: .constant(true),
@@ -588,7 +588,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
         )
         
         // Warning
-        PDSInstantFeedback(
+        PDSBanner(
             message: "Your connection is unstable",
             type: .warning,
             isPresented: .constant(true),
@@ -596,7 +596,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
         )
         
         // With Action
-        PDSInstantFeedback(
+        PDSBanner(
             message: "Item removed from list",
             type: .neutral,
             actionText: "Undo",
@@ -605,7 +605,7 @@ struct PDSInstantFeedbackContainer<Content: View>: View {
         )
         
         // Custom Icon
-        PDSInstantFeedback(
+        PDSBanner(
             message: "Link copied to clipboard",
             icon: "doc.on.doc.fill",
             isPresented: .constant(true),

@@ -71,14 +71,14 @@ struct PDSPlaceCard: View {
 
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                             .lineLimit(1)
                     }
 
                     if let distance = distance {
                         Text(distance)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -92,7 +92,7 @@ struct PDSPlaceCard: View {
             .padding(12)
             .background(Colors.backgroundCard)
             .clipShape(RoundedRectangle(cornerRadius: CornerRadius.card))
-            .shadow(Shadow.uiEmphasis)
+            .shadow(Shadows.uiEmphasis)
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
@@ -108,5 +108,5 @@ struct PDSPlaceCard: View {
         PDSPlaceCard(place: samplePlaces[1], subtitle: "Landmark", onTap: { })
     }
     .padding(20)
-    .background(Colors.backgroundWash)
+    .background(Colors.backgroundCanvas)
 }

@@ -77,13 +77,13 @@ struct PDSProfileHeader: View {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.system(size: 14))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.fixedAccent)
                             .accessibilityLabel("Verified")
                     }
                 }
 
                 Text("@\(username)")
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
 
                 if let bio = bio {
@@ -116,9 +116,9 @@ struct PDSProfileHeader: View {
     @ViewBuilder
     private var avatar: some View {
         if let image = image {
-            PDSActor(image: image, size: .xlarge)
+            PDSAvatar(image: image, size: .xLarge)
         } else {
-            PDSActor(initials: initials ?? String(name.prefix(2)), size: .xlarge)
+            PDSAvatar(initials: initials ?? String(name.prefix(2)), size: .xLarge)
         }
     }
 }

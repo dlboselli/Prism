@@ -157,7 +157,7 @@ struct PDSSimpleNavigationBar: View {
                     
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundStyle(subtitleColor)
                             .lineLimit(1)
                     }
@@ -260,7 +260,7 @@ struct NavBarIconButton: View {
         switch badge {
         case .dot:
             Circle()
-                .fill(Colors.persistentNegative)
+                .fill(Colors.fixedNegative)
                 .frame(width: 8, height: 8)
         case .count(let value) where value > 0:
             Text(badge.displayText ?? "")
@@ -270,7 +270,7 @@ struct NavBarIconButton: View {
                 .padding(.vertical, 2)
                 .background(
                     Capsule()
-                        .fill(Colors.persistentNegative)
+                        .fill(Colors.fixedNegative)
                 )
                 .fixedSize()
         default:
@@ -349,7 +349,7 @@ struct PDSSearchNavigationBar: View {
                         onCancel?()
                     }
                     .typography(Typography.button2)
-                    .foregroundStyle(Colors.accentText)
+                    .foregroundStyle(Colors.textAccent)
                     .transition(.move(edge: .trailing).combined(with: .opacity))
                 } else {
                     ForEach(trailingActions) { action in
@@ -418,7 +418,7 @@ struct PDSProfileNavigationBar: View {
                             
                             if let subtitle = subtitle {
                                 Text(subtitle)
-                                    .typography(Typography.meta4)
+                                    .typography(Typography.caption2)
                                     .foregroundStyle(Colors.textSecondary)
                             }
                         }
@@ -641,7 +641,7 @@ struct NavigationBarPreview: View {
                                     )
                                 
                                 Text(label)
-                                    .typography(Typography.meta4)
+                                    .typography(Typography.caption2)
                                     .foregroundColor(Colors.textSecondary)
                             }
                         }

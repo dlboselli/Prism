@@ -38,9 +38,9 @@ enum PDSToastVariant {
     var iconColor: Color {
         switch self {
         case .neutral: return Colors.iconSecondary
-        case .positive: return Colors.persistentPositive
-        case .negative: return Colors.persistentNegative
-        case .warning: return Colors.persistentWarning
+        case .positive: return Colors.fixedPositive
+        case .negative: return Colors.fixedNegative
+        case .warning: return Colors.fixedWarning
         }
     }
 }
@@ -66,7 +66,7 @@ struct PDSToast: View {
         .padding(.vertical, 12)
         .background(Colors.backgroundPopover)
         .clipShape(Capsule())
-        .shadow(Shadow.uiEmphasis)
+        .shadow(Shadows.uiEmphasis)
         .accessibilityElement(children: .combine)
     }
 }

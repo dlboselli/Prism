@@ -74,18 +74,18 @@ enum PDSNotificationType {
     
     var color: Color {
         switch self {
-        case .like: return Colors.persistentNegative
-        case .comment: return Colors.persistentAccent
-        case .follow: return Colors.persistentAccent
-        case .mention: return Colors.persistentAccent
-        case .share: return Colors.persistentPositive
-        case .reply: return Colors.persistentAccent
-        case .tag: return Colors.persistentWarning
-        case .friendRequest: return Colors.persistentAccent
-        case .birthday: return Colors.persistentWarning
-        case .memory: return Colors.persistentAccent
-        case .groupInvite: return Colors.persistentAccent
-        case .eventInvite: return Colors.persistentWarning
+        case .like: return Colors.fixedNegative
+        case .comment: return Colors.fixedAccent
+        case .follow: return Colors.fixedAccent
+        case .mention: return Colors.fixedAccent
+        case .share: return Colors.fixedPositive
+        case .reply: return Colors.fixedAccent
+        case .tag: return Colors.fixedWarning
+        case .friendRequest: return Colors.fixedAccent
+        case .birthday: return Colors.fixedWarning
+        case .memory: return Colors.fixedAccent
+        case .groupInvite: return Colors.fixedAccent
+        case .eventInvite: return Colors.fixedWarning
         case .custom(_, let color): return color
         }
     }
@@ -189,7 +189,7 @@ struct PDSNotificationCell: View {
                     
                     // Timestamp
                     Text(timestamp)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                     
                     // Action buttons
@@ -213,7 +213,7 @@ struct PDSNotificationCell: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
-            .background(isRead ? Colors.backgroundSurface : Colors.persistentAccentDeemphasized.opacity(0.3))
+            .background(isRead ? Colors.backgroundSurface : Colors.fixedAccentDeemphasized.opacity(0.3))
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
@@ -224,7 +224,7 @@ struct PDSNotificationCell: View {
     private var actorWithBadge: some View {
         ZStack(alignment: .bottomTrailing) {
             Button(action: { onActorTap?() }) {
-                PDSActor(
+                PDSAvatar(
                     url: actorURL,
                     fallbackInitials: actorInitials ?? String(actorName.prefix(2)),
                     size: .medium

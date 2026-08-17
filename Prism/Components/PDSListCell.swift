@@ -121,7 +121,7 @@ struct PDSCell<LeadingAccessory: View, TrailingAccessory: View>: View {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(subtitleColor)
                 }
             }
@@ -186,7 +186,7 @@ struct PDSCellChevron: View {
 /// Checkmark indicator for selection cells
 struct PDSCellCheckmark: View {
     let isSelected: Bool
-    var color: Color = Colors.persistentAccent
+    var color: Color = Colors.fixedAccent
     
     var body: some View {
         if isSelected {
@@ -200,7 +200,7 @@ struct PDSCellCheckmark: View {
 /// Radio button indicator for single-selection cells
 struct PDSCellRadio: View {
     let isSelected: Bool
-    var selectedColor: Color = Colors.persistentAccent
+    var selectedColor: Color = Colors.fixedAccent
     var unselectedColor: Color = Colors.iconSecondary
     
     var body: some View {
@@ -337,7 +337,7 @@ struct PDSToggleCell: View {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(isEnabled ? Colors.textSecondary : Colors.textDisabled)
                 }
             }
@@ -382,7 +382,7 @@ struct PDSCheckmarkCell: View {
                     
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -427,7 +427,7 @@ struct PDSRadioCell: View {
                     
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -458,9 +458,9 @@ enum PDSStatusType {
     
     var color: Color {
         switch self {
-        case .online: return Colors.persistentPositive
-        case .away: return Colors.persistentWarning
-        case .busy: return Colors.persistentNegative
+        case .online: return Colors.fixedPositive
+        case .away: return Colors.fixedWarning
+        case .busy: return Colors.fixedNegative
         case .offline: return Colors.gray400
         }
     }
@@ -518,7 +518,7 @@ struct PDSStatusCell: View {
                     PDSCellStatusDot(status: status)
                     
                     Text(displaySubtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -575,7 +575,7 @@ struct PDSBadgeCell: View {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -603,8 +603,8 @@ struct PDSAvatarCell: View {
     var avatarURL: URL? = nil
     var avatarImage: String? = nil
     var avatarInitials: String? = nil
-    var avatarBadge: PDSActorBadgeType? = nil
-    var avatarSize: PDSActorSize = .medium
+    var avatarBadge: PDSAvatarBadgeType? = nil
+    var avatarSize: PDSAvatarSize = .medium
     var showChevron: Bool = false
     var action: (() -> Void)? = nil
     
@@ -633,7 +633,7 @@ struct PDSAvatarCell: View {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -652,13 +652,13 @@ struct PDSAvatarCell: View {
     @ViewBuilder
     private var actorView: some View {
         if let url = avatarURL {
-            PDSActor(url: url, size: avatarSize, badge: avatarBadge)
+            PDSAvatar(url: url, size: avatarSize, badge: avatarBadge)
         } else if let image = avatarImage {
-            PDSActor(image: image, size: avatarSize, badge: avatarBadge)
+            PDSAvatar(image: image, size: avatarSize, badge: avatarBadge)
         } else if let initials = avatarInitials {
-            PDSActor(initials: initials, size: avatarSize, badge: avatarBadge)
+            PDSAvatar(initials: initials, size: avatarSize, badge: avatarBadge)
         } else {
-            PDSActor(size: avatarSize, badge: avatarBadge)
+            PDSAvatar(size: avatarSize, badge: avatarBadge)
         }
     }
 }
@@ -701,7 +701,7 @@ struct PDSDetailCell: View {
             Spacer(minLength: 0)
             
             Text(detail)
-                .typography(Typography.meta4)
+                .typography(Typography.caption2)
                 .foregroundColor(Colors.textSecondary)
             
             if showChevron {
@@ -737,22 +737,22 @@ struct PDSDestructiveCell: View {
             if let icon = leadingIcon {
                 Image(systemName: icon)
                     .font(.system(size: 18, weight: .medium))
-                    .foregroundColor(Colors.persistentNegative)
+                    .foregroundColor(Colors.fixedNegative)
                     .frame(width: 36, height: 36)
                     .background(
                         RoundedRectangle(cornerRadius: CornerRadius.button)
-                            .fill(Colors.persistentNegative.opacity(0.12))
+                            .fill(Colors.fixedNegative.opacity(0.12))
                     )
             }
             
             VStack(alignment: .leading, spacing: PDSTextScale.compact.lineSpacing) {
                 Text(title)
                     .typography(Typography.headline4)
-                    .foregroundColor(Colors.persistentNegative)
+                    .foregroundColor(Colors.fixedNegative)
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -791,7 +791,7 @@ struct PDSActionCell: View {
                 
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -820,7 +820,7 @@ struct PDSSwipeAction {
     let tint: Color
     let action: () -> Void
     
-    init(title: String, icon: String? = nil, tint: Color = Colors.persistentAccent, action: @escaping () -> Void) {
+    init(title: String, icon: String? = nil, tint: Color = Colors.fixedAccent, action: @escaping () -> Void) {
         self.title = title
         self.icon = icon
         self.tint = tint
@@ -905,7 +905,7 @@ struct PDSSwipeableCell<Content: View>: View {
                     PDSNavigationCell(
                         title: "Appearance",
                         leadingIcon: "paintbrush",
-                        leadingIconColor: Colors.persistentAccent
+                        leadingIconColor: Colors.fixedAccent
                     ) { }
                 }
             }
@@ -959,7 +959,7 @@ struct PDSSwipeableCell<Content: View>: View {
                     PDSBadgeCell(
                         title: "Messages",
                         leadingIcon: "message.fill",
-                        leadingIconColor: Colors.persistentAccent,
+                        leadingIconColor: Colors.fixedAccent,
                         count: 12,
                         showChevron: true
                     )
@@ -967,7 +967,7 @@ struct PDSSwipeableCell<Content: View>: View {
                         title: "Notifications",
                         subtitle: "3 unread",
                         leadingIcon: "bell.fill",
-                        leadingIconColor: Colors.persistentWarning,
+                        leadingIconColor: Colors.fixedWarning,
                         count: 3
                     )
                 }

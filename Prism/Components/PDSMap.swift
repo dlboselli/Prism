@@ -86,7 +86,7 @@ struct PDSMap: View {
         Map(position: $position, interactionModes: interactionModes) {
             ForEach(markers) { marker in
                 Marker(marker.title, coordinate: marker.coordinate)
-                    .tint(Colors.persistentAccent)
+                    .tint(Colors.fixedAccent)
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))

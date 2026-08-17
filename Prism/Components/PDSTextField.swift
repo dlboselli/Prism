@@ -55,7 +55,7 @@ struct PDSTextField: View {
             if let label = label {
                 Text(label)
                     .typography(Typography.body3)
-                    .foregroundColor(hasError ? Colors.persistentNegative : Colors.textPrimary)
+                    .foregroundColor(hasError ? Colors.fixedNegative : Colors.textPrimary)
             }
             
             // Input field
@@ -82,7 +82,7 @@ struct PDSTextField: View {
                     Button(action: { onTrailingTap?() }) {
                         Image(systemName: icon)
                             .font(.system(size: 16))
-                            .foregroundColor(hasError ? Colors.persistentNegative : Colors.iconSecondary)
+                            .foregroundColor(hasError ? Colors.fixedNegative : Colors.iconSecondary)
                     }
                     .disabled(onTrailingTap == nil)
                 }
@@ -100,11 +100,11 @@ struct PDSTextField: View {
             // Help/Error text
             if let error = errorText {
                 Label(error, systemImage: "exclamationmark.circle.fill")
-                    .typography(Typography.meta3)
-                    .foregroundColor(Colors.persistentNegative)
+                    .typography(Typography.caption1)
+                    .foregroundColor(Colors.fixedNegative)
             } else if let help = helpText {
                 Text(help)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
         }
@@ -112,7 +112,7 @@ struct PDSTextField: View {
     }
     
     private var borderColor: Color {
-        if hasError { return Colors.persistentNegative }
+        if hasError { return Colors.fixedNegative }
         if isFocused { return Colors.textInputActiveInnerBorder }
         return Colors.textInputInactiveInnerBorder
     }
@@ -159,7 +159,7 @@ struct PDSPasswordField: View {
             if let label = label {
                 Text(label)
                     .typography(Typography.body3)
-                    .foregroundColor(hasError ? Colors.persistentNegative : Colors.textPrimary)
+                    .foregroundColor(hasError ? Colors.fixedNegative : Colors.textPrimary)
             }
             
             // Input field
@@ -195,18 +195,18 @@ struct PDSPasswordField: View {
             // Help/Error text
             if let error = errorText {
                 Label(error, systemImage: "exclamationmark.circle.fill")
-                    .typography(Typography.meta3)
-                    .foregroundColor(Colors.persistentNegative)
+                    .typography(Typography.caption1)
+                    .foregroundColor(Colors.fixedNegative)
             } else if let help = helpText {
                 Text(help)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
         }
     }
     
     private var borderColor: Color {
-        if hasError { return Colors.persistentNegative }
+        if hasError { return Colors.fixedNegative }
         if isFocused { return Colors.textInputActiveInnerBorder }
         return Colors.textInputInactiveInnerBorder
     }
@@ -278,7 +278,7 @@ struct PDSTextFieldStyle: ViewModifier {
     }
     
     private var borderColor: Color {
-        if hasError { return Colors.persistentNegative }
+        if hasError { return Colors.fixedNegative }
         if isFocused { return Colors.textInputActiveInnerBorder }
         return Colors.textInputInactiveInnerBorder
     }

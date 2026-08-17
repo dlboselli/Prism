@@ -36,7 +36,7 @@ struct PDSSelectMenu<Content: View>: View {
             if let label = label {
                 Text(label)
                     .typography(Typography.body3)
-                    .foregroundColor(hasError ? Colors.persistentNegative : Colors.textPrimary)
+                    .foregroundColor(hasError ? Colors.fixedNegative : Colors.textPrimary)
             }
             
             // Native Menu
@@ -60,7 +60,7 @@ struct PDSSelectMenu<Content: View>: View {
                 .background(Colors.backgroundCard)
                 .overlay(
                     RoundedRectangle(cornerRadius: CornerRadius.small)
-                        .stroke(hasError ? Colors.persistentNegative : Colors.textInputInactiveInnerBorder, lineWidth: 1)
+                        .stroke(hasError ? Colors.fixedNegative : Colors.textInputInactiveInnerBorder, lineWidth: 1)
                 )
                 .clipShape(RoundedRectangle(cornerRadius: CornerRadius.small))
             }
@@ -72,12 +72,12 @@ struct PDSSelectMenu<Content: View>: View {
                     Image(systemName: "exclamationmark.circle.fill")
                         .font(.system(size: 12))
                     Text(error)
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                 }
-                .foregroundColor(Colors.persistentNegative)
+                .foregroundColor(Colors.fixedNegative)
             } else if let help = helpText {
                 Text(help)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
         }
@@ -134,25 +134,25 @@ struct PDSPicker<SelectionValue: Hashable, Content: View>: View {
                 content()
             }
             .pickerStyle(.menu)
-            .tint(Colors.persistentAccent)
+            .tint(Colors.fixedAccent)
         case .segmented:
             Picker(label ?? "", selection: $selection) {
                 content()
             }
             .pickerStyle(.segmented)
-            .tint(Colors.persistentAccent)
+            .tint(Colors.fixedAccent)
         case .wheel:
             Picker(label ?? "", selection: $selection) {
                 content()
             }
             .pickerStyle(.wheel)
-            .tint(Colors.persistentAccent)
+            .tint(Colors.fixedAccent)
         case .inline:
             Picker(label ?? "", selection: $selection) {
                 content()
             }
             .pickerStyle(.inline)
-            .tint(Colors.persistentAccent)
+            .tint(Colors.fixedAccent)
         }
     }
 }
@@ -234,10 +234,10 @@ struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable
                     HStack(spacing: 12) {
                         // Checkbox - square with rounded corners
                         RoundedRectangle(cornerRadius: 4)
-                            .fill(isSelected ? Colors.persistentAccent : Color.clear)
+                            .fill(isSelected ? Colors.fixedAccent : Color.clear)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 4)
-                                    .stroke(isSelected ? Colors.persistentAccent : Colors.iconSecondary, lineWidth: 1.5)
+                                    .stroke(isSelected ? Colors.fixedAccent : Colors.iconSecondary, lineWidth: 1.5)
                             )
                             .overlay(
                                 Image(systemName: "checkmark")
@@ -255,7 +255,7 @@ struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable
                             
                             if let subtitle = optionSubtitle?(option) {
                                 Text(subtitle)
-                                    .typography(Typography.meta4)
+                                    .typography(Typography.caption2)
                                     .foregroundColor(Colors.textSecondary)
                             }
                         }
@@ -377,7 +377,7 @@ private struct MultiSelectPreview: View {
                 .typography(Typography.headline4Emphasized)
             
             Text("List with multiple selection")
-                .typography(Typography.meta3)
+                .typography(Typography.caption1)
                 .foregroundColor(Colors.textSecondary)
             
             PDSMultiSelectList(

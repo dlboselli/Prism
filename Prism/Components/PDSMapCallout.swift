@@ -39,7 +39,7 @@ struct PDSMapCallout: View {
 
                     if let subtitle = subtitle {
                         Text(subtitle)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                             .lineLimit(1)
                     }
@@ -53,7 +53,7 @@ struct PDSMapCallout: View {
                     .fill(Colors.backgroundPopover)
                     .frame(width: 14, height: 7)
             }
-            .shadow(Shadow.uiEmphasis)
+            .shadow(Shadows.uiEmphasis)
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .combine)
@@ -82,5 +82,5 @@ private struct Triangle: Shape {
         PDSMapCallout(title: "Coit Tower")
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    .background(Colors.backgroundWash)
+    .background(Colors.backgroundCanvas)
 }

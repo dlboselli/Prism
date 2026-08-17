@@ -14,7 +14,6 @@ struct Typography {
     // MARK: - Font Family
     
     private enum Inter {
-        static let light = "Inter-Light"
         static let regular = "Inter-Regular"
         static let medium = "Inter-Medium"
         static let semibold = "Inter-SemiBold"
@@ -44,17 +43,17 @@ struct Typography {
     // Headline 0 (28pt)
     static let headline0 = Style(Inter.medium, size: 28, leading: 32, relativeTo: .title)
     static let headline0Emphasized = Style(Inter.bold, size: 28, leading: 32, relativeTo: .title)
-    static let headline0Deemphasized = Style(Inter.light, size: 28, leading: 32, relativeTo: .title)
+    static let headline0Deemphasized = Style(Inter.regular, size: 28, leading: 32, relativeTo: .title)
 
     // Headline 1 (24pt)
     static let headline1 = Style(Inter.medium, size: 24, leading: 28, relativeTo: .title2)
     static let headline1Emphasized = Style(Inter.bold, size: 24, leading: 28, relativeTo: .title2)
-    static let headline1Deemphasized = Style(Inter.light, size: 24, leading: 28, relativeTo: .title2)
+    static let headline1Deemphasized = Style(Inter.regular, size: 24, leading: 28, relativeTo: .title2)
 
     // Headline 2 (20pt)
     static let headline2 = Style(Inter.medium, size: 20, leading: 24, relativeTo: .title3)
     static let headline2Emphasized = Style(Inter.bold, size: 20, leading: 24, relativeTo: .title3)
-    static let headline2Deemphasized = Style(Inter.light, size: 20, leading: 24, relativeTo: .title3)
+    static let headline2Deemphasized = Style(Inter.regular, size: 20, leading: 24, relativeTo: .title3)
 
     // Headline 3 (17pt)
     static let headline3 = Style(Inter.medium, size: 17, leading: 20, relativeTo: .headline)
@@ -84,14 +83,12 @@ struct Typography {
     static let button2 = Style(Inter.semibold, size: 15, leading: 20, relativeTo: .subheadline)
     static let button3 = Style(Inter.semibold, size: 13, leading: 16, relativeTo: .footnote)
 
-    // MARK: - Meta
+    // MARK: - Caption
 
-    static let meta1 = Style(Inter.semibold, size: 13, leading: 16, relativeTo: .footnote)
-    static let meta2 = Style(Inter.semibold, size: 13, leading: 16, relativeTo: .footnote)
-    static let meta3 = Style(Inter.regular, size: 13, leading: 16, relativeTo: .footnote)
-    static let meta3Link = Style(Inter.semibold, size: 13, leading: 16, relativeTo: .footnote)
-    static let meta4 = Style(Inter.regular, size: 12, leading: 16, relativeTo: .caption)
-    static let meta4Link = Style(Inter.semibold, size: 12, leading: 16, relativeTo: .caption)
+    static let caption1 = Style(Inter.regular, size: 13, leading: 16, relativeTo: .footnote)
+    static let caption1Emphasized = Style(Inter.semibold, size: 13, leading: 16, relativeTo: .footnote)
+    static let caption2 = Style(Inter.regular, size: 12, leading: 16, relativeTo: .caption)
+    static let caption2Emphasized = Style(Inter.semibold, size: 12, leading: 16, relativeTo: .caption)
     
     // MARK: - Semantic Styles
     
@@ -107,8 +104,8 @@ struct Typography {
     static let headlinePrimary = SemanticStyle(typography: headline3Emphasized, color: Colors.textPrimary)
     static let bodyPrimary = SemanticStyle(typography: body2, color: Colors.textPrimary)
     static let bodySecondary = SemanticStyle(typography: body2, color: Colors.textSecondary)
-    static let link = SemanticStyle(typography: body2Link, color: Colors.textBlueLink)
-    static let metaSecondary = SemanticStyle(typography: meta3, color: Colors.textSecondary)
+    static let link = SemanticStyle(typography: body2Link, color: Colors.textAccent)
+    static let captionSecondary = SemanticStyle(typography: caption1, color: Colors.textSecondary)
 }
 
 // MARK: - Font Accessors
@@ -131,8 +128,8 @@ extension Typography {
         static let headline3 = Font.custom("Inter-Medium", size: 17, relativeTo: .headline)
         static let headline4 = Font.custom("Inter-Medium", size: 15, relativeTo: .subheadline)
 
-        static let meta3 = Font.custom("Inter-Regular", size: 13, relativeTo: .footnote)
-        static let meta4 = Font.custom("Inter-Regular", size: 12, relativeTo: .caption)
+        static let caption1 = Font.custom("Inter-Regular", size: 13, relativeTo: .footnote)
+        static let caption2 = Font.custom("Inter-Regular", size: 12, relativeTo: .caption)
     }
 }
 
@@ -153,3 +150,110 @@ extension View {
         self.font(style.font)
     }
 }
+
+// MARK: - PDSTextScale
+
+/// Unified typography + spacing scale for consistent text hierarchy
+///
+/// Each scale provides coordinated typography styles and spacing values
+/// that work together to create clear visual hierarchy.
+///
+/// ## Usage
+/// ```swift
+/// // Apply spacing to a VStack
+/// VStack(spacing: PDSTextScale.compact.lineSpacing) {
+///     Text("Title")
+///         .typography(PDSTextScale.compact.headline)
+///     Text("Description")
+///         .typography(PDSTextScale.compact.body)
+/// }
+/// .padding(.vertical, PDSTextScale.compact.verticalPadding)
+///
+/// // Or use the convenience modifier
+/// VStack(spacing: PDSTextScale.compact.lineSpacing) { ... }
+///     .pdsTextPadding(.compact)
+/// ```
+///
+/// ## Scale Selection Guide
+/// - **hero**: Page titles, onboarding headers, empty states
+/// - **section**: Card headers, section titles, modal headers
+/// - **content**: List items, table rows, navigation cells
+/// - **compact**: Comments, notifications, post headers, metadata
+enum PDSTextScale {
+    /// Large scale (24pt headline) — Page titles, hero sections, onboarding
+    case hero
+    
+    /// Standard scale (20pt headline) — Cards, section headers, modal titles
+    case section
+    
+    /// Compact scale (17pt headline) — List items, table rows, navigation cells
+    case content
+    
+    /// Dense scale (15pt headline) — Comments, notifications, post headers, metadata
+    case compact
+    
+    // MARK: - Typography
+    
+    /// Headline style for this scale
+    var headline: Typography.Style {
+        switch self {
+        case .hero: return Typography.headline1Emphasized
+        case .section: return Typography.headline2Emphasized
+        case .content: return Typography.headline3Emphasized
+        case .compact: return Typography.headline4Emphasized
+        }
+    }
+    
+    /// Body text style for this scale
+    var body: Typography.Style {
+        switch self {
+        case .hero: return Typography.body1
+        case .section: return Typography.body2
+        case .content: return Typography.body3
+        case .compact: return Typography.body4
+        }
+    }
+    
+    /// Caption style for this scale
+    var caption: Typography.Style {
+        switch self {
+        case .hero: return Typography.caption1Emphasized
+        case .section: return Typography.caption1Emphasized
+        case .content: return Typography.caption1
+        case .compact: return Typography.caption2
+        }
+    }
+    
+    /// Link style for this scale (semibold body)
+    var link: Typography.Style {
+        switch self {
+        case .hero: return Typography.body1Link
+        case .section: return Typography.body2Link
+        case .content: return Typography.body3Link
+        case .compact: return Typography.body4Link
+        }
+    }
+    
+    // MARK: - Spacing
+    
+    /// Spacing between text lines (headline → body → caption)
+    var lineSpacing: CGFloat {
+        switch self {
+        case .hero: return 4
+        case .section: return 3
+        case .content: return 2
+        case .compact: return 2
+        }
+    }
+    
+    /// Vertical padding for containers using this scale
+    var verticalPadding: CGFloat {
+        switch self {
+        case .hero: return 16
+        case .section: return 14
+        case .content: return 12
+        case .compact: return 10
+        }
+    }
+}
+

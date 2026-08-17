@@ -1,5 +1,5 @@
 //
-//  Shadow.swift
+//  Shadows.swift
 //  Prism
 //
 //  Created by David Boselli on 11/22/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Prism Design System Shadows
-struct Shadow {
+struct Shadows {
     
     // MARK: - Style
     
@@ -67,6 +67,6 @@ struct Shadow {
 // MARK: - View Extension
 
 extension View {
-    func shadow(_ style: Shadow.Style) -> some View { style.apply(to: self) }
-    func shadow(_ style: Shadow.MultiStyle) -> some View { style.apply(to: self) }
+    func shadow(_ style: Shadows.Style) -> some View { style.apply(to: self) }
+    func shadow(_ style: Shadows.MultiStyle) -> some View { style.apply(to: self) }
 }

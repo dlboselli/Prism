@@ -45,7 +45,7 @@ struct PDSProgressBar: View {
             
             if showLabel && !isIndeterminate {
                 Text("\(Int(progress * 100))%")
-                    .typography(Typography.meta4)
+                    .typography(Typography.caption2)
                     .foregroundColor(Colors.textSecondary)
             }
         }
@@ -64,10 +64,10 @@ enum PDSProgressVariant {
     
     var color: Color {
         switch self {
-        case .accent: return Colors.persistentAccent
-        case .positive: return Colors.persistentPositive
-        case .warning: return Colors.persistentWarning
-        case .negative: return Colors.persistentNegative
+        case .accent: return Colors.fixedAccent
+        case .positive: return Colors.fixedPositive
+        case .warning: return Colors.fixedWarning
+        case .negative: return Colors.fixedNegative
         case .neutral: return Colors.gray500
         }
     }
@@ -126,7 +126,7 @@ struct PDSProgressRing: View {
                             .typography(size.typography)
                             .foregroundColor(Colors.textPrimary)
                         Text("of \(total)")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     case .custom(let text):
                         Text(text)
@@ -158,14 +158,14 @@ enum PDSRingSize {
     case small
     case medium
     case large
-    case xlarge
+    case xLarge
     
     var diameter: CGFloat {
         switch self {
         case .small: return 48
         case .medium: return 80
         case .large: return 120
-        case .xlarge: return 160
+        case .xLarge: return 160
         }
     }
     
@@ -174,16 +174,16 @@ enum PDSRingSize {
         case .small: return 4
         case .medium: return 6
         case .large: return 8
-        case .xlarge: return 10
+        case .xLarge: return 10
         }
     }
     
     var typography: Typography.Style {
         switch self {
-        case .small: return Typography.meta3
+        case .small: return Typography.caption1
         case .medium: return Typography.headline4Emphasized
         case .large: return Typography.headline3Emphasized
-        case .xlarge: return Typography.headline2Emphasized
+        case .xLarge: return Typography.headline2Emphasized
         }
     }
 }
@@ -254,7 +254,7 @@ struct PDSProgressSteps: View {
             stepCircle(index: index)
             
             Text(label)
-                .typography(Typography.meta4)
+                .typography(Typography.caption2)
                 .foregroundColor(index <= currentStep ? Colors.textPrimary : Colors.gray400)
                 .lineLimit(1)
         }
@@ -273,7 +273,7 @@ struct PDSProgressSteps: View {
                     .foregroundColor(.white)
             } else {
                 Text("\(index + 1)")
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(index == currentStep ? .white : Colors.gray400)
             }
         }
@@ -362,7 +362,7 @@ struct PDSStreakIndicator: View {
         case .calendar:
             Image(systemName: "calendar")
                 .font(.system(size: size.iconSize * 0.8, weight: .semibold))
-                .foregroundColor(isActive ? Colors.persistentWarning : Colors.gray400)
+                .foregroundColor(isActive ? Colors.fixedWarning : Colors.gray400)
         }
     }
     
@@ -380,7 +380,7 @@ struct PDSStreakIndicator: View {
                 
                 if size != .small {
                     Text(count == 1 ? "day" : "days")
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -389,7 +389,7 @@ struct PDSStreakIndicator: View {
         .padding(.vertical, size.padding * 0.75)
         .background(
             RoundedRectangle(cornerRadius: size.cornerRadius)
-                .fill(isActive ? Colors.persistentWarning.opacity(0.15) : Colors.backgroundDeemphasized)
+                .fill(isActive ? Colors.fixedWarning.opacity(0.15) : Colors.backgroundDeemphasized)
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(streakAccessibilityLabel)

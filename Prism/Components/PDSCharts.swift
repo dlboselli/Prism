@@ -57,7 +57,7 @@ struct PDSStatCard: View {
                 .font(.system(size: 12, weight: .semibold))
             
             Text(trend.text)
-                .typography(Typography.meta3)
+                .typography(Typography.caption1)
         }
         .foregroundColor(trend.color)
     }
@@ -75,9 +75,9 @@ struct PDSStatTrend {
     
     var color: Color {
         if isGood {
-            return Colors.persistentPositive
+            return Colors.fixedPositive
         } else {
-            return Colors.persistentNegative
+            return Colors.fixedNegative
         }
     }
     
@@ -100,10 +100,10 @@ enum PDSStatVariant {
     var valueColor: Color {
         switch self {
         case .default: return Colors.textPrimary
-        case .accent: return Colors.persistentAccent
-        case .positive: return Colors.persistentPositive
-        case .warning: return Colors.persistentWarning
-        case .negative: return Colors.persistentNegative
+        case .accent: return Colors.fixedAccent
+        case .positive: return Colors.fixedPositive
+        case .warning: return Colors.fixedWarning
+        case .negative: return Colors.fixedNegative
         }
     }
     
@@ -133,8 +133,8 @@ enum PDSStatSize {
     
     var labelTypography: Typography.Style {
         switch self {
-        case .small: return Typography.meta4
-        case .medium: return Typography.meta3
+        case .small: return Typography.caption2
+        case .medium: return Typography.caption1
         case .large: return Typography.body3
         }
     }
@@ -289,10 +289,10 @@ enum PDSSparklineVariant {
     var color: Color {
         switch self {
         case .neutral: return Colors.gray500
-        case .accent: return Colors.persistentAccent
-        case .positive: return Colors.persistentPositive
-        case .warning: return Colors.persistentWarning
-        case .negative: return Colors.persistentNegative
+        case .accent: return Colors.fixedAccent
+        case .positive: return Colors.fixedPositive
+        case .warning: return Colors.fixedWarning
+        case .negative: return Colors.fixedNegative
         }
     }
 }
@@ -339,7 +339,7 @@ struct PDSBarChart: View {
                 HStack(spacing: barSpacing) {
                     ForEach(data) { item in
                         Text(item.formattedValue)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                             .frame(maxWidth: .infinity)
                     }
@@ -351,7 +351,7 @@ struct PDSBarChart: View {
                 HStack(alignment: .bottom, spacing: barSpacing) {
                     ForEach(data) { item in
                         RoundedRectangle(cornerRadius: cornerRadius)
-                            .fill(item.color ?? Colors.persistentAccent)
+                            .fill(item.color ?? Colors.fixedAccent)
                             .frame(height: geometry.size.height * (item.value / maxValue))
                     }
                 }
@@ -362,7 +362,7 @@ struct PDSBarChart: View {
                 HStack(spacing: barSpacing) {
                     ForEach(data) { item in
                         Text(item.label)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                             .lineLimit(1)
                             .frame(maxWidth: .infinity)
@@ -378,7 +378,7 @@ struct PDSBarChart: View {
                 HStack(spacing: 12) {
                     if showLabels {
                         Text(item.label)
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                             .frame(width: 60, alignment: .trailing)
                     }
@@ -386,7 +386,7 @@ struct PDSBarChart: View {
                     GeometryReader { geometry in
                         HStack {
                             RoundedRectangle(cornerRadius: cornerRadius)
-                                .fill(item.color ?? Colors.persistentAccent)
+                                .fill(item.color ?? Colors.fixedAccent)
                                 .frame(width: geometry.size.width * (item.value / maxValue))
                             Spacer()
                         }
@@ -395,7 +395,7 @@ struct PDSBarChart: View {
                     
                     if showValues {
                         Text(item.formattedValue)
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textPrimary)
                             .frame(width: 50, alignment: .trailing)
                     }
@@ -502,7 +502,7 @@ struct PDSLineChart: View {
     private func xAxisLabel(for index: Int, item: PDSLineChartData) -> some View {
         if index == 0 || index == data.count - 1 || index == data.count / 2 {
             Text(item.label)
-                .typography(Typography.meta4)
+                .typography(Typography.caption2)
                 .foregroundColor(Colors.gray400)
         }
         if index < data.count - 1 {
@@ -638,7 +638,7 @@ struct PDSDonutChart: View {
                     }
                     if let label = centerLabel {
                         Text(label)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -809,9 +809,9 @@ struct PDSDonutChartData: Identifiable {
             }
             
             PDSBarChart(data: [
-                PDSBarChartData(label: "React", value: 4500, color: Colors.persistentAccent),
-                PDSBarChartData(label: "Swift", value: 3200, color: Colors.persistentWarning),
-                PDSBarChartData(label: "Python", value: 2800, color: Colors.persistentPositive),
+                PDSBarChartData(label: "React", value: 4500, color: Colors.fixedAccent),
+                PDSBarChartData(label: "Swift", value: 3200, color: Colors.fixedWarning),
+                PDSBarChartData(label: "Python", value: 2800, color: Colors.fixedPositive),
                 PDSBarChartData(label: "Go", value: 1900, color: Colors.blue400)
             ], orientation: .horizontal)
             .frame(height: 140)
@@ -872,9 +872,9 @@ struct PDSDonutChartData: Identifiable {
             VStack(spacing: 16) {
                 PDSDonutChart(
                     data: [
-                        PDSDonutChartData(label: "Food", value: 450, color: Colors.persistentAccent),
-                        PDSDonutChartData(label: "Transport", value: 280, color: Colors.persistentPositive),
-                        PDSDonutChartData(label: "Shopping", value: 320, color: Colors.persistentWarning),
+                        PDSDonutChartData(label: "Food", value: 450, color: Colors.fixedAccent),
+                        PDSDonutChartData(label: "Transport", value: 280, color: Colors.fixedPositive),
+                        PDSDonutChartData(label: "Shopping", value: 320, color: Colors.fixedWarning),
                         PDSDonutChartData(label: "Other", value: 150, color: Colors.gray400)
                     ],
                     centerLabel: "Total",
@@ -882,9 +882,9 @@ struct PDSDonutChartData: Identifiable {
                 )
                 
                 VStack(spacing: 8) {
-                    legendItem(color: Colors.persistentAccent, label: "Food", value: "$450")
-                    legendItem(color: Colors.persistentPositive, label: "Transport", value: "$280")
-                    legendItem(color: Colors.persistentWarning, label: "Shopping", value: "$320")
+                    legendItem(color: Colors.fixedAccent, label: "Food", value: "$450")
+                    legendItem(color: Colors.fixedPositive, label: "Transport", value: "$280")
+                    legendItem(color: Colors.fixedWarning, label: "Shopping", value: "$320")
                     legendItem(color: Colors.gray400, label: "Other", value: "$150")
                 }
                 .frame(maxWidth: .infinity)
@@ -898,7 +898,7 @@ struct PDSDonutChartData: Identifiable {
             
             PDSDonutChart(
                 data: [
-                    PDSDonutChartData(label: "Complete", value: 72, color: Colors.persistentPositive),
+                    PDSDonutChartData(label: "Complete", value: 72, color: Colors.fixedPositive),
                     PDSDonutChartData(label: "Remaining", value: 28, color: Colors.backgroundDeemphasized)
                 ],
                 size: 100,

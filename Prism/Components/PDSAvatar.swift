@@ -1,5 +1,5 @@
 //
-//  PDSActor.swift
+//  PDSAvatar.swift
 //  Prism
 //
 //  Part of the Prism Design System (PDS)
@@ -12,13 +12,13 @@ import SwiftUI
 
 // MARK: - Actor Size
 
-/// Standard sizes for PDSActor
-enum PDSActorSize: CGFloat {
-    case xsmall = 24   // Inline mentions, compact lists
+/// Standard sizes for PDSAvatar
+enum PDSAvatarSize: CGFloat {
+    case xSmall = 24   // Inline mentions, compact lists
     case small = 32    // List cells, comments
     case medium = 40   // Standard list cells, cards
     case large = 56    // Profile headers, chat
-    case xlarge = 80   // Profile pages, settings
+    case xLarge = 80   // Profile pages, settings
     
     /// Icon size relative to actor size
     var iconSize: CGFloat {
@@ -28,33 +28,33 @@ enum PDSActorSize: CGFloat {
     /// Font size for initials
     var initialsFont: Font {
         switch self {
-        case .xsmall: return .system(size: 10, weight: .semibold)
+        case .xSmall: return .system(size: 10, weight: .semibold)
         case .small: return .system(size: 12, weight: .semibold)
         case .medium: return .system(size: 14, weight: .semibold)
         case .large: return .system(size: 20, weight: .semibold)
-        case .xlarge: return .system(size: 28, weight: .semibold)
+        case .xLarge: return .system(size: 28, weight: .semibold)
         }
     }
     
     /// Badge size relative to actor size
     var badgeSize: CGFloat {
         switch self {
-        case .xsmall: return 8
+        case .xSmall: return 8
         case .small: return 10
         case .medium: return 12
         case .large: return 16
-        case .xlarge: return 20
+        case .xLarge: return 20
         }
     }
     
     /// Badge offset from edge
     var badgeOffset: CGFloat {
         switch self {
-        case .xsmall: return 1
+        case .xSmall: return 1
         case .small: return 1
         case .medium: return 2
         case .large: return 2
-        case .xlarge: return 3
+        case .xLarge: return 3
         }
     }
 }
@@ -62,7 +62,7 @@ enum PDSActorSize: CGFloat {
 // MARK: - Actor Badge Type
 
 /// Badge types for status indicators
-enum PDSActorBadgeType {
+enum PDSAvatarBadgeType {
     case online                    // Green dot
     case offline                   // Gray dot
     case away                      // Yellow dot
@@ -71,26 +71,26 @@ enum PDSActorBadgeType {
     
     var color: Color {
         switch self {
-        case .online: return Colors.actorOnlineIndicator
-        case .offline: return Colors.actorOfflineIndicator
-        case .away: return Colors.persistentWarning
-        case .count: return Colors.persistentNegative
-        case .icon: return Colors.persistentAccent
+        case .online: return Colors.avatarOnlineIndicator
+        case .offline: return Colors.avatarOfflineIndicator
+        case .away: return Colors.fixedWarning
+        case .count: return Colors.fixedNegative
+        case .icon: return Colors.fixedAccent
         }
     }
 }
 
 // MARK: - Actor Source
 
-/// Image source for PDSActor
+/// Image source for PDSAvatar
 ///
 /// Usage:
 /// ```swift
-/// PDSActor(source: .url(profileURL, fallback: "JD"))
-/// PDSActor(source: .asset("profile_photo"))
-/// PDSActor(source: .initials("JD"))
+/// PDSAvatar(source: .url(profileURL, fallback: "JD"))
+/// PDSAvatar(source: .asset("profile_photo"))
+/// PDSAvatar(source: .initials("JD"))
 /// ```
-enum PDSActorSource {
+enum PDSAvatarSource {
     /// Remote URL with optional initials fallback
     case url(URL?, fallback: String? = nil)
     
@@ -107,31 +107,31 @@ enum PDSActorSource {
     case placeholder
 }
 
-// MARK: - PDSActor View
+// MARK: - PDSAvatar View
 
 /// A profile photo/avatar component
 ///
 /// Usage:
 /// ```swift
 /// // With source enum (recommended)
-/// PDSActor(source: .url(profileURL, fallback: "JD"), size: .medium)
-/// PDSActor(source: .initials("JD"), size: .large, badge: .online)
+/// PDSAvatar(source: .url(profileURL, fallback: "JD"), size: .medium)
+/// PDSAvatar(source: .initials("JD"), size: .large, badge: .online)
 ///
 /// // Convenience initializers
-/// PDSActor(url: profileURL, size: .medium)
-/// PDSActor(initials: "JD", size: .large)
-/// PDSActor(size: .medium)  // Placeholder
+/// PDSAvatar(url: profileURL, size: .medium)
+/// PDSAvatar(initials: "JD", size: .large)
+/// PDSAvatar(size: .medium)  // Placeholder
 ///
 /// // Custom pixel size
-/// PDSActor(source: .initials("JD"), size: 36)
+/// PDSAvatar(source: .initials("JD"), size: 36)
 /// ```
-struct PDSActor: View {
+struct PDSAvatar: View {
     // MARK: - Properties
     
-    private let source: PDSActorSource
+    private let source: PDSAvatarSource
     private let sizeValue: CGFloat
-    private let sizeEnum: PDSActorSize?
-    private let badge: PDSActorBadgeType?
+    private let sizeEnum: PDSAvatarSize?
+    private let badge: PDSAvatarBadgeType?
     
     // MARK: - Primary Initializer
     
@@ -140,7 +140,7 @@ struct PDSActor: View {
     ///   - source: Image source (url, asset, initials, etc.)
     ///   - size: Standard size enum
     ///   - badge: Optional status badge
-    init(source: PDSActorSource, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(source: PDSAvatarSource, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.source = source
         self.sizeValue = size.rawValue
         self.sizeEnum = size
@@ -152,7 +152,7 @@ struct PDSActor: View {
     ///   - source: Image source (url, asset, initials, etc.)
     ///   - size: Custom size in points
     ///   - badge: Optional status badge
-    init(source: PDSActorSource, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(source: PDSAvatarSource, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.source = source
         self.sizeValue = size
         self.sizeEnum = nil
@@ -162,57 +162,57 @@ struct PDSActor: View {
     // MARK: - Convenience Initializers
     
     /// Creates an actor with a remote URL
-    init(url: URL?, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(url: URL?, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .url(url), size: size, badge: badge)
     }
     
     /// Creates an actor with a remote URL (custom size)
-    init(url: URL?, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(url: URL?, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .url(url), size: size, badge: badge)
     }
     
     /// Creates an actor with URL and initials fallback
-    init(url: URL?, fallbackInitials: String?, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(url: URL?, fallbackInitials: String?, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .url(url, fallback: fallbackInitials), size: size, badge: badge)
     }
     
     /// Creates an actor with URL and initials fallback (custom size)
-    init(url: URL?, fallbackInitials: String?, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(url: URL?, fallbackInitials: String?, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .url(url, fallback: fallbackInitials), size: size, badge: badge)
     }
     
     /// Creates an actor with an asset image
-    init(image: String, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(image: String, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .asset(image), size: size, badge: badge)
     }
     
     /// Creates an actor with an asset image (custom size)
-    init(image: String, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(image: String, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .asset(image), size: size, badge: badge)
     }
     
     /// Creates an actor with initials
-    init(initials: String, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(initials: String, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .initials(initials), size: size, badge: badge)
     }
     
     /// Creates an actor with initials (custom size)
-    init(initials: String, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(initials: String, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .initials(initials), size: size, badge: badge)
     }
     
     /// Creates an actor with an SF Symbol
-    init(systemImage: String, size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(systemImage: String, size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .systemImage(systemImage), size: size, badge: badge)
     }
     
     /// Creates an actor with an SF Symbol (custom size)
-    init(systemImage: String, size: CGFloat, badge: PDSActorBadgeType? = nil) {
+    init(systemImage: String, size: CGFloat, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .systemImage(systemImage), size: size, badge: badge)
     }
     
     /// Creates an actor with default placeholder
-    init(size: PDSActorSize = .medium, badge: PDSActorBadgeType? = nil) {
+    init(size: PDSAvatarSize = .medium, badge: PDSAvatarBadgeType? = nil) {
         self.init(source: .placeholder, size: size, badge: badge)
     }
     
@@ -245,7 +245,7 @@ struct PDSActor: View {
             
             // Badge overlay
             if let badge = badge {
-                PDSActorBadge(type: badge, size: badgeSize)
+                PDSAvatarBadge(type: badge, size: badgeSize)
                     .offset(x: badgeOffset, y: badgeOffset)
             }
         }
@@ -308,7 +308,7 @@ struct PDSActor: View {
     private var placeholderView: some View {
         ZStack {
             Circle()
-                .fill(Colors.actorPlaceholderBackground)
+                .fill(Colors.avatarPlaceholderBackground)
             
             Image(systemName: "person.fill")
                 .font(.system(size: iconSize))
@@ -319,7 +319,7 @@ struct PDSActor: View {
     private func systemImageView(_ systemName: String) -> some View {
         ZStack {
             Circle()
-                .fill(Colors.actorPlaceholderBackground)
+                .fill(Colors.avatarPlaceholderBackground)
             
             Image(systemName: systemName)
                 .font(.system(size: iconSize))
@@ -339,11 +339,11 @@ struct PDSActor: View {
     }
 }
 
-// MARK: - PDSActorBadge
+// MARK: - PDSAvatarBadge
 
 /// Badge component for status indicators
-struct PDSActorBadge: View {
-    let type: PDSActorBadgeType
+struct PDSAvatarBadge: View {
+    let type: PDSAvatarBadgeType
     let size: CGFloat
     
     var body: some View {
@@ -403,20 +403,20 @@ struct PDSActorBadge: View {
     }
 }
 
-// MARK: - PDSActorStack
+// MARK: - PDSAvatarStack
 
 /// A stack of overlapping actors for group displays
 ///
 /// Usage:
 /// ```swift
-/// PDSActorStack(urls: [url1, url2, url3], size: .small, maxVisible: 3)
-/// PDSActorStack(sources: [.initials("JD"), .initials("AB")], size: .medium)
+/// PDSAvatarStack(urls: [url1, url2, url3], size: .small, maxVisible: 3)
+/// PDSAvatarStack(sources: [.initials("JD"), .initials("AB")], size: .medium)
 /// // With custom border color to match background
-/// PDSActorStack(urls: urls, borderColor: Colors.backgroundSurface)
+/// PDSAvatarStack(urls: urls, borderColor: Colors.backgroundSurface)
 /// ```
-struct PDSActorStack: View {
-    let sources: [PDSActorSource]
-    let size: PDSActorSize
+struct PDSAvatarStack: View {
+    let sources: [PDSAvatarSource]
+    let size: PDSAvatarSize
     let maxVisible: Int
     let borderColor: Color
     
@@ -424,7 +424,7 @@ struct PDSActorStack: View {
         size.rawValue * 0.24
     }
     
-    private var visibleSources: [PDSActorSource] {
+    private var visibleSources: [PDSAvatarSource] {
         Array(sources.prefix(maxVisible))
     }
     
@@ -433,7 +433,7 @@ struct PDSActorStack: View {
     }
     
     /// Creates a stack with source enums
-    init(sources: [PDSActorSource], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
+    init(sources: [PDSAvatarSource], size: PDSAvatarSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
         self.sources = sources
         self.size = size
         self.maxVisible = maxVisible
@@ -441,16 +441,16 @@ struct PDSActorStack: View {
     }
     
     /// Creates a stack with URLs
-    init(urls: [URL?], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
-        self.sources = urls.map { PDSActorSource.url($0) }
+    init(urls: [URL?], size: PDSAvatarSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
+        self.sources = urls.map { PDSAvatarSource.url($0) }
         self.size = size
         self.maxVisible = maxVisible
         self.borderColor = borderColor
     }
     
     /// Creates a stack with initials
-    init(initials: [String], size: PDSActorSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
-        self.sources = initials.map { PDSActorSource.initials($0) }
+    init(initials: [String], size: PDSAvatarSize = .small, maxVisible: Int = 3, borderColor: Color = Colors.backgroundSurface) {
+        self.sources = initials.map { PDSAvatarSource.initials($0) }
         self.size = size
         self.maxVisible = maxVisible
         self.borderColor = borderColor
@@ -459,7 +459,7 @@ struct PDSActorStack: View {
     var body: some View {
         HStack(spacing: -overlapOffset) {
             ForEach(Array(visibleSources.enumerated()), id: \.offset) { index, source in
-                PDSActor(source: source, size: size)
+                PDSAvatar(source: source, size: size)
                     .overlay(
                         Circle()
                             .stroke(borderColor, lineWidth: 2)
@@ -477,7 +477,7 @@ struct PDSActorStack: View {
     private var overflowBadge: some View {
         ZStack {
             Circle()
-                .fill(Colors.actorPlaceholderBackground)
+                .fill(Colors.avatarPlaceholderBackground)
             
             Image(systemName: "person.fill")
                 .font(.system(size: size.rawValue * 0.45))
@@ -511,37 +511,37 @@ struct PDSActorStack: View {
             
             HStack(spacing: 16) {
                 VStack {
-                    PDSActor(size: .xsmall)
+                    PDSAvatar(size: .xSmall)
                     Text("24")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(size: .small)
+                    PDSAvatar(size: .small)
                     Text("32")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(size: .medium)
+                    PDSAvatar(size: .medium)
                     Text("40")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(size: .large)
+                    PDSAvatar(size: .large)
                     Text("56")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(size: .xlarge)
+                    PDSAvatar(size: .xLarge)
                     Text("80")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -556,30 +556,30 @@ struct PDSActorStack: View {
             
             HStack(spacing: 16) {
                 VStack {
-                    PDSActor(source: .placeholder, size: .large)
+                    PDSAvatar(source: .placeholder, size: .large)
                     Text("Placeholder")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(source: .systemImage("star.fill"), size: .large)
+                    PDSAvatar(source: .systemImage("star.fill"), size: .large)
                     Text("SF Symbol")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(source: .initials("JD"), size: .large)
+                    PDSAvatar(source: .initials("JD"), size: .large)
                     Text("Initials")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(source: .url(nil, fallback: "AB"), size: .large)
+                    PDSAvatar(source: .url(nil, fallback: "AB"), size: .large)
                     Text("URL + Fallback")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -594,37 +594,37 @@ struct PDSActorStack: View {
             
             HStack(spacing: 16) {
                 VStack {
-                    PDSActor(initials: "AB", size: .large, badge: .online)
+                    PDSAvatar(initials: "AB", size: .large, badge: .online)
                     Text("Online")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(initials: "CD", size: .large, badge: .offline)
+                    PDSAvatar(initials: "CD", size: .large, badge: .offline)
                     Text("Offline")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(initials: "EF", size: .large, badge: .away)
+                    PDSAvatar(initials: "EF", size: .large, badge: .away)
                     Text("Away")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(initials: "GH", size: .large, badge: .count(5))
+                    PDSAvatar(initials: "GH", size: .large, badge: .count(5))
                     Text("Count")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 VStack {
-                    PDSActor(initials: "IJ", size: .large, badge: .icon("checkmark"))
+                    PDSAvatar(initials: "IJ", size: .large, badge: .icon("checkmark"))
                     Text("Icon")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -639,26 +639,26 @@ struct PDSActorStack: View {
             
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    PDSActorStack(
+                    PDSAvatarStack(
                         sources: [.initials("AB"), .initials("CD"), .initials("EF")],
                         size: .medium,
                         maxVisible: 3
                     )
                     Spacer()
                     Text("3 actors")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
                 HStack {
-                    PDSActorStack(
+                    PDSAvatarStack(
                         initials: ["AB", "CD", "EF", "GH", "IJ"],
                         size: .medium,
                         maxVisible: 3
                     )
                     Spacer()
                     Text("5 actors, max 3")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
             }

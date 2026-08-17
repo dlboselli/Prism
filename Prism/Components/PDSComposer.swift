@@ -47,15 +47,15 @@ struct PDSTextArea: View {
                     if let label = label {
                         Text(label)
                             .typography(Typography.body3)
-                            .foregroundColor(hasError || isOverLimit ? Colors.persistentNegative : Colors.textPrimary)
+                            .foregroundColor(hasError || isOverLimit ? Colors.fixedNegative : Colors.textPrimary)
                     }
                     
                     Spacer()
                     
                     if let max = maxLength {
                         Text("\(characterCount)/\(max)")
-                            .typography(Typography.meta3)
-                            .foregroundColor(isOverLimit ? Colors.persistentNegative : Colors.textSecondary)
+                            .typography(Typography.caption1)
+                            .foregroundColor(isOverLimit ? Colors.fixedNegative : Colors.textSecondary)
                     }
                 }
             }
@@ -88,18 +88,18 @@ struct PDSTextArea: View {
             // Help/Error text
             if let error = errorText {
                 Label(error, systemImage: "exclamationmark.circle.fill")
-                    .typography(Typography.meta3)
-                    .foregroundColor(Colors.persistentNegative)
+                    .typography(Typography.caption1)
+                    .foregroundColor(Colors.fixedNegative)
             } else if let help = helpText {
                 Text(help)
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
         }
     }
     
     private var borderColor: Color {
-        if hasError || isOverLimit { return Colors.persistentNegative }
+        if hasError || isOverLimit { return Colors.fixedNegative }
         if isFocused { return Colors.textInputActiveInnerBorder }
         return Colors.textInputInactiveInnerBorder
     }
@@ -111,25 +111,25 @@ struct PDSTextArea: View {
 struct PDSCommentInput: View {
     let placeholder: String
     @Binding var text: String
-    let actorInitials: String?
+    let avatarInitials: String?
     let onSubmit: (() -> Void)?
     
     init(
         placeholder: String = "Write a comment...",
         text: Binding<String>,
-        actorInitials: String? = nil,
+        avatarInitials: String? = nil,
         onSubmit: (() -> Void)? = nil
     ) {
         self.placeholder = placeholder
         self._text = text
-        self.actorInitials = actorInitials
+        self.avatarInitials = avatarInitials
         self.onSubmit = onSubmit
     }
     
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
-            if let initials = actorInitials {
-                PDSActor(initials: initials, size: 36)
+            if let initials = avatarInitials {
+                PDSAvatar(initials: initials, size: 36)
             }
             
             HStack(spacing: 8) {
@@ -148,7 +148,7 @@ struct PDSCommentInput: View {
                     } label: {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.system(size: 24))
-                            .foregroundStyle(.white, Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.fixedAccent)
                     }
                     .accessibilityLabel("Send")
                 }
@@ -202,7 +202,7 @@ struct PDSMessageInput: View {
                 Button(action: action.action) {
                     Image(systemName: action.icon)
                         .font(.system(size: 28))
-                        .foregroundStyle(.white, Colors.persistentAccent)
+                        .foregroundStyle(.white, Colors.fixedAccent)
                 }
                 .accessibilityLabel(action.label ?? action.icon.split(separator: ".").first.map(String.init) ?? "Action")
             }
@@ -228,7 +228,7 @@ struct PDSMessageInput: View {
                     Button(action: onSend) {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.system(size: 24))
-                            .foregroundStyle(.white, Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.fixedAccent)
                     }
                     .accessibilityLabel("Send")
                 }
@@ -252,8 +252,8 @@ struct PDSComposeSheet: View {
     @Binding var isPresented: Bool
     let title: String
     let placeholder: String
-    let actorName: String
-    let actorInitials: String?
+    let authorName: String
+    let avatarInitials: String?
     let submitLabel: String
     let onSubmit: () -> Void
     
@@ -264,8 +264,8 @@ struct PDSComposeSheet: View {
         isPresented: Binding<Bool>,
         title: String = "New Post",
         placeholder: String = "What's on your mind?",
-        actorName: String,
-        actorInitials: String? = nil,
+        authorName: String,
+        avatarInitials: String? = nil,
         submitLabel: String = "Post",
         onSubmit: @escaping () -> Void
     ) {
@@ -273,8 +273,8 @@ struct PDSComposeSheet: View {
         self._isPresented = isPresented
         self.title = title
         self.placeholder = placeholder
-        self.actorName = actorName
-        self.actorInitials = actorInitials
+        self.authorName = authorName
+        self.avatarInitials = avatarInitials
         self.submitLabel = submitLabel
         self.onSubmit = onSubmit
     }
@@ -285,9 +285,9 @@ struct PDSComposeSheet: View {
                 VStack(alignment: .leading, spacing: 12) {
                     // Author
                     HStack(spacing: 12) {
-                        PDSActor(initials: actorInitials ?? String(actorName.prefix(2)), size: .medium)
+                        PDSAvatar(initials: avatarInitials ?? String(authorName.prefix(2)), size: .medium)
                         
-                        Text(actorName)
+                        Text(authorName)
                             .typography(Typography.headline4Emphasized)
                             .foregroundColor(Colors.textPrimary)
                     }
@@ -356,7 +356,7 @@ struct PDSComposeSheet: View {
                 
                 PDSCommentInput(
                     text: .constant(""),
-                    actorInitials: "JD"
+                    avatarInitials: "JD"
                 )
                 .background(Colors.backgroundCard)
             }

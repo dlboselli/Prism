@@ -155,9 +155,9 @@ struct MoreTabView: View {
                 }
                 
                 NavigationLink {
-                    ActorDetailView()
+                    AvatarDetailView()
                 } label: {
-                    Text("Actor")
+                    Text("Avatar")
                 }
                 
                 NavigationLink {
@@ -166,6 +166,12 @@ struct MoreTabView: View {
                     Text("Badges")
                 }
                 
+                NavigationLink {
+                    BannerDetailView()
+                } label: {
+                    Text("Banner")
+                }
+
                 NavigationLink {
                     BottomSheetDetailView()
                 } label: {
@@ -221,13 +227,7 @@ struct MoreTabView: View {
                 } label: {
                     Text("Icon Buttons")
                 }
-                
-                NavigationLink {
-                    InstantFeedbackDetailView()
-                } label: {
-                    Text("Instant Feedback")
-                }
-                
+
                 NavigationLink {
                     ListCellsDetailView()
                 } label: {
@@ -444,7 +444,7 @@ struct ColorsShowcaseView: View {
                     
                     ForEach(steps, id: \.self) { step in
                         Text(step)
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                             .frame(maxWidth: .infinity)
                     }
@@ -557,25 +557,25 @@ struct ColorsShowcaseView: View {
                     .foregroundColor(Colors.textSecondary)
             }
             
-            // Persistent
-            semanticColorGroup(title: "Persistent", colors: [
-                ("Accent", Colors.persistentAccent),
-                ("Accent Deemphasized", Colors.persistentAccentDeemphasized),
-                ("Negative", Colors.persistentNegative),
-                ("Negative Deemphasized", Colors.persistentNegativeDeemphasized),
-                ("Positive", Colors.persistentPositive),
-                ("Positive Deemphasized", Colors.persistentPositiveDeemphasized),
-                ("Warning", Colors.persistentWarning),
-                ("Warning Deemphasized", Colors.persistentWarningDeemphasized),
-                ("Always White", Colors.persistentAlwaysWhite),
-                ("Always Black", Colors.persistentAlwaysBlack),
+            // Fixed
+            semanticColorGroup(title: "Fixed", colors: [
+                ("Accent", Colors.fixedAccent),
+                ("Accent Deemphasized", Colors.fixedAccentDeemphasized),
+                ("Negative", Colors.fixedNegative),
+                ("Negative Deemphasized", Colors.fixedNegativeDeemphasized),
+                ("Positive", Colors.fixedPositive),
+                ("Positive Deemphasized", Colors.fixedPositiveDeemphasized),
+                ("Warning", Colors.fixedWarning),
+                ("Warning Deemphasized", Colors.fixedWarningDeemphasized),
+                ("White", Colors.fixedWhite),
+                ("Black", Colors.fixedBlack),
             ])
             
             // Text
             semanticColorGroup(title: "Text", colors: [
                 ("Primary", Colors.textPrimary),
                 ("Secondary", Colors.textSecondary),
-                ("Blue Link", Colors.textBlueLink),
+                ("Accent", Colors.textAccent),
                 ("Placeholder", Colors.textPlaceholder),
                 ("Disabled", Colors.textDisabled),
                 ("Primary On Color", Colors.textPrimaryOnColor),
@@ -598,9 +598,9 @@ struct ColorsShowcaseView: View {
                 ("Surface", Colors.backgroundSurface, true),
                 ("Card", Colors.backgroundCard, true),
                 ("Deemphasized", Colors.backgroundDeemphasized, false),
-                ("Wash", Colors.backgroundWash, false),
+                ("Canvas", Colors.backgroundCanvas, false),
                 ("Divider", Colors.backgroundDivider, false),
-                ("Card Dark", Colors.backgroundCardDark, false),
+                ("Card Inverse", Colors.backgroundCardInverse, false),
                 ("Overlay On Media", Colors.backgroundOverlayOnMedia, false),
                 ("Overlay On Media Light", Colors.backgroundOverlayOnMediaLight, false),
             ])
@@ -650,7 +650,7 @@ struct SemanticColorCard: View {
                 )
             
             Text(name)
-                .typography(Typography.meta3)
+                .typography(Typography.caption1)
                 .foregroundColor(Colors.textSecondary)
         }
     }
@@ -695,12 +695,10 @@ struct TypographyShowcaseView: View {
                 ])
                 
                 typographyList([
-                    ("Meta 1", Typography.meta1),
-                    ("Meta 2", Typography.meta2),
-                    ("Meta 3", Typography.meta3),
-                    ("Meta 3 Link", Typography.meta3Link),
-                    ("Meta 4", Typography.meta4),
-                    ("Meta 4 Link", Typography.meta4Link),
+                    ("Caption 1", Typography.caption1),
+                    ("Caption 1 Emphasized", Typography.caption1Emphasized),
+                    ("Caption 2", Typography.caption2),
+                    ("Caption 2 Emphasized", Typography.caption2Emphasized),
                 ])
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -758,8 +756,8 @@ struct TypographyShowcaseView: View {
                 .typography(scale.body)
                 .foregroundColor(Colors.textSecondary)
             
-            Text("\(scaleName) Meta")
-                .typography(scale.meta)
+            Text("\(scaleName) Caption")
+                .typography(scale.caption)
                 .foregroundColor(Colors.gray400)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -803,7 +801,7 @@ struct ShadowsShowcaseView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(light: Colors.white, dark: Colors.gray700))
                             .frame(height: 100)
-                            .shadow(Shadow.uiEmphasis)
+                            .shadow(Shadows.uiEmphasis)
                     }
                 )
                 
@@ -815,7 +813,7 @@ struct ShadowsShowcaseView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(Color(light: Colors.white, dark: Colors.gray700))
                             .frame(height: 100)
-                            .shadow(Shadow.responsiveUI)
+                            .shadow(Shadows.responsiveUI)
                     }
                 )
                 
@@ -829,7 +827,7 @@ struct ShadowsShowcaseView: View {
                             Rectangle()
                                 .fill(Color(light: Colors.white, dark: Colors.gray700))
                                 .frame(height: 60)
-                                .shadow(Shadow.persistentUI)
+                                .shadow(Shadows.persistentUI)
                         }
                         .frame(height: 120)
                         .clipped()
@@ -852,12 +850,12 @@ struct ShadowsShowcaseView: View {
                                 Image(systemName: "play.fill")
                                     .font(.system(size: 32))
                                     .foregroundColor(Colors.white)
-                                    .shadow(Shadow.textAndIconOnMedia)
+                                    .shadow(Shadows.textAndIconOnMedia)
                                 
                                 Text("Watch Now")
                                     .typography(Typography.button1)
                                     .foregroundColor(Colors.white)
-                                    .shadow(Shadow.textAndIconOnMedia)
+                                    .shadow(Shadows.textAndIconOnMedia)
                             }
                         }
                         .frame(height: 120)
@@ -889,7 +887,7 @@ struct ShadowsShowcaseView: View {
             
             content()
                 .padding(16)
-                .background(Colors.backgroundWash)
+                .background(Colors.backgroundCanvas)
                 .cornerRadius(12)
         }
     }
@@ -1062,7 +1060,7 @@ private struct MotionDurationRow: View {
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(.easeInOut(duration: duration), value: isAnimating)
@@ -1095,7 +1093,7 @@ private struct MotionSpringRow: View {
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(animation, value: isAnimating)
@@ -1128,7 +1126,7 @@ private struct MotionInteractiveRow: View {
             
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(animation, value: isAnimating)
@@ -1198,7 +1196,7 @@ private struct MotionTypeRow: View {
         case .enterExit:
             // Enter/Exit - opacity animation
             RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.persistentAccent)
+                .fill(Colors.fixedAccent)
                 .frame(width: squareSize, height: squareSize)
                 .opacity(isAnimating ? 1 : 0)
                 .animation(animation, value: isAnimating)
@@ -1206,7 +1204,7 @@ private struct MotionTypeRow: View {
         case .expandCollapse:
             // Expand/Collapse - scale animation
             RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.persistentAccent)
+                .fill(Colors.fixedAccent)
                 .frame(width: isAnimating ? 80 : squareSize, height: squareSize)
                 .animation(animation, value: isAnimating)
             
@@ -1214,13 +1212,13 @@ private struct MotionTypeRow: View {
             // Two elements swapping with opacity change
             HStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .opacity(isAnimating ? 0.4 : 1.0)
                     .offset(x: isAnimating ? 28 : 0)
                 
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .opacity(isAnimating ? 1.0 : 0.4)
                     .offset(x: isAnimating ? -28 : 0)
@@ -1231,7 +1229,7 @@ private struct MotionTypeRow: View {
             // Position animation
             GeometryReader { geometry in
                 RoundedRectangle(cornerRadius: 4)
-                    .fill(Colors.persistentAccent)
+                    .fill(Colors.fixedAccent)
                     .frame(width: squareSize, height: squareSize)
                     .position(x: isAnimating ? geometry.size.width - squareSize/2 - 4 : squareSize/2 + 4, y: geometry.size.height / 2)
                     .animation(animation, value: isAnimating)
@@ -1240,7 +1238,7 @@ private struct MotionTypeRow: View {
         case .fade:
             // Crossfade opacity
             RoundedRectangle(cornerRadius: 4)
-                .fill(Colors.persistentAccent)
+                .fill(Colors.fixedAccent)
                 .frame(width: squareSize, height: squareSize)
                 .opacity(isAnimating ? 0.3 : 1)
                 .animation(animation, value: isAnimating)
@@ -1538,7 +1536,7 @@ struct ButtonsDetailView: View {
                     .padding(16)
                     .background(
                         RoundedRectangle(cornerRadius: CornerRadius.card)
-                            .fill(Colors.persistentPositive)
+                            .fill(Colors.fixedPositive)
                     )
                 }
                 
@@ -1601,14 +1599,14 @@ struct ButtonsDetailView: View {
                 buttonSection(title: "Size Variants") {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Large")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                         
                         Button("Large Button") { }
                             .pdsButton(variant: .primary, size: .large)
                         
                         Text("Medium (Default)")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                             .padding(.top, 8)
                         
@@ -1616,7 +1614,7 @@ struct ButtonsDetailView: View {
                             .pdsButton(variant: .primary, size: .medium)
                         
                         Text("Small")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                             .padding(.top, 8)
                         
@@ -1629,14 +1627,14 @@ struct ButtonsDetailView: View {
                 buttonSection(title: "Width Modes") {
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Flexible (fits content)")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                         
                         Button("Save") { }
                             .pdsButton(variant: .primary, width: .flexible)
                         
                         Text("Full Width")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                             .padding(.top, 8)
                         
@@ -1689,7 +1687,7 @@ struct IconButtonsDetailView: View {
                             .pdsIconButton(size: .regular)
                             
                             Text("24pt")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -1700,7 +1698,7 @@ struct IconButtonsDetailView: View {
                             .pdsIconButton(size: .small)
                             
                             Text("20pt")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -1761,7 +1759,7 @@ struct IconButtonsDetailView: View {
                         VStack(alignment: .leading, spacing: 20) {
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Primary")
-                                    .typography(Typography.meta3)
+                                    .typography(Typography.caption1)
                                     .foregroundColor(Colors.textPrimaryOnMedia)
                                 
                                 HStack(spacing: 16) {
@@ -1784,7 +1782,7 @@ struct IconButtonsDetailView: View {
                             
                             VStack(alignment: .leading, spacing: 8) {
                                 Text("Secondary")
-                                    .typography(Typography.meta3)
+                                    .typography(Typography.caption1)
                                     .foregroundColor(Colors.textPrimaryOnMedia)
                                 
                                 HStack(spacing: 16) {
@@ -1943,7 +1941,7 @@ struct ActionChipsDetailView: View {
                             .padding(16)
                         }
                     }
-                    .background(Colors.persistentAccent)
+                    .background(Colors.fixedAccent)
                     .cornerRadius(12)
                 }
                 
@@ -2013,13 +2011,13 @@ struct ActionChipsDetailView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
                             Button("John Doe") { }
-                                .pdsAuthorChip(actorInitials: "JD", isSelected: true)
+                                .pdsAuthorChip(avatarInitials: "JD", isSelected: true)
                             Button("Jane Smith") { }
-                                .pdsAuthorChip(actorInitials: "JS")
+                                .pdsAuthorChip(avatarInitials: "JS")
                             Button("Alex Chen") { }
-                                .pdsAuthorChip(actorInitials: "AC")
+                                .pdsAuthorChip(avatarInitials: "AC")
                             Button("Sam Wilson") { }
-                                .pdsAuthorChip(actorInitials: "SW")
+                                .pdsAuthorChip(avatarInitials: "SW")
                         }
                         .padding(.horizontal, 21) // 20 + 1 for border
                     }
@@ -2348,7 +2346,7 @@ struct BottomSheetDetailView: View {
                                 .foregroundColor(Colors.textPrimary)
                             
                             Text("Description text goes here")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -2486,7 +2484,7 @@ struct ListCellsDetailView: View {
                         PDSNavigationCell(
                             title: "Appearance",
                             leadingIcon: "paintbrush",
-                            leadingIconColor: Colors.persistentAccent
+                            leadingIconColor: Colors.fixedAccent
                         ) { }
                     }
                 }
@@ -2545,7 +2543,7 @@ struct ListCellsDetailView: View {
                         PDSBadgeCell(
                             title: "Messages",
                             leadingIcon: "message.fill",
-                            leadingIconColor: Colors.persistentAccent,
+                            leadingIconColor: Colors.fixedAccent,
                             count: 12,
                             showChevron: true,
                             action: { }
@@ -2554,7 +2552,7 @@ struct ListCellsDetailView: View {
                             title: "Notifications",
                             subtitle: "3 unread",
                             leadingIcon: "bell.fill",
-                            leadingIconColor: Colors.persistentWarning,
+                            leadingIconColor: Colors.fixedWarning,
                             count: 3,
                             badgeVariant: .warning,
                             action: { }
@@ -2562,7 +2560,7 @@ struct ListCellsDetailView: View {
                         PDSBadgeCell(
                             title: "Updates",
                             leadingIcon: "arrow.down.circle.fill",
-                            leadingIconColor: Colors.persistentPositive,
+                            leadingIconColor: Colors.fixedPositive,
                             count: 5,
                             badgeVariant: .positive
                         )
@@ -2666,7 +2664,7 @@ struct ListCellsDetailView: View {
                             title: "Premium Features",
                             subtitle: "Unlock all features",
                             leadingIcon: "star.fill",
-                            leadingIconColor: Colors.persistentWarning,
+                            leadingIconColor: Colors.fixedWarning,
                             actionTitle: "Upgrade",
                             onAction: { }
                         )
@@ -2702,7 +2700,7 @@ struct ListCellsDetailView: View {
 
 // MARK: - Instant Feedback Detail View
 
-struct InstantFeedbackDetailView: View {
+struct BannerDetailView: View {
     @State private var showNeutral = false
     @State private var showSuccess = false
     @State private var showError = false
@@ -2819,41 +2817,41 @@ struct InstantFeedbackDetailView: View {
             }
             .background(Colors.backgroundSurface)
         }
-        .navigationTitle("Instant Feedback")
+        .navigationTitle("Banner")
         .navigationBarTitleDisplayMode(.large)
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "This is a neutral message",
             type: .neutral,
             isPresented: $showNeutral
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "Post shared successfully!",
             type: .success,
             isPresented: $showSuccess
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "Unable to connect. Check your network.",
             type: .error,
             isPresented: $showError
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "Your session will expire soon",
             type: .warning,
             isPresented: $showWarning
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "Post deleted",
             type: .neutral,
             actionText: "Undo",
             action: { },
             isPresented: $showWithAction
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "John liked your post",
-            actorInitials: "JD",
+            avatarInitials: "JD",
             isPresented: $showWithActor
         )
-        .pdsInstantFeedback(
+        .pdsBanner(
             message: "New notification received",
             type: .neutral,
             icon: "bell.fill",
@@ -2882,7 +2880,7 @@ struct InstantFeedbackDetailView: View {
         }
     }
     
-    private func staticFeedbackRow(message: String, type: PDSInstantFeedbackType) -> some View {
+    private func staticFeedbackRow(message: String, type: PDSBannerType) -> some View {
         HStack(spacing: 12) {
             if let icon = type.icon {
                 Image(systemName: icon)
@@ -2901,7 +2899,7 @@ struct InstantFeedbackDetailView: View {
         .padding(.vertical, 14)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Colors.backgroundCardDark)
+                .fill(Colors.backgroundCardInverse)
         )
         .environment(\.colorScheme, .dark)
     }
@@ -2917,13 +2915,13 @@ struct InstantFeedbackDetailView: View {
             
             Text(actionText)
                 .typography(Typography.button3)
-                .foregroundColor(Colors.textBlueLink)
+                .foregroundColor(Colors.textAccent)
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 14)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Colors.backgroundCardDark)
+                .fill(Colors.backgroundCardInverse)
         )
         .environment(\.colorScheme, .dark)
     }
@@ -2945,14 +2943,14 @@ struct InstantFeedbackDetailView: View {
         .padding(.vertical, 14)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Colors.backgroundCardDark)
+                .fill(Colors.backgroundCardInverse)
         )
         .environment(\.colorScheme, .dark)
     }
     
     private func staticFeedbackRowWithActor(message: String, initials: String) -> some View {
         HStack(spacing: 12) {
-            PDSActor(initials: initials, size: .small)
+            PDSAvatar(initials: initials, size: .small)
             
             Text(message)
                 .typography(Typography.body3)
@@ -2965,7 +2963,7 @@ struct InstantFeedbackDetailView: View {
         .padding(.vertical, 14)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.card)
-                .fill(Colors.backgroundCardDark)
+                .fill(Colors.backgroundCardInverse)
         )
         .environment(\.colorScheme, .dark)
     }
@@ -2973,7 +2971,7 @@ struct InstantFeedbackDetailView: View {
 
 // MARK: - Actor Detail View
 
-struct ActorDetailView: View {
+struct AvatarDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 48) {
@@ -2981,37 +2979,37 @@ struct ActorDetailView: View {
                 actorSection(title: "Sizes", description: "Standard size variants for different contexts") {
                     HStack(spacing: 20) {
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .xsmall)
+                            PDSAvatar(image: "sampleProfile", size: .xSmall)
                             Text("24")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .small)
+                            PDSAvatar(image: "sampleProfile", size: .small)
                             Text("32")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .medium)
+                            PDSAvatar(image: "sampleProfile", size: .medium)
                             Text("40")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .large)
+                            PDSAvatar(image: "sampleProfile", size: .large)
                             Text("56")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .xlarge)
+                            PDSAvatar(image: "sampleProfile", size: .xLarge)
                             Text("80")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -3021,30 +3019,30 @@ struct ActorDetailView: View {
                 actorSection(title: "Image Sources", description: "Different ways to display actor content") {
                     HStack(spacing: 20) {
                         VStack(spacing: 8) {
-                            PDSActor(image: "sampleProfile", size: .large)
+                            PDSAvatar(image: "sampleProfile", size: .large)
                             Text("Image")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(initials: "JD", size: .large)
+                            PDSAvatar(initials: "JD", size: .large)
                             Text("Initials")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(systemImage: "star.fill", size: .large)
+                            PDSAvatar(systemImage: "star.fill", size: .large)
                             Text("SF Symbol")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(size: .large)
+                            PDSAvatar(size: .large)
                             Text("Placeholder")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -3054,37 +3052,37 @@ struct ActorDetailView: View {
                 actorSection(title: "Badges", description: "Status indicators and notification counts") {
                     HStack(spacing: 16) {
                         VStack(spacing: 8) {
-                            PDSActor(initials: "AB", size: .large, badge: .online)
+                            PDSAvatar(initials: "AB", size: .large, badge: .online)
                             Text("Online")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(initials: "CD", size: .large, badge: .offline)
+                            PDSAvatar(initials: "CD", size: .large, badge: .offline)
                             Text("Offline")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(initials: "EF", size: .large, badge: .away)
+                            PDSAvatar(initials: "EF", size: .large, badge: .away)
                             Text("Away")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(initials: "GH", size: .large, badge: .count(5))
+                            PDSAvatar(initials: "GH", size: .large, badge: .count(5))
                             Text("Count")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSActor(initials: "IJ", size: .large, badge: .icon("checkmark"))
+                            PDSAvatar(initials: "IJ", size: .large, badge: .icon("checkmark"))
                             Text("Icon")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -3094,7 +3092,7 @@ struct ActorDetailView: View {
                 actorSection(title: "Actor Stack", description: "Overlapping avatars for group displays") {
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            PDSActorStack(urls: [nil, nil, nil], size: .medium, maxVisible: 3)
+                            PDSAvatarStack(urls: [nil, nil, nil], size: .medium, maxVisible: 3)
                             Spacer()
                             Text("3 actors")
                                 .typography(Typography.body4)
@@ -3102,7 +3100,7 @@ struct ActorDetailView: View {
                         }
                         
                         HStack {
-                            PDSActorStack(urls: [nil, nil, nil, nil, nil], size: .medium, maxVisible: 3)
+                            PDSAvatarStack(urls: [nil, nil, nil, nil, nil], size: .medium, maxVisible: 3)
                             Spacer()
                             Text("5 actors, max 3 visible")
                                 .typography(Typography.body4)
@@ -3110,7 +3108,7 @@ struct ActorDetailView: View {
                         }
                         
                         HStack {
-                            PDSActorStack(urls: Array(repeating: nil, count: 10), size: .small, maxVisible: 4)
+                            PDSAvatarStack(urls: Array(repeating: nil, count: 10), size: .small, maxVisible: 4)
                             Spacer()
                             Text("10 actors, max 4 visible")
                                 .typography(Typography.body4)
@@ -3122,7 +3120,7 @@ struct ActorDetailView: View {
             .padding(20)
         }
         .background(Colors.backgroundSurface)
-        .navigationTitle("Actor")
+        .navigationTitle("Avatar")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -3660,7 +3658,7 @@ struct ReactionBarDetailView: View {
                 reactionSection(title: "Reaction Actors", description: "Who reacted with avatars") {
                     VStack(spacing: 16) {
                         HStack {
-                            PDSReactionActors(
+                            PDSReactionAvatars(
                                 reactors: [
                                     PDSReactorInfo(name: "John", url: nil, initials: "JD"),
                                     PDSReactorInfo(name: "Jane", url: nil, initials: "JS"),
@@ -3678,7 +3676,7 @@ struct ReactionBarDetailView: View {
                         }
                         
                         HStack {
-                            PDSReactionActors(
+                            PDSReactionAvatars(
                                 reactors: [
                                     PDSReactorInfo(name: "John", url: nil, initials: "JD"),
                                     PDSReactorInfo(name: "Jane", url: nil, initials: "JS"),
@@ -3755,7 +3753,7 @@ struct ComposerDetailView: View {
                 composerSection(title: "Comment Input", description: "Compact inline input with avatar") {
                     PDSCommentInput(
                         text: $commentText,
-                        actorInitials: "JD",
+                        avatarInitials: "JD",
                         onSubmit: { commentText = "" }
                     )
                     .background(Colors.backgroundCard)
@@ -3796,8 +3794,8 @@ struct ComposerDetailView: View {
             PDSComposeSheet(
                 text: $postText,
                 isPresented: $showComposeSheet,
-                actorName: "John Doe",
-                actorInitials: "JD",
+                authorName: "John Doe",
+                avatarInitials: "JD",
                 onSubmit: { postText = "" }
             )
         }
@@ -3892,7 +3890,7 @@ struct SelectMenuDetailView: View {
                     
                     if !selectedTags.isEmpty {
                         Text("Selected: \(tags.filter { selectedTags.contains($0.id) }.map { $0.name }.joined(separator: ", "))")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -4081,7 +4079,7 @@ struct SubNavigationDetailView: View {
                         
                         if !callbackMessage.isEmpty {
                             Text(callbackMessage)
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                                 .padding(.horizontal, 16)
                         }
@@ -4164,7 +4162,7 @@ struct MediaDetailView: View {
                         ForEach([PDSMediaRatio.ratio16x9, .ratio3x2, .ratio4x3, .ratio5x4], id: \.label) { ratio in
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(ratio.label)
-                                    .typography(Typography.meta2)
+                                    .typography(Typography.caption1Emphasized)
                                     .foregroundColor(Colors.textSecondary)
                                 
                                 PDSMedia(ratio: ratio) {
@@ -4190,7 +4188,7 @@ struct MediaDetailView: View {
                         ForEach([PDSMediaRatio.ratio4x5, .ratio3x5, .ratio9x16], id: \.label) { ratio in
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(ratio.label)
-                                    .typography(Typography.meta2)
+                                    .typography(Typography.caption1Emphasized)
                                     .foregroundColor(Colors.textSecondary)
                                 
                                 PDSMedia(ratio: ratio) {
@@ -4206,7 +4204,7 @@ struct MediaDetailView: View {
                 mediaSection(title: "Custom Ratio", description: "Define any aspect ratio") {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("21:9 (Ultrawide)")
-                            .typography(Typography.meta2)
+                            .typography(Typography.caption1Emphasized)
                             .foregroundColor(Colors.textSecondary)
                         
                         PDSMedia(ratio: .custom(width: 21, height: 9)) {
@@ -4299,7 +4297,7 @@ struct MapDetailView: View {
                     HStack(spacing: 12) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Square")
-                                .typography(Typography.meta2)
+                                .typography(Typography.caption1Emphasized)
                                 .foregroundColor(Colors.textSecondary)
 
                             PDSMap(interactionModes: [], cornerRadius: CornerRadius.square)
@@ -4308,7 +4306,7 @@ struct MapDetailView: View {
 
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Media Large")
-                                .typography(Typography.meta2)
+                                .typography(Typography.caption1Emphasized)
                                 .foregroundColor(Colors.textSecondary)
 
                             PDSMap(interactionModes: [], cornerRadius: CornerRadius.mediaLarge)
@@ -4362,7 +4360,7 @@ struct ProgressDetailView: View {
                     VStack(spacing: 20) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Variants")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSProgressBar(progress: 0.65, variant: .accent)
@@ -4373,7 +4371,7 @@ struct ProgressDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Sizes")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSProgressBar(progress: 0.6, size: .small)
@@ -4383,7 +4381,7 @@ struct ProgressDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("With Label")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSProgressBar(progress: animatedProgress, showLabel: true)
@@ -4391,7 +4389,7 @@ struct ProgressDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Indeterminate")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSProgressBar(progress: 0, isIndeterminate: true)
@@ -4457,21 +4455,21 @@ struct ProgressDetailView: View {
                     VStack(spacing: 24) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("4 sections, 2 complete")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             PDSProgressStepper(totalSections: 4, completedSections: 2)
                         }
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("5 sections, 3 complete")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             PDSProgressStepper(totalSections: 5, completedSections: 3, variant: .positive)
                         }
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Interactive")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             PDSProgressStepper(totalSections: 4, completedSections: currentStep + 1)
                         }
@@ -4483,7 +4481,7 @@ struct ProgressDetailView: View {
                     VStack(alignment: .leading, spacing: 24) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Styles")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             HStack(spacing: 12) {
                                 PDSStreakIndicator(count: 14, style: .flame)
@@ -4494,7 +4492,7 @@ struct ProgressDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Sizes")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             HStack(spacing: 12) {
                                 PDSStreakIndicator(count: 14, size: .small)
@@ -4505,7 +4503,7 @@ struct ProgressDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("States")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             HStack(spacing: 12) {
                                 PDSStreakIndicator(count: 14, isActive: true)
@@ -4637,7 +4635,7 @@ struct ChartsDetailView: View {
                     VStack(spacing: 32) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Daily Activity")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSBarChart(data: [
@@ -4654,13 +4652,13 @@ struct ChartsDetailView: View {
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Skills")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textSecondary)
                             
                             PDSBarChart(data: [
-                                PDSBarChartData(label: "React", value: 4500, color: Colors.persistentAccent),
-                                PDSBarChartData(label: "Swift", value: 3200, color: Colors.persistentWarning),
-                                PDSBarChartData(label: "Python", value: 2800, color: Colors.persistentPositive),
+                                PDSBarChartData(label: "React", value: 4500, color: Colors.fixedAccent),
+                                PDSBarChartData(label: "Swift", value: 3200, color: Colors.fixedWarning),
+                                PDSBarChartData(label: "Python", value: 2800, color: Colors.fixedPositive),
                                 PDSBarChartData(label: "Go", value: 1900, color: Colors.blue400)
                             ], orientation: .horizontal)
                             .frame(height: 140)
@@ -4687,9 +4685,9 @@ struct ChartsDetailView: View {
                     VStack(spacing: 16) {
                         PDSDonutChart(
                             data: [
-                                PDSDonutChartData(label: "Food", value: 450, color: Colors.persistentAccent),
-                                PDSDonutChartData(label: "Transport", value: 280, color: Colors.persistentPositive),
-                                PDSDonutChartData(label: "Shopping", value: 320, color: Colors.persistentWarning),
+                                PDSDonutChartData(label: "Food", value: 450, color: Colors.fixedAccent),
+                                PDSDonutChartData(label: "Transport", value: 280, color: Colors.fixedPositive),
+                                PDSDonutChartData(label: "Shopping", value: 320, color: Colors.fixedWarning),
                                 PDSDonutChartData(label: "Other", value: 150, color: Colors.gray400)
                             ],
                             centerLabel: "Total",
@@ -4697,9 +4695,9 @@ struct ChartsDetailView: View {
                         )
                         
                         VStack(spacing: 8) {
-                            legendRow(color: Colors.persistentAccent, label: "Food", value: "$450")
-                            legendRow(color: Colors.persistentPositive, label: "Transport", value: "$280")
-                            legendRow(color: Colors.persistentWarning, label: "Shopping", value: "$320")
+                            legendRow(color: Colors.fixedAccent, label: "Food", value: "$450")
+                            legendRow(color: Colors.fixedPositive, label: "Transport", value: "$280")
+                            legendRow(color: Colors.fixedWarning, label: "Shopping", value: "$320")
                             legendRow(color: Colors.gray400, label: "Other", value: "$150")
                         }
                     }

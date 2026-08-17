@@ -14,7 +14,7 @@ import SwiftUI
 /// Usage:
 /// ```swift
 /// Image(systemName: "heart.fill")
-///     .font(.system(size: IconSize.md))
+///     .font(.system(size: IconSize.medium))
 ///
 /// PDSIcon(systemName: "star", size: .large)
 /// ```
@@ -23,25 +23,25 @@ struct IconSize {
     // MARK: - Base Scale
     
     /// 10pt - Extra extra small icons (badges, indicators)
-    static let xxs: CGFloat = 10
+    static let xxSmall: CGFloat = 10
     
     /// 12pt - Extra small icons (inline, compact)
-    static let xs: CGFloat = 12
+    static let xSmall: CGFloat = 12
     
     /// 14pt - Small icons (list accessories, buttons)
-    static let sm: CGFloat = 14
+    static let small: CGFloat = 14
     
     /// 16pt - Medium icons (standard UI)
-    static let md: CGFloat = 16
+    static let medium: CGFloat = 16
     
     /// 20pt - Large icons (prominent actions)
-    static let lg: CGFloat = 20
+    static let large: CGFloat = 20
     
     /// 24pt - Extra large icons (navigation, headers)
-    static let xl: CGFloat = 24
+    static let xLarge: CGFloat = 24
     
     /// 28pt - Extra extra large icons (feature icons)
-    static let xxl: CGFloat = 28
+    static let xxLarge: CGFloat = 28
     
     /// 32pt - Hero icons (empty states, onboarding)
     static let hero: CGFloat = 32
@@ -52,40 +52,40 @@ struct IconSize {
     // MARK: - Semantic Aliases
     
     /// Navigation bar icons (24pt)
-    static let navBar: CGFloat = xl
+    static let navBar: CGFloat = xLarge
     
     /// Tab bar icons (24pt)
-    static let tabBar: CGFloat = xl
+    static let tabBar: CGFloat = xLarge
     
     /// Toolbar icons (20pt)
-    static let toolbar: CGFloat = lg
+    static let toolbar: CGFloat = large
     
     /// Button icons (16pt)
-    static let button: CGFloat = md
+    static let button: CGFloat = medium
     
     /// Button icons - small buttons (12pt)
-    static let buttonSmall: CGFloat = xs
+    static let buttonSmall: CGFloat = xSmall
     
     /// List cell leading icons (20pt)
-    static let listLeading: CGFloat = lg
+    static let listLeading: CGFloat = large
     
     /// List cell trailing icons (14pt)
-    static let listTrailing: CGFloat = sm
+    static let listTrailing: CGFloat = small
     
     /// Input field icons (16pt)
-    static let input: CGFloat = md
+    static let input: CGFloat = medium
     
     /// Badge/indicator icons (10pt)
-    static let badge: CGFloat = xxs
+    static let badge: CGFloat = xxSmall
     
     /// Action chip icons (14pt)
-    static let chip: CGFloat = sm
+    static let chip: CGFloat = small
     
     /// Inline text icons (14pt)
-    static let inline: CGFloat = sm
+    static let inline: CGFloat = small
     
     /// Card action icons (20pt)
-    static let cardAction: CGFloat = lg
+    static let cardAction: CGFloat = large
     
     /// Empty state icons (48pt)
     static let emptyState: CGFloat = display
@@ -116,7 +116,7 @@ enum IconWeight {
 
 extension Image {
     /// Apply PDS icon styling
-    func pdsIcon(size: CGFloat = IconSize.md, weight: IconWeight = .medium) -> some View {
+    func pdsIcon(size: CGFloat = IconSize.medium, weight: IconWeight = .medium) -> some View {
         self
             .font(.system(size: size, weight: weight.fontWeight))
     }

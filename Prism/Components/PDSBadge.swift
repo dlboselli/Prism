@@ -37,30 +37,30 @@ enum PDSBadgeVariant {
     var backgroundColor: Color {
         switch self {
         case .neutral: return Colors.backgroundDeemphasized
-        case .accent: return Colors.persistentAccentDeemphasized
-        case .positive: return Colors.persistentPositiveDeemphasized
-        case .negative: return Colors.persistentNegativeDeemphasized
-        case .warning: return Colors.persistentWarningDeemphasized
+        case .accent: return Colors.fixedAccentDeemphasized
+        case .positive: return Colors.fixedPositiveDeemphasized
+        case .negative: return Colors.fixedNegativeDeemphasized
+        case .warning: return Colors.fixedWarningDeemphasized
         }
     }
     
     var foregroundColor: Color {
         switch self {
         case .neutral: return Colors.textSecondary
-        case .accent: return Colors.persistentAccent
-        case .positive: return Colors.persistentPositive
-        case .negative: return Colors.persistentNegative
-        case .warning: return Colors.persistentWarning
+        case .accent: return Colors.fixedAccent
+        case .positive: return Colors.fixedPositive
+        case .negative: return Colors.fixedNegative
+        case .warning: return Colors.fixedWarning
         }
     }
     
     var solidBackgroundColor: Color {
         switch self {
         case .neutral: return Colors.backgroundDeemphasized
-        case .accent: return Colors.persistentAccent
-        case .positive: return Colors.persistentPositive
-        case .negative: return Colors.persistentNegative
-        case .warning: return Colors.persistentWarning
+        case .accent: return Colors.fixedAccent
+        case .positive: return Colors.fixedPositive
+        case .negative: return Colors.fixedNegative
+        case .warning: return Colors.fixedWarning
         }
     }
     
@@ -81,8 +81,8 @@ enum PDSBadgeSize {
     
     var font: Typography.Style {
         switch self {
-        case .small: return Typography.meta2   // 13pt semibold
-        case .medium: return Typography.meta2  // 13pt semibold
+        case .small: return Typography.caption1Emphasized   // 13pt semibold
+        case .medium: return Typography.caption1Emphasized  // 13pt semibold
         case .large: return Typography.button2 // 15pt semibold
         }
     }

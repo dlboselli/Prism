@@ -81,7 +81,7 @@ struct PDSComment: View {
         HStack(alignment: .top, spacing: 12) {
             // Author avatar
             Button(action: { onAuthorTap?() }) {
-                PDSActor(
+                PDSAvatar(
                     url: authorURL,
                     fallbackInitials: authorInitials ?? String(authorName.prefix(2)),
                     size: .small
@@ -103,14 +103,14 @@ struct PDSComment: View {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.system(size: 12))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.fixedAccent)
                     }
                     
                     Text("·")
                         .foregroundColor(Colors.textSecondary)
                     
                     Text(timestamp)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
@@ -141,11 +141,11 @@ struct PDSComment: View {
                         HStack(spacing: 4) {
                             Image(systemName: isLiked ? "heart.fill" : "heart")
                                 .font(.system(size: 14))
-                                .foregroundColor(isLiked ? Colors.persistentNegative : Colors.iconSecondary)
+                                .foregroundColor(isLiked ? Colors.fixedNegative : Colors.iconSecondary)
 
                             if likeCount > 0 {
                                 Text("\(likeCount)")
-                                    .typography(Typography.meta4)
+                                    .typography(Typography.caption2)
                                     .foregroundColor(Colors.textSecondary)
                             }
                         }
@@ -162,7 +162,7 @@ struct PDSComment: View {
                                 .foregroundColor(Colors.iconSecondary)
                             
                             Text("Reply")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -193,8 +193,8 @@ struct PDSCommentThread: View {
             if !replies.isEmpty {
                 Button(action: { onToggleReplies?() }) {
                     Text(showReplies ? "Hide replies" : "View \(replies.count) \(replies.count == 1 ? "reply" : "replies")")
-                        .typography(Typography.meta4Link)
-                        .foregroundColor(Colors.textBlueLink)
+                        .typography(Typography.caption2Emphasized)
+                        .foregroundColor(Colors.textAccent)
                 }
                 .buttonStyle(.plain)
                 .padding(.leading, 44)

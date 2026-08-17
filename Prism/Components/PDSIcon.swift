@@ -4,20 +4,20 @@ import SwiftUI
 
 /// Standard icon sizes aligned with the design system
 enum PDSIconSize {
-    case extraSmall  // 12pt - inline text, badges
+    case xSmall  // 12pt - inline text, badges
     case small       // 16pt - compact UI, chips
     case medium      // 20pt - standard UI elements
     case large       // 24pt - prominent actions (default)
-    case extraLarge  // 32pt - featured icons
+    case xLarge  // 32pt - featured icons
     case display     // 48pt - empty states, onboarding
     
     var pointSize: CGFloat {
         switch self {
-        case .extraSmall: return 12
+        case .xSmall: return 12
         case .small: return 16
         case .medium: return 20
         case .large: return 24
-        case .extraLarge: return 32
+        case .xLarge: return 32
         case .display: return 48
         }
     }
@@ -25,9 +25,9 @@ enum PDSIconSize {
     /// Recommended font weight for each size
     var weight: Font.Weight {
         switch self {
-        case .extraSmall, .small: return .medium
+        case .xSmall, .small: return .medium
         case .medium, .large: return .regular
-        case .extraLarge, .display: return .light
+        case .xLarge, .display: return .light
         }
     }
 }
@@ -128,13 +128,13 @@ struct PDSIcon: View {
         case .disabled:
             return Colors.iconDisabled
         case .accent:
-            return Colors.persistentAccent
+            return Colors.fixedAccent
         case .positive:
-            return Colors.persistentPositive
+            return Colors.fixedPositive
         case .negative:
-            return Colors.persistentNegative
+            return Colors.fixedNegative
         case .warning:
-            return Colors.persistentWarning
+            return Colors.fixedWarning
         case .primaryOnColor:
             return Colors.iconPrimaryOnColor
         case .secondaryOnColor:
@@ -330,44 +330,44 @@ extension View {
                 
                 HStack(spacing: 24) {
                     VStack(spacing: 8) {
-                        PDSIcon(systemName: "heart.fill", size: .extraSmall)
+                        PDSIcon(systemName: "heart.fill", size: .xSmall)
                         Text("XS 12pt")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon(systemName: "heart.fill", size: .small)
                         Text("S 16pt")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon(systemName: "heart.fill", size: .medium)
                         Text("M 20pt")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon(systemName: "heart.fill", size: .large)
                         Text("L 24pt")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
-                        PDSIcon(systemName: "heart.fill", size: .extraLarge)
+                        PDSIcon(systemName: "heart.fill", size: .xLarge)
                         Text("XL 32pt")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon(systemName: "heart.fill", size: .display)
                         Text("Display")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -392,56 +392,56 @@ extension View {
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "star.fill", variant: .primary)
                         Text("Primary")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "star.fill", variant: .secondary)
                         Text("Secondary")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "star.fill", variant: .accent)
                         Text("Accent")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "star.fill", variant: .disabled)
                         Text("Disabled")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "checkmark.circle.fill", variant: .positive)
                         Text("Positive")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "xmark.circle.fill", variant: .negative)
                         Text("Negative")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "exclamationmark.triangle.fill", variant: .warning)
                         Text("Warning")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 4) {
                         PDSIcon(systemName: "star.fill", variant: .placeholder)
                         Text("Placeholder")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -461,40 +461,40 @@ extension View {
                     VStack(spacing: 8) {
                         PDSIcon(
                             systemName: "cloud.sun.rain.fill",
-                            size: .extraLarge,
+                            size: .xLarge,
                             renderingMode: .monochrome
                         )
                         Text("Mono")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon(
                             systemName: "cloud.sun.rain.fill",
-                            size: .extraLarge,
+                            size: .xLarge,
                             renderingMode: .hierarchical
                         )
                         Text("Hierarchical")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
                         PDSIcon.palette(
                             "cloud.sun.rain.fill",
-                            size: .extraLarge,
-                            colors: [Colors.persistentAccent, Colors.persistentWarning, Colors.gray600]
+                            size: .xLarge,
+                            colors: [Colors.fixedAccent, Colors.fixedWarning, Colors.gray600]
                         )
                         Text("Palette")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
                     VStack(spacing: 8) {
-                        PDSIcon.multicolor("cloud.sun.rain.fill", size: .extraLarge)
+                        PDSIcon.multicolor("cloud.sun.rain.fill", size: .xLarge)
                         Text("Multicolor")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -511,17 +511,17 @@ extension View {
                     .foregroundColor(Colors.textPrimary)
                 
                 HStack(spacing: 24) {
-                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.0, size: .extraLarge)
-                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.33, size: .extraLarge)
-                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.66, size: .extraLarge)
-                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 1.0, size: .extraLarge)
+                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.0, size: .xLarge)
+                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.33, size: .xLarge)
+                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 0.66, size: .xLarge)
+                    PDSVariableIcon(systemName: "speaker.wave.3.fill", value: 1.0, size: .xLarge)
                 }
                 
                 HStack(spacing: 24) {
-                    PDSVariableIcon(systemName: "wifi", value: 0.0, size: .extraLarge)
-                    PDSVariableIcon(systemName: "wifi", value: 0.33, size: .extraLarge)
-                    PDSVariableIcon(systemName: "wifi", value: 0.66, size: .extraLarge)
-                    PDSVariableIcon(systemName: "wifi", value: 1.0, size: .extraLarge)
+                    PDSVariableIcon(systemName: "wifi", value: 0.0, size: .xLarge)
+                    PDSVariableIcon(systemName: "wifi", value: 0.33, size: .xLarge)
+                    PDSVariableIcon(systemName: "wifi", value: 0.66, size: .xLarge)
+                    PDSVariableIcon(systemName: "wifi", value: 1.0, size: .xLarge)
                 }
             }
             
@@ -550,14 +550,14 @@ extension View {
                         VStack(spacing: 8) {
                             PDSIcon(systemName: "heart.fill", size: .large, variant: .primaryOnMedia)
                             Text("Primary")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textPrimaryOnMedia)
                         }
                         
                         VStack(spacing: 8) {
                             PDSIcon(systemName: "heart.fill", size: .large, variant: .secondaryOnMedia)
                             Text("Secondary")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondaryOnMedia)
                         }
                     }
@@ -633,7 +633,7 @@ struct AnimatedIconsPreview: View {
                         } label: {
                             PDSAnimatedIcon(
                                 systemName: "heart",
-                                size: .extraLarge,
+                                size: .xLarge,
                                 variant: .secondary,
                                 isActive: likeCount > 0,
                                 activeSymbolName: "heart.fill",
@@ -648,7 +648,7 @@ struct AnimatedIconsPreview: View {
                         } label: {
                             PDSAnimatedIcon(
                                 systemName: "bookmark",
-                                size: .extraLarge,
+                                size: .xLarge,
                                 variant: .secondary,
                                 isActive: isActive,
                                 activeSymbolName: "bookmark.fill",
@@ -658,7 +658,7 @@ struct AnimatedIconsPreview: View {
                     }
                     
                     Text("Tap icons to toggle state")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
                 
@@ -674,26 +674,26 @@ struct AnimatedIconsPreview: View {
                     
                     HStack(spacing: 32) {
                         VStack(spacing: 8) {
-                            PDSIcon(systemName: "bell.fill", size: .extraLarge)
+                            PDSIcon(systemName: "bell.fill", size: .xLarge)
                                 .pdsSymbolEffect(.bounce, isActive: isActive)
                             Text("Bounce")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSIcon(systemName: "heart.fill", size: .extraLarge, variant: .negative)
+                            PDSIcon(systemName: "heart.fill", size: .xLarge, variant: .negative)
                                 .pdsSymbolEffect(.pulse, isActive: isActive)
                             Text("Pulse")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
                         VStack(spacing: 8) {
-                            PDSIcon(systemName: "wifi", size: .extraLarge, renderingMode: .hierarchical)
+                            PDSIcon(systemName: "wifi", size: .xLarge, renderingMode: .hierarchical)
                                 .pdsSymbolEffect(.variableColor, isActive: isActive)
                             Text("Variable")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }

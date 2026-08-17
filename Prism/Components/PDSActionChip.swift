@@ -28,7 +28,7 @@
 //
 //  // Author chip with avatar
 //  Button("John Doe") { }
-//      .pdsAuthorChip(actorInitials: "JD", name: "John Doe")
+//      .pdsAuthorChip(avatarInitials: "JD", name: "John Doe")
 //  ```
 //
 
@@ -95,7 +95,7 @@ struct PDSActionChipStyle: ButtonStyle {
             switch context {
             case .standard:
                 // Selected: blue text on light blue (light mode), black text on white (dark mode)
-                return Color(light: Colors.accentText, dark: Colors.gray950)
+                return Color(light: Colors.textAccent, dark: Colors.gray950)
             case .onColor, .onMedia:
                 // Selected on color/media: black text on white background
                 return Colors.gray950
@@ -118,7 +118,7 @@ struct PDSActionChipStyle: ButtonStyle {
         switch context {
         case .standard:
             if isSelected {
-                let selectedBg = Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+                let selectedBg = Color(light: Colors.fixedAccentDeemphasized, dark: Colors.white)
                 return isPressed ? selectedBg.opacity(0.7) : selectedBg
             }
             // Unselected: transparent background
@@ -145,12 +145,12 @@ struct PDSActionChipStyle: ButtonStyle {
 struct PDSDismissibleChipStyle: ButtonStyle {
     // Light: accent text, Dark: black (for white background)
     private var foregroundColor: Color {
-        Color(light: Colors.accentText, dark: Colors.gray950)
+        Color(light: Colors.textAccent, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
     private var bgColor: Color {
-        Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+        Color(light: Colors.fixedAccentDeemphasized, dark: Colors.white)
     }
     
     func makeBody(configuration: Configuration) -> some View {
@@ -179,28 +179,28 @@ struct PDSDismissibleChipStyle: ButtonStyle {
 /// Author chip style - includes actor avatar with name
 struct PDSAuthorChipStyle: ButtonStyle {
     var actorURL: URL? = nil
-    var actorInitials: String? = nil
+    var avatarInitials: String? = nil
     var isSelected: Bool = false
     
     // Selected text: blue (light mode), black (dark mode for white background)
     private var selectedTextColor: Color {
-        Color(light: Colors.accentText, dark: Colors.gray950)
+        Color(light: Colors.textAccent, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
     private var selectedBgColor: Color {
-        Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+        Color(light: Colors.fixedAccentDeemphasized, dark: Colors.white)
     }
     
     func makeBody(configuration: Configuration) -> some View {
         HStack(spacing: 8) {
             // Actor avatar
             if let url = actorURL {
-                PDSActor(url: url, size: .xsmall)
-            } else if let initials = actorInitials {
-                PDSActor(initials: initials, size: .xsmall)
+                PDSAvatar(url: url, size: .xSmall)
+            } else if let initials = avatarInitials {
+                PDSAvatar(initials: initials, size: .xSmall)
             } else {
-                PDSActor(size: .xsmall)
+                PDSAvatar(size: .xSmall)
             }
             
             configuration.label
@@ -245,12 +245,12 @@ struct PDSEmojiChipStyle: ButtonStyle {
     
     // Light: accent text, Dark: black (for white background)
     private var selectedTextColor: Color {
-        Color(light: Colors.accentText, dark: Colors.gray950)
+        Color(light: Colors.textAccent, dark: Colors.gray950)
     }
     
     // Light: light blue, Dark: white
     private var selectedBgColor: Color {
-        Color(light: Colors.persistentAccentDeemphasized, dark: Colors.white)
+        Color(light: Colors.fixedAccentDeemphasized, dark: Colors.white)
     }
     
     func makeBody(configuration: Configuration) -> some View {
@@ -260,7 +260,7 @@ struct PDSEmojiChipStyle: ButtonStyle {
             
             if let count = count, count > 0 {
                 Text("\(count)")
-                    .typography(isSelected ? Typography.button3 : Typography.meta3)
+                    .typography(isSelected ? Typography.button3 : Typography.caption1)
                     .foregroundColor(isSelected ? selectedTextColor : Colors.textSecondary)
             }
         }
@@ -307,12 +307,12 @@ extension View {
     /// Applies PDS author chip style with actor avatar
     func pdsAuthorChip(
         actorURL: URL? = nil,
-        actorInitials: String? = nil,
+        avatarInitials: String? = nil,
         isSelected: Bool = false
     ) -> some View {
         self.buttonStyle(PDSAuthorChipStyle(
             actorURL: actorURL,
-            actorInitials: actorInitials,
+            avatarInitials: avatarInitials,
             isSelected: isSelected
         ))
     }
@@ -415,13 +415,13 @@ extension View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     Button("John Doe") { }
-                        .pdsAuthorChip(actorInitials: "JD", isSelected: true)
+                        .pdsAuthorChip(avatarInitials: "JD", isSelected: true)
                     
                     Button("Jane Smith") { }
-                        .pdsAuthorChip(actorInitials: "JS")
+                        .pdsAuthorChip(avatarInitials: "JS")
                     
                     Button("Alex Chen") { }
-                        .pdsAuthorChip(actorInitials: "AC")
+                        .pdsAuthorChip(avatarInitials: "AC")
                 }
             }
         }

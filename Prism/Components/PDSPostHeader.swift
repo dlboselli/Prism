@@ -100,7 +100,7 @@ struct PDSPostHeader: View {
         HStack(alignment: .center, spacing: 12) {
             // Author avatar
             Button(action: { onAuthorTap?() }) {
-                PDSActor(
+                PDSAvatar(
                     url: authorURL,
                     fallbackInitials: authorInitials ?? String(authorName.prefix(2)),
                     size: .medium
@@ -123,14 +123,14 @@ struct PDSPostHeader: View {
                         Image(systemName: "checkmark.seal.fill")
                             .font(.system(size: 14))
                             .symbolRenderingMode(.palette)
-                            .foregroundStyle(.white, Colors.persistentAccent)
+                            .foregroundStyle(.white, Colors.fixedAccent)
                     }
                 }
                 
                 // Subtitle (e.g., "is with John Doe at Location")
                 if let subtitle = subtitle {
                     Text(subtitle)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                         .lineLimit(1)
                 }
@@ -138,7 +138,7 @@ struct PDSPostHeader: View {
                 // Timestamp, privacy, and sponsored
                 HStack(spacing: 4) {
                     Text(timestamp)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textSecondary)
                     
                     if let privacy = privacy {
@@ -155,7 +155,7 @@ struct PDSPostHeader: View {
                             .foregroundColor(Colors.textSecondary)
                         
                         Text("Sponsored")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -223,7 +223,7 @@ struct PDSPostHeaderCompact: View {
     var body: some View {
         HStack(spacing: 8) {
             Button(action: { onAuthorTap?() }) {
-                PDSActor(
+                PDSAvatar(
                     url: authorURL,
                     fallbackInitials: authorInitials ?? String(authorName.prefix(2)),
                     size: .small
@@ -243,14 +243,14 @@ struct PDSPostHeaderCompact: View {
                     Image(systemName: "checkmark.seal.fill")
                         .font(.system(size: 12))
                         .symbolRenderingMode(.palette)
-                        .foregroundStyle(.white, Colors.persistentAccent)
+                        .foregroundStyle(.white, Colors.fixedAccent)
                 }
                 
                 Text("·")
                     .foregroundColor(Colors.textSecondary)
                 
                 Text(timestamp)
-                    .typography(Typography.meta4)
+                    .typography(Typography.caption2)
                     .foregroundColor(Colors.textSecondary)
             }
         }

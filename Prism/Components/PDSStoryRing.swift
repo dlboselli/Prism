@@ -20,7 +20,7 @@ struct PDSStoryRing: View {
     let image: String?
     let name: String?
     let isViewed: Bool
-    let size: PDSActorSize
+    let size: PDSAvatarSize
     let onTap: (() -> Void)?
 
     init(
@@ -28,7 +28,7 @@ struct PDSStoryRing: View {
         image: String? = nil,
         name: String? = nil,
         isViewed: Bool = false,
-        size: PDSActorSize = .large,
+        size: PDSAvatarSize = .large,
         onTap: (() -> Void)? = nil
     ) {
         self.initials = initials
@@ -40,7 +40,7 @@ struct PDSStoryRing: View {
     }
 
     private var ringColor: Color {
-        isViewed ? Colors.backgroundDivider : Colors.persistentAccent
+        isViewed ? Colors.backgroundDivider : Colors.fixedAccent
     }
 
     var body: some View {
@@ -55,7 +55,7 @@ struct PDSStoryRing: View {
 
                 if let name = name {
                     Text(name)
-                        .typography(Typography.meta4)
+                        .typography(Typography.caption2)
                         .foregroundColor(Colors.textPrimary)
                         .lineLimit(1)
                 }
@@ -70,9 +70,9 @@ struct PDSStoryRing: View {
     @ViewBuilder
     private var avatar: some View {
         if let image = image {
-            PDSActor(image: image, size: size)
+            PDSAvatar(image: image, size: size)
         } else {
-            PDSActor(initials: initials ?? "?", size: size)
+            PDSAvatar(initials: initials ?? "?", size: size)
         }
     }
 }

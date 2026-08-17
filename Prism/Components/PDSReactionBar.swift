@@ -151,7 +151,7 @@ struct PDSReactionBar: View {
                 if commentCount > 0 {
                     Button(action: { onCommentsTap?() }) {
                         Text("\(commentCount) \(commentCount == 1 ? "comment" : "comments")")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                     }
                     .buttonStyle(.plain)
@@ -160,7 +160,7 @@ struct PDSReactionBar: View {
                 if shareCount > 0 {
                     Button(action: { onSharesTap?() }) {
                         Text("\(shareCount) \(shareCount == 1 ? "share" : "shares")")
-                            .typography(Typography.meta3)
+                            .typography(Typography.caption1)
                             .foregroundColor(Colors.textSecondary)
                     }
                     .buttonStyle(.plain)
@@ -189,26 +189,26 @@ struct PDSReactionBar: View {
             
             if remaining > 0 {
                 Text("\(names.joined(separator: ", ")) and \(remaining) \(remaining == 1 ? "other" : "others")")
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             } else {
                 Text(names.joined(separator: " and "))
-                    .typography(Typography.meta3)
+                    .typography(Typography.caption1)
                     .foregroundColor(Colors.textSecondary)
             }
         } else {
             // Just show count
             Text("\(summary.totalCount)")
-                .typography(Typography.meta3)
+                .typography(Typography.caption1)
                 .foregroundColor(Colors.textSecondary)
         }
     }
 }
 
-// MARK: - PDSReactionActors
+// MARK: - PDSReactionAvatars
 
 /// Shows who reacted with their avatars
-struct PDSReactionActors: View {
+struct PDSReactionAvatars: View {
     let reactors: [PDSReactorInfo]
     let totalCount: Int
     let maxVisible: Int
@@ -232,16 +232,16 @@ struct PDSReactionActors: View {
     var body: some View {
         Button(action: { onTap?() }) {
             HStack(spacing: 4) {
-                PDSActorStack(
+                PDSAvatarStack(
                     urls: reactors.prefix(maxVisible).map { $0.url },
-                    size: .xsmall,
+                    size: .xSmall,
                     maxVisible: maxVisible,
                     borderColor: borderColor
                 )
                 
                 if totalCount > maxVisible {
                     Text("+\(totalCount - maxVisible)")
-                        .typography(Typography.meta3)
+                        .typography(Typography.caption1)
                         .foregroundColor(Colors.textSecondary)
                 }
             }
@@ -471,7 +471,7 @@ struct PDSPostActions: View {
                 
                 Text(label)
                     .typography(Typography.button3)
-                    .foregroundColor(isActive ? Colors.textBlueLink : Colors.textSecondary)
+                    .foregroundColor(isActive ? Colors.textAccent : Colors.textSecondary)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)

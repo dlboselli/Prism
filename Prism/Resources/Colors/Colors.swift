@@ -33,21 +33,22 @@ struct Colors {
     // MARK: - Semantic Colors
     // ═══════════════════════════════════════════════════════════════════════════
     
-    // MARK: Persistent (Status)
-    
-    static var persistentAccent: Color { Color(light: accent600, dark: accent600) }
-    static var persistentAccentDeemphasized: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
-    static var accentText: Color { Color(light: accent500, dark: accent400) }
-    static var persistentAlwaysBlack: Color { black }
-    static var persistentAlwaysBlackOverlay: Color { black.opacity(0.4) }
-    static var persistentAlwaysTransparent: Color { .clear }
-    static var persistentAlwaysWhite: Color { white }
-    static var persistentNegative: Color { Color(light: red600, dark: red600) }
-    static var persistentNegativeDeemphasized: Color { Color(light: red100, dark: red600.opacity(0.2)) }
-    static var persistentPositive: Color { Color(light: green600, dark: green600) }
-    static var persistentPositiveDeemphasized: Color { Color(light: green100, dark: green600.opacity(0.2)) }
-    static var persistentWarning: Color { Color(light: yellow600, dark: yellow600) }
-    static var persistentWarningDeemphasized: Color { Color(light: yellow100, dark: yellow600.opacity(0.2)) }
+    // MARK: Fixed (Status)
+    // Fixed colors render the same in light and dark mode
+
+    static var fixedAccent: Color { Color(light: accent600, dark: accent600) }
+    static var fixedAccentDeemphasized: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
+    static var textAccent: Color { Color(light: accent500, dark: accent400) }
+    static var fixedBlack: Color { black }
+    static var fixedBlackOverlay: Color { black.opacity(0.4) }
+    static var fixedTransparent: Color { .clear }
+    static var fixedWhite: Color { white }
+    static var fixedNegative: Color { Color(light: red600, dark: red600) }
+    static var fixedNegativeDeemphasized: Color { Color(light: red100, dark: red600.opacity(0.2)) }
+    static var fixedPositive: Color { Color(light: green600, dark: green600) }
+    static var fixedPositiveDeemphasized: Color { Color(light: green100, dark: green600.opacity(0.2)) }
+    static var fixedWarning: Color { Color(light: yellow600, dark: yellow600) }
+    static var fixedWarningDeemphasized: Color { Color(light: yellow100, dark: yellow600.opacity(0.2)) }
     
     // MARK: Text
     
@@ -63,7 +64,6 @@ struct Colors {
     static var textDisabled: Color { Color(light: gray400, dark: gray500) }
     static var textDisabledOnColor: Color { white.opacity(0.9) }
     static var textDisabledOnMedia: Color { white.opacity(0.5) }
-    static var textBlueLink: Color { Color(light: blue500, dark: blue500) }
     static var textLinkOnColor: Color { white }
     static var textLinkOnMedia: Color { white }
     
@@ -86,10 +86,10 @@ struct Colors {
     
     static var backgroundSurface: Color { Color(light: white, dark: gray900) }
     static var backgroundDeemphasized: Color { Color(light: gray100, dark: white.opacity(0.1)) }
-    static var backgroundWash: Color { Color(light: gray200, dark: gray950) }
+    static var backgroundCanvas: Color { Color(light: gray200, dark: gray950) }
     static var backgroundCard: Color { Color(light: white, dark: gray800) }
     static var backgroundCardFlat: Color { Color(light: gray50, dark: gray800) }
-    static var backgroundCardDark: Color { gray800 }
+    static var backgroundCardInverse: Color { gray800 }
     static var backgroundCardOnColor: Color { white.opacity(0.15) }
     static var backgroundCardOnMedia: Color { gray900.opacity(0.6) }
     static var backgroundCardOnMediaExtraLight: Color { black.opacity(0.2) }
@@ -111,11 +111,11 @@ struct Colors {
     static var elevationBorderEmphasisOnMedia: Color { black.opacity(0.1) }
     static var elevationBorderFocus: Color { Color(light: gray950.opacity(0.15), dark: white.opacity(0.05)) }
     static var elevationCardBorder: Color { .clear }
-    static var elevationInstantFeedbackBorder: Color { .clear }
+    static var elevationBannerBorder: Color { .clear }
     static var elevationCardShadowLight: Color { Color(light: black.opacity(0.05), dark: black.opacity(0.1)) }
     static var elevationCardShadowMedium: Color { Color(light: black.opacity(0.05), dark: black.opacity(0.1)) }
     static var elevationCardShadowStrong: Color { Color(light: black.opacity(0.1), dark: black.opacity(0.15)) }
-    static var elevationInstantFeedbackShadow: Color { Color(light: black.opacity(0.05), dark: black.opacity(0.1)) }
+    static var elevationBannerShadow: Color { Color(light: black.opacity(0.05), dark: black.opacity(0.1)) }
     static var elevationPersistentCtaShadow: Color { Color(light: black.opacity(0.1), dark: black.opacity(0.15)) }
     static var elevationShadowPersistent: Color { Color(light: black.opacity(0.1), dark: black.opacity(0.3)) }
     static var elevationShadowResponsive: Color { black.opacity(0.1) }
@@ -125,62 +125,65 @@ struct Colors {
     
     // MARK: Data Visualization
     
-    static var datavizBluePrimary: Color { blue500 }
-    static var datavizBlueSecondary: Color { Color(light: blue700, dark: blue100) }
+    static var datavizPrimary: Color { blue500 }
+    static var datavizSecondary: Color { Color(light: blue700, dark: blue100) }
     
     // ═══════════════════════════════════════════════════════════════════════════
     // MARK: - Component Colors
     // ═══════════════════════════════════════════════════════════════════════════
     
-    // Primary Button
-    static var primaryButtonBackground: Color { accent600 }
-    static var primaryButtonBackgroundPressed: Color { Color(light: accent700, dark: accent600) }
-    static var primaryButtonBackgroundOnColor: Color { white }
-    static var primaryButtonOnMedia: Color { white }
-    static var primaryButtonIcon: Color { white }
-    static var primaryButtonIconOnColor: Color { black }
-    static var primaryButtonIconOnMedia: Color { gray950 }
-    static var primaryButtonText: Color { white }
-    static var primaryButtonTextOnColor: Color { black }
-    static var primaryButtonTextOnMedia: Color { gray950 }
-    
-    // Primary Deemphasized Button
-    static var primaryDeemphasizedButtonBackground: Color { Color(light: accent100, dark: accent600.opacity(0.2)) }
-    static var primaryDeemphasizedButtonIcon: Color { persistentAccent }
-    static var primaryDeemphasizedButtonText: Color { accentText }
-    
-    // Secondary Button
-    static var secondaryButtonBackground: Color { Color(light: gray100, dark: white.opacity(0.1)) }
-    static var secondaryButtonBackgroundOnColor: Color { black.opacity(0.15) }
-    static var secondaryButtonBackgroundOnMedia: Color { gray900.opacity(0.6) }
-    static var secondaryButtonBackgroundFloating: Color { Color(light: white, dark: gray700) }
-    static var secondaryButtonIcon: Color { Color(light: gray950, dark: gray100) }
-    static var secondaryButtonIconOnColor: Color { white }
-    static var secondaryButtonIconOnMedia: Color { white }
-    static var secondaryButtonText: Color { Color(light: gray950, dark: gray100) }
-    static var secondaryButtonTextOnColor: Color { white }
-    static var secondaryButtonTextOnMedia: Color { white }
-    
-    // Destructive Button
-    static var destructiveButtonBackground: Color { persistentNegative }
-    static var destructiveButtonBackgroundPressed: Color { Color(light: red700, dark: red700) }
-    static var destructiveButtonText: Color { white }
-    
-    // Destructive Deemphasized Button
-    static var destructiveDeemphasizedButtonBackground: Color { Color(light: red100, dark: red600.opacity(0.2)) }
-    static var destructiveDeemphasizedButtonText: Color { Color(light: red600, dark: red300) }
-    
-    // Warning Button
-    static var warningButtonBackground: Color { persistentWarning }
-    static var warningButtonBackgroundPressed: Color { Color(light: yellow700, dark: yellow700) }
-    static var warningButtonText: Color { white }
-    
-    // Warning Deemphasized Button
-    static var warningDeemphasizedButtonBackground: Color { Color(light: yellow100, dark: yellow600.opacity(0.2)) }
-    static var warningDeemphasizedButtonText: Color { Color(light: yellow600, dark: yellow300) }
-    
-    // Disabled Button
-    static var disabledButtonBackground: Color { Color(light: gray200, dark: white.opacity(0.1)) }
+    /// Button colors, grouped by variant
+    struct Button {
+        // Primary
+        static var primaryBackground: Color { Colors.accent600 }
+        static var primaryBackgroundPressed: Color { Color(light: Colors.accent700, dark: Colors.accent600) }
+        static var primaryBackgroundOnColor: Color { Colors.white }
+        static var primaryOnMedia: Color { Colors.white }
+        static var primaryIcon: Color { Colors.white }
+        static var primaryIconOnColor: Color { Colors.black }
+        static var primaryIconOnMedia: Color { Colors.gray950 }
+        static var primaryText: Color { Colors.white }
+        static var primaryTextOnColor: Color { Colors.black }
+        static var primaryTextOnMedia: Color { Colors.gray950 }
+
+        // Primary Deemphasized
+        static var primaryDeemphasizedBackground: Color { Color(light: Colors.accent100, dark: Colors.accent600.opacity(0.2)) }
+        static var primaryDeemphasizedIcon: Color { Colors.fixedAccent }
+        static var primaryDeemphasizedText: Color { Colors.textAccent }
+
+        // Secondary
+        static var secondaryBackground: Color { Color(light: Colors.gray100, dark: Colors.white.opacity(0.1)) }
+        static var secondaryBackgroundOnColor: Color { Colors.black.opacity(0.15) }
+        static var secondaryBackgroundOnMedia: Color { Colors.gray900.opacity(0.6) }
+        static var secondaryBackgroundFloating: Color { Color(light: Colors.white, dark: Colors.gray700) }
+        static var secondaryIcon: Color { Color(light: Colors.gray950, dark: Colors.gray100) }
+        static var secondaryIconOnColor: Color { Colors.white }
+        static var secondaryIconOnMedia: Color { Colors.white }
+        static var secondaryText: Color { Color(light: Colors.gray950, dark: Colors.gray100) }
+        static var secondaryTextOnColor: Color { Colors.white }
+        static var secondaryTextOnMedia: Color { Colors.white }
+
+        // Destructive
+        static var destructiveBackground: Color { Colors.fixedNegative }
+        static var destructiveBackgroundPressed: Color { Color(light: Colors.red700, dark: Colors.red700) }
+        static var destructiveText: Color { Colors.white }
+
+        // Destructive Deemphasized
+        static var destructiveDeemphasizedBackground: Color { Color(light: Colors.red100, dark: Colors.red600.opacity(0.2)) }
+        static var destructiveDeemphasizedText: Color { Color(light: Colors.red600, dark: Colors.red300) }
+
+        // Warning
+        static var warningBackground: Color { Colors.fixedWarning }
+        static var warningBackgroundPressed: Color { Color(light: Colors.yellow700, dark: Colors.yellow700) }
+        static var warningText: Color { Colors.white }
+
+        // Warning Deemphasized
+        static var warningDeemphasizedBackground: Color { Color(light: Colors.yellow100, dark: Colors.yellow600.opacity(0.2)) }
+        static var warningDeemphasizedText: Color { Color(light: Colors.yellow600, dark: Colors.yellow300) }
+
+        // Disabled
+        static var disabledBackground: Color { Color(light: Colors.gray200, dark: Colors.white.opacity(0.1)) }
+    }
     
     // Text Input
     static var textInputActiveInnerBorder: Color { Color(light: accent600, dark: accent500) }
@@ -212,25 +215,25 @@ struct Colors {
     static var tooltipText: Color { Color(light: gray200, dark: gray950) }
     
     // Indicators
-    static var stepperActive: Color { persistentAccent }
+    static var stepperActive: Color { fixedAccent }
     static var stepperInactive: Color { Color(light: gray200, dark: gray700) }
-    static var activeDot: Color { persistentAccent }
+    static var activeDot: Color { fixedAccent }
     static var activeDotOnColor: Color { white }
     static var activeDotOnMedia: Color { white }
     static var inactiveDot: Color { Color(light: gray300, dark: gray600) }
     static var inactiveDotOnColor: Color { white.opacity(0.5) }
     static var inactiveDotOnMedia: Color { white.opacity(0.5) }
-    static var dotBadgeBlue: Color { persistentAccent }
+    static var dotBadgeBlue: Color { fixedAccent }
     static var ratingStarActive: Color { Color(light: yellow400, dark: yellow300) }
     static var ratingStarActiveOnColor: Color { white }
     static var ratingStarActiveOnMedia: Color { white }
     
     // Actor (Profile Photos)
-    static var actorPlaceholderBackground: Color { Color(light: gray200, dark: gray700) }
-    static var actorInitialsBackground: Color { persistentAccent }
-    static var actorOnlineIndicator: Color { Color(light: green500, dark: green400) }
-    static var actorOfflineIndicator: Color { Color(light: gray400, dark: gray500) }
-    static var actorBadgeBackground: Color { persistentAccent }
+    static var avatarPlaceholderBackground: Color { Color(light: gray200, dark: gray700) }
+    static var actorInitialsBackground: Color { fixedAccent }
+    static var avatarOnlineIndicator: Color { Color(light: green500, dark: green400) }
+    static var avatarOfflineIndicator: Color { Color(light: gray400, dark: gray500) }
+    static var actorBadgeBackground: Color { fixedAccent }
     
     // Miscellaneous
     static var bottomSheetHandle: Color { Color(light: gray300, dark: gray600) }
@@ -242,8 +245,8 @@ struct Colors {
     static var optimisticPostTint: Color { white.opacity(0.6) }
     static var placeholderImage: Color { Color(light: gray200, dark: gray700) }
     static var mapHighlightBackground: Color { Color(light: accent100, dark: accent800) }
-    static var mapHighlightBorder: Color { persistentAccent }
-    static var ufiTrayIconButtonBackground: Color { Color(light: gray100, dark: gray800) }
+    static var mapHighlightBorder: Color { fixedAccent }
+    static var reactionTrayIconBackground: Color { Color(light: gray100, dark: gray800) }
     
     static var overlayScrim: Color { Color(light: black.opacity(0.6), dark: black.opacity(0.8)) }
     static var tabBarBackground: Color { backgroundNavBar }

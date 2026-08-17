@@ -74,7 +74,7 @@ struct PDSSubNavigationBar: View {
             
             if let badge = item.badge, badge > 0 {
                 Text("\(badge)")
-                    .typography(Typography.meta4)
+                    .typography(Typography.caption2)
                     .foregroundColor(badgeTextColor(isSelected: isSelected))
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
@@ -96,7 +96,7 @@ struct PDSSubNavigationBar: View {
     private func standardForegroundColor(isSelected: Bool) -> Color {
         switch context {
         case .surface:
-            return isSelected ? Colors.primaryDeemphasizedButtonText : Colors.textPrimary
+            return isSelected ? Colors.Button.primaryDeemphasizedText : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
             return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
@@ -107,7 +107,7 @@ struct PDSSubNavigationBar: View {
         switch context {
         case .surface:
             // Surface: primary deemphasized bg for active, transparent for inactive
-            return isSelected ? Colors.primaryDeemphasizedButtonBackground : Color.clear
+            return isSelected ? Colors.Button.primaryDeemphasizedBackground : Color.clear
         case .onMedia:
             // On media: white for active, transparent for inactive
             return isSelected ? Colors.white : Color.clear
@@ -117,7 +117,7 @@ struct PDSSubNavigationBar: View {
     private func badgeTextColor(isSelected: Bool) -> Color {
         switch context {
         case .surface:
-            return isSelected ? Colors.primaryDeemphasizedButtonText : Colors.textPrimary
+            return isSelected ? Colors.Button.primaryDeemphasizedText : Colors.textPrimary
         case .onMedia:
             // On media: active uses black text on white bg, inactive uses white text
             return isSelected ? Colors.gray950 : Colors.textPrimaryOnMedia
@@ -127,7 +127,7 @@ struct PDSSubNavigationBar: View {
     private func badgeBackgroundColor(isSelected: Bool) -> Color {
         switch context {
         case .surface:
-            return isSelected ? Colors.persistentAccentDeemphasized : Colors.backgroundCard
+            return isSelected ? Colors.fixedAccentDeemphasized : Colors.backgroundCard
         case .onMedia:
             // On media: active uses light gray on white bg, inactive uses translucent white
             return isSelected ? Colors.gray200 : Colors.white.opacity(0.1)
@@ -213,7 +213,7 @@ extension PDSSubNavigationBar {
                             
                             if !callbackMessage.isEmpty {
                                 Text(callbackMessage)
-                                    .typography(Typography.meta3)
+                                    .typography(Typography.caption1)
                                     .foregroundColor(Colors.textSecondary)
                                     .padding(.horizontal, 16)
                             }

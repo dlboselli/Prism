@@ -98,9 +98,9 @@ struct PDSIconButtonStyle: ButtonStyle {
         case .secondary:
             baseColor = Colors.iconSecondary
         case .accent:
-            baseColor = Colors.persistentAccent
+            baseColor = Colors.fixedAccent
         case .negative:
-            baseColor = Colors.persistentNegative
+            baseColor = Colors.fixedNegative
         case .onMediaPrimary:
             baseColor = Colors.iconPrimaryOnMedia
         case .onMediaSecondary:
@@ -264,7 +264,7 @@ extension View {
                         .pdsIconButton(size: .large)
                         
                         Text("Large")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -275,7 +275,7 @@ extension View {
                         .pdsIconButton(size: .regular)
                         
                         Text("Regular")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -286,7 +286,7 @@ extension View {
                         .pdsIconButton(size: .small)
                         
                         Text("Small")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -297,7 +297,7 @@ extension View {
                         .pdsIconButton(size: .compact)
                         
                         Text("Compact")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -320,7 +320,7 @@ extension View {
                         }
                         .pdsIconButton(variant: .primary)
                         Text("Primary")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -330,7 +330,7 @@ extension View {
                         }
                         .pdsIconButton(variant: .secondary)
                         Text("Secondary")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -340,7 +340,7 @@ extension View {
                         }
                         .pdsIconButton(variant: .accent)
                         Text("Accent")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -350,7 +350,7 @@ extension View {
                         }
                         .pdsIconButton(variant: .negative)
                         Text("Negative")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -373,7 +373,7 @@ extension View {
                         }
                         .pdsIconButtonStyle(renderingMode: .monochrome)
                         Text("Mono")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -383,7 +383,7 @@ extension View {
                         }
                         .pdsIconButtonStyle(renderingMode: .hierarchical)
                         Text("Hierarchical")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                     
@@ -393,7 +393,7 @@ extension View {
                         }
                         .pdsIconButtonStyle(renderingMode: .multicolor)
                         Text("Multicolor")
-                            .typography(Typography.meta4)
+                            .typography(Typography.caption2)
                             .foregroundColor(Colors.textSecondary)
                     }
                 }
@@ -461,7 +461,7 @@ extension View {
                     HStack(spacing: 32) {
                         VStack(spacing: 12) {
                             Text("Primary")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textPrimaryOnMedia)
                             
                             HStack(spacing: 12) {
@@ -479,7 +479,7 @@ extension View {
                         
                         VStack(spacing: 12) {
                             Text("Secondary")
-                                .typography(Typography.meta3)
+                                .typography(Typography.caption1)
                                 .foregroundColor(Colors.textPrimaryOnMedia)
                             
                             HStack(spacing: 12) {
@@ -559,7 +559,7 @@ struct ToggleIconButtonPreview: View {
                                 activeVariant: .negative
                             )
                             Text("Like")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -571,7 +571,7 @@ struct ToggleIconButtonPreview: View {
                                 activeVariant: .accent
                             )
                             Text("Save")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -582,7 +582,7 @@ struct ToggleIconButtonPreview: View {
                                 isActive: $isMuted
                             )
                             Text("Mute")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -594,7 +594,7 @@ struct ToggleIconButtonPreview: View {
                                 activeVariant: .accent
                             )
                             Text("Notify")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
@@ -617,7 +617,7 @@ struct ToggleIconButtonPreview: View {
                             }
                             .pdsIconButtonStyle(effect: .bounce)
                             Text("Bounce")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -627,7 +627,7 @@ struct ToggleIconButtonPreview: View {
                             }
                             .pdsIconButtonStyle(variant: .negative, effect: .pulse)
                             Text("Pulse")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                         
@@ -637,7 +637,7 @@ struct ToggleIconButtonPreview: View {
                             }
                             .pdsIconButtonStyle(variant: .accent, effect: .none)
                             Text("None")
-                                .typography(Typography.meta4)
+                                .typography(Typography.caption2)
                                 .foregroundColor(Colors.textSecondary)
                         }
                     }
