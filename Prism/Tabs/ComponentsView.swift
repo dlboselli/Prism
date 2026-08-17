@@ -388,7 +388,7 @@ struct ComponentsView: View {
                     }
                 }
             } header: {
-                Text("Library")
+                Text("Components")
             }
             
             Section {

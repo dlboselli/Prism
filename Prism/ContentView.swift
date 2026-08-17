@@ -52,18 +52,18 @@ struct ContentView: View {
                     Button {
                         navigationPath.append(NavigationDestination.components)
                     } label: {
-                        Image(systemName: "square.grid.2x2")
+                        Image(systemName: "cube")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundStyle(Colors.iconPrimary)
                     }
-                    .accessibilityLabel("Components")
+                    .accessibilityLabel("Prism")
                 }
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
                 switch destination {
                 case .components:
                     ComponentsView()
-                        .navigationTitle("Components")
+                        .navigationTitle("Prism")
                         .navigationBarTitleDisplayMode(.large)
                 }
             }
