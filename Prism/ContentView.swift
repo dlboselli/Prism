@@ -44,6 +44,8 @@ struct ContentView: View {
                     }
                     .tag(Tab.profile)
             }
+            .navigationTitle(selectedTab.title)
+            .navigationBarTitleDisplayMode(.large)
             .tint(Colors.tabSelected)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -82,6 +84,15 @@ enum Tab: Hashable {
     case explore
     case activity
     case profile
+
+    var title: String {
+        switch self {
+        case .home: return "Home"
+        case .explore: return "Explore"
+        case .activity: return "Activity"
+        case .profile: return "Profile"
+        }
+    }
 }
 
 #Preview {

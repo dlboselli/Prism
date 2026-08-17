@@ -11,7 +11,7 @@ struct HomeTabView: View {
     var body: some View {
         PDSEmptyState(
             icon: "house.fill",
-            title: "Home",
+            title: "No posts yet",
             message: "Your feed will appear here"
         )
         .frame(maxWidth: .infinity, maxHeight: .infinity)

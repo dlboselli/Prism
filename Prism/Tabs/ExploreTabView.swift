@@ -17,6 +17,21 @@ struct ExploreTabView: View {
             cornerRadius: CornerRadius.square
         )
         .ignoresSafeArea()
+        .overlay(alignment: .top) {
+            // Legibility scrim behind the large title over busy map content
+            LinearGradient(
+                stops: [
+                    .init(color: Colors.backgroundSurface.opacity(0.95), location: 0.0),
+                    .init(color: Colors.backgroundSurface.opacity(0.8), location: 0.5),
+                    .init(color: Colors.backgroundSurface.opacity(0.0), location: 1.0)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .frame(height: 190)
+            .ignoresSafeArea(edges: .top)
+            .allowsHitTesting(false)
+        }
     }
 }
 

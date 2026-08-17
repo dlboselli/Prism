@@ -11,13 +11,6 @@ struct ActivityTabView: View {
     var body: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 0) {
-                Text("Activity")
-                    .typography(Typography.headline1Emphasized)
-                    .foregroundColor(Colors.textPrimary)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 20)
-                    .padding(.bottom, 8)
-
                 ForEach(sampleNotifications) { notification in
                     PDSNotificationCell(
                         type: notification.type.pdsType,
