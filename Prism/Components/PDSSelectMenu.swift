@@ -53,6 +53,7 @@ struct PDSSelectMenu<Content: View>: View {
                     Image(systemName: "chevron.up.chevron.down")
                         .font(.system(size: 12, weight: .medium))
                         .foregroundColor(Colors.iconSecondary)
+                        .accessibilityHidden(true)
                 }
                 .padding(.horizontal, 12)
                 .frame(height: 44)
@@ -264,7 +265,9 @@ struct PDSMultiSelectList<T: Identifiable & Hashable>: View where T.ID: Hashable
                     .padding(.vertical, 12)
                 }
                 .buttonStyle(.plain)
-                
+                .accessibilityElement(children: .combine)
+                .accessibilityAddTraits(isSelected ? [.isSelected] : [])
+
                 if option.id != options.last?.id {
                     Rectangle()
                         .fill(Colors.backgroundDivider)

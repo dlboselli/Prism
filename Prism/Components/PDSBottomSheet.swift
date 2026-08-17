@@ -116,6 +116,7 @@ struct PDSBottomSheetModifier<SheetContent: View>: ViewModifier {
                                 .background(Colors.backgroundDeemphasized)
                                 .clipShape(Circle())
                         }
+                        .accessibilityLabel("Close")
                     }
                 }
                 .padding(.horizontal, Spacing.lg)

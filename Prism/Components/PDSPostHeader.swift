@@ -173,8 +173,9 @@ struct PDSPostHeader: View {
                             .frame(width: 36, height: 36)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("More options")
                 }
-                
+
                 if onCloseTap != nil {
                     Button(action: { onCloseTap?() }) {
                         Image(systemName: "xmark")
@@ -183,6 +184,7 @@ struct PDSPostHeader: View {
                             .frame(width: 36, height: 36)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("Hide post")
                 }
             }
         }

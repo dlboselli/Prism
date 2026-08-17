@@ -218,6 +218,8 @@ struct PDSMediaPlaceholder: View {
                         .foregroundColor(Colors.iconSecondary)
                 }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Media placeholder")
     }
 }
 

@@ -150,6 +150,7 @@ struct PDSCommentInput: View {
                             .font(.system(size: 24))
                             .foregroundStyle(.white, Colors.persistentAccent)
                     }
+                    .accessibilityLabel("Send")
                 }
             }
             .padding(.leading, 12)
@@ -176,6 +177,7 @@ struct PDSMessageInput: View {
     struct PDSInputAction: Identifiable {
         let id = UUID()
         let icon: String
+        var label: String? = nil
         let action: () -> Void
     }
     
@@ -202,6 +204,7 @@ struct PDSMessageInput: View {
                         .font(.system(size: 28))
                         .foregroundStyle(.white, Colors.persistentAccent)
                 }
+                .accessibilityLabel(action.label ?? action.icon.split(separator: ".").first.map(String.init) ?? "Action")
             }
             
             // Input field
@@ -219,6 +222,7 @@ struct PDSMessageInput: View {
                                 .font(.system(size: 20))
                                 .foregroundColor(Colors.iconSecondary)
                         }
+                        .accessibilityLabel(action.label ?? action.icon.split(separator: ".").first.map(String.init) ?? "Action")
                     }
                 } else {
                     Button(action: onSend) {
@@ -226,6 +230,7 @@ struct PDSMessageInput: View {
                             .font(.system(size: 24))
                             .foregroundStyle(.white, Colors.persistentAccent)
                     }
+                    .accessibilityLabel("Send")
                 }
             }
             .padding(.leading, 12)

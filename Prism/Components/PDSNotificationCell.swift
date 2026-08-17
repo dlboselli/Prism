@@ -216,6 +216,9 @@ struct PDSNotificationCell: View {
             .background(isRead ? Colors.backgroundSurface : Colors.persistentAccentDeemphasized.opacity(0.3))
         }
         .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(actorName) \(message), \(timestamp)")
+        .accessibilityValue(isRead ? "" : "Unread")
     }
     
     private var actorWithBadge: some View {
@@ -228,6 +231,7 @@ struct PDSNotificationCell: View {
                 )
             }
             .buttonStyle(.plain)
+            .accessibilityLabel(actorName)
             
             // Notification type badge
             Circle()

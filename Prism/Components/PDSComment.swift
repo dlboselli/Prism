@@ -142,7 +142,7 @@ struct PDSComment: View {
                             Image(systemName: isLiked ? "heart.fill" : "heart")
                                 .font(.system(size: 14))
                                 .foregroundColor(isLiked ? Colors.persistentNegative : Colors.iconSecondary)
-                            
+
                             if likeCount > 0 {
                                 Text("\(likeCount)")
                                     .typography(Typography.meta4)
@@ -151,6 +151,8 @@ struct PDSComment: View {
                         }
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(isLiked ? "Unlike" : "Like")
+                    .accessibilityValue(likeCount > 0 ? "\(likeCount) likes" : "")
                     
                     // Reply button
                     Button(action: { onReply?() }) {

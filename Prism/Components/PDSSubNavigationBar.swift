@@ -56,6 +56,7 @@ struct PDSSubNavigationBar: View {
         }
         .buttonStyle(.plain)
         .animation(.easeInOut(duration: 0.2), value: isSelected)
+        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
     }
     
     // MARK: - Standard Style

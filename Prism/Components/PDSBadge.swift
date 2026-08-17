@@ -175,6 +175,7 @@ struct PDSBadge: View {
         .padding(.vertical, size.verticalPadding)
         .background(isSolid ? variant.solidBackgroundColor : variant.backgroundColor)
         .clipShape(Capsule())
+        .accessibilityElement(children: .combine)
     }
     
     // MARK: - Static Factories

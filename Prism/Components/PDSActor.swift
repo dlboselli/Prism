@@ -357,6 +357,7 @@ struct PDSActorBadge: View {
                         Circle()
                             .stroke(Colors.backgroundSurface, lineWidth: size * 0.15)
                     )
+                    .accessibilityLabel(statusLabel)
                 
             case .count(let count):
                 let displayCount = count > 99 ? "99+" : "\(count)"
@@ -388,6 +389,16 @@ struct PDSActorBadge: View {
                             .stroke(Colors.backgroundSurface, lineWidth: size * 0.12)
                     )
             }
+        }
+    }
+
+    private var statusLabel: String {
+        switch type {
+        case .online: return "Online"
+        case .offline: return "Offline"
+        case .away: return "Away"
+        case .count(let count): return "\(count) notifications"
+        case .icon: return ""
         }
     }
 }
@@ -485,6 +496,7 @@ struct PDSActorStack: View {
             Circle()
                 .stroke(borderColor, lineWidth: 2)
         )
+        .accessibilityLabel("More people")
     }
 }
 

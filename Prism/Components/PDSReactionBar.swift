@@ -134,12 +134,14 @@ struct PDSReactionBar: View {
                     HStack(spacing: 4) {
                         // Reaction icons
                         reactionIcons
-                        
+
                         // Count or names
                         reactionLabel
                     }
                 }
                 .buttonStyle(.plain)
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(summary.totalCount) reactions")
             }
             
             Spacer()
@@ -330,16 +332,7 @@ struct PDSReactionPicker: View {
     var body: some View {
         HStack(spacing: 8) {
             ForEach(PDSReactionType.allCases, id: \.self) { reaction in
-                Button(action: { onSelect(reaction) }) {
-                    Text(reaction.icon)
-                        .font(.system(size: hoveredReaction == reaction ? 40 : 28))
-                        .scaleEffect(hoveredReaction == reaction ? 1.2 : 1.0)
-                        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: hoveredReaction)
-                }
-                .buttonStyle(.plain)
-                .onHover { isHovered in
-                    hoveredReaction = isHovered ? reaction : nil
-                }
+                reactionButton(for: reaction)
             }
             
             // More emoji button
@@ -373,6 +366,7 @@ struct PDSReactionPicker: View {
                             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isMoreHovered)
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel("More reactions")
                     .onHover { isHovered in
                         isMoreHovered = isHovered
                     }
@@ -386,6 +380,20 @@ struct PDSReactionPicker: View {
                 .fill(Colors.backgroundCard)
                 .shadow(color: Colors.elevationCardShadowMedium, radius: 12, x: 0, y: 4)
         )
+    }
+
+    private func reactionButton(for reaction: PDSReactionType) -> some View {
+        Button(action: { onSelect(reaction) }) {
+            Text(reaction.icon)
+                .font(.system(size: hoveredReaction == reaction ? 40 : 28))
+                .scaleEffect(hoveredReaction == reaction ? 1.2 : 1.0)
+                .animation(.spring(response: 0.3, dampingFraction: 0.6), value: hoveredReaction)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(reaction.name)
+        .onHover { isHovered in
+            hoveredReaction = isHovered ? reaction : nil
+        }
     }
 }
 

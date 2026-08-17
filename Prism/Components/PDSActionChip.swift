@@ -157,9 +157,10 @@ struct PDSDismissibleChipStyle: ButtonStyle {
         HStack(spacing: 6) {
             configuration.label
                 .typography(Typography.button3)
-            
+
             Image(systemName: "xmark")
                 .font(.system(size: 10, weight: .bold))
+                .accessibilityHidden(true)
         }
         .foregroundColor(foregroundColor)
         .padding(.leading, 14)
@@ -171,6 +172,7 @@ struct PDSDismissibleChipStyle: ButtonStyle {
         )
         .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
         .animation(.easeInOut(duration: 0.15), value: configuration.isPressed)
+        .accessibilityHint("Removes this item")
     }
 }
 

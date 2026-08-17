@@ -141,6 +141,7 @@ struct PDSInstantFeedback: View {
                 Image(systemName: iconName)
                     .font(.system(size: 18, weight: .medium))
                     .foregroundColor(icon != nil ? Colors.iconPrimaryOnColor : type.iconColor)
+                    .accessibilityHidden(true)
             }
             
             // Message

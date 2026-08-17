@@ -181,6 +181,7 @@ struct PDSPasswordField: View {
                         .font(.system(size: 16))
                         .foregroundColor(Colors.iconSecondary)
                 }
+                .accessibilityLabel(isSecure ? "Show password" : "Hide password")
             }
             .padding(.horizontal, 12)
             .frame(height: 44)
