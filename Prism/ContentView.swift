@@ -10,7 +10,8 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
     @State private var navigationPath = NavigationPath()
-    
+    @AppStorage(PrototypeSettings.showActivityBadge) private var showActivityBadge = true
+
     var body: some View {
         NavigationStack(path: $navigationPath) {
             TabView(selection: $selectedTab) {
@@ -19,19 +20,20 @@ struct ContentView: View {
                         Image(systemName: selectedTab == .home ? "house.fill" : "house")
                     }
                     .tag(Tab.home)
-                
-                FriendsTabView()
+
+                ExploreTabView()
                     .tabItem {
-                        Image(systemName: selectedTab == .friends ? "person.2.fill" : "person.2")
+                        Image(systemName: selectedTab == .explore ? "map.fill" : "map")
                     }
-                    .tag(Tab.friends)
-                
-                SearchTabView()
+                    .tag(Tab.explore)
+
+                ActivityTabView()
                     .tabItem {
-                        Image(systemName: "magnifyingglass")
+                        Image(systemName: selectedTab == .activity ? "bell.fill" : "bell")
                     }
-                    .tag(Tab.search)
-                
+                    .tag(Tab.activity)
+                    .badge(showActivityBadge ? unreadNotificationCount : 0)
+
                 ProfileTabView()
                     .tabItem {
                         Image(systemName: selectedTab == .profile ? "person.circle.fill" : "person.circle")
@@ -44,10 +46,11 @@ struct ContentView: View {
                     Button {
                         navigationPath.append(NavigationDestination.more)
                     } label: {
-                        Image(systemName: "line.3.horizontal")
+                        Image(systemName: "square.grid.2x2")
                             .font(.system(size: 20, weight: .medium))
                             .foregroundStyle(Colors.iconPrimary)
                     }
+                    .accessibilityLabel("Components")
                 }
             }
             .navigationDestination(for: NavigationDestination.self) { destination in
@@ -72,8 +75,8 @@ enum NavigationDestination: Hashable {
 
 enum Tab: Hashable {
     case home
-    case friends
-    case search
+    case explore
+    case activity
     case profile
 }
 

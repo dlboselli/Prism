@@ -66,7 +66,23 @@ struct MoreTabView: View {
             } header: {
                 Text("Appearance")
             }
-            
+
+            Section {
+                NavigationLink {
+                    PrototypeSettingsView()
+                } label: {
+                    HStack(spacing: 12) {
+                        Image(systemName: "slider.horizontal.3")
+                            .font(.system(size: 16))
+                            .foregroundColor(Colors.iconPrimary)
+                            .frame(width: 24)
+                        Text("Prototype Settings")
+                    }
+                }
+            } header: {
+                Text("Prototype")
+            }
+
             Section {
                 NavigationLink {
                     ColorsShowcaseView()
@@ -198,6 +214,12 @@ struct MoreTabView: View {
                     Text("List Cells")
                 }
                 
+                NavigationLink {
+                    MapDetailView()
+                } label: {
+                    Text("Map")
+                }
+
                 NavigationLink {
                     MediaDetailView()
                 } label: {
@@ -4117,6 +4139,90 @@ struct MediaDetailView: View {
                     .foregroundColor(Colors.textSecondary)
             }
             
+            content()
+        }
+    }
+}
+
+// MARK: - Map Detail View
+
+struct MapDetailView: View {
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 48) {
+                // Interactive
+                mapSection(title: "Interactive", description: "Default map with pan and zoom, framed with the media corner radius") {
+                    PDSMap(markers: samplePlaces.map(\.marker))
+                        .frame(height: 260)
+                }
+
+                // Static
+                mapSection(title: "Static", description: "Non-interactive preview for cards and list cells") {
+                    PDSMap(span: 0.02, interactionModes: [])
+                        .frame(height: 160)
+                }
+
+                // Markers
+                mapSection(title: "Markers", description: "Markers are tinted with the persistent accent token") {
+                    PDSMap(
+                        latitude: samplePlaces[0].latitude,
+                        longitude: samplePlaces[0].longitude,
+                        span: 0.01,
+                        markers: [samplePlaces[0].marker],
+                        interactionModes: []
+                    )
+                    .frame(height: 200)
+                }
+
+                // Corner Radii
+                mapSection(title: "Corner Radii", description: "Framing derives from shape tokens") {
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Square")
+                                .typography(Typography.meta2)
+                                .foregroundColor(Colors.textSecondary)
+
+                            PDSMap(interactionModes: [], cornerRadius: CornerRadius.square)
+                                .frame(height: 120)
+                        }
+
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Media Large")
+                                .typography(Typography.meta2)
+                                .foregroundColor(Colors.textSecondary)
+
+                            PDSMap(interactionModes: [], cornerRadius: CornerRadius.mediaLarge)
+                                .frame(height: 120)
+                        }
+                    }
+                }
+
+                Spacer().frame(height: 20)
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 24)
+        }
+        .background(Colors.backgroundSurface)
+        .navigationTitle("Map")
+        .navigationBarTitleDisplayMode(.large)
+    }
+
+    private func mapSection<Content: View>(
+        title: String,
+        description: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: PDSTextScale.content.lineSpacing) {
+                Text(title)
+                    .typography(PDSTextScale.content.headline)
+                    .foregroundColor(Colors.textPrimary)
+
+                Text(description)
+                    .typography(PDSTextScale.content.body)
+                    .foregroundColor(Colors.textSecondary)
+            }
+
             content()
         }
     }

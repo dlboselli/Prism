@@ -447,6 +447,36 @@ let sampleStories: [StoryData] = [
     )
 ]
 
+// MARK: - Sample Places
+
+/// Place data for maps
+struct PlaceData: Identifiable, Hashable {
+    let id: String
+    let name: String
+    let latitude: Double
+    let longitude: Double
+
+    init(
+        id: String = UUID().uuidString,
+        name: String,
+        latitude: Double,
+        longitude: Double
+    ) {
+        self.id = id
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+}
+
+let samplePlaces: [PlaceData] = [
+    PlaceData(id: "place-1", name: "Ferry Building", latitude: 37.7955, longitude: -122.3937),
+    PlaceData(id: "place-2", name: "Coit Tower", latitude: 37.8024, longitude: -122.4058),
+    PlaceData(id: "place-3", name: "Painted Ladies", latitude: 37.7763, longitude: -122.4327),
+    PlaceData(id: "place-4", name: "Oracle Park", latitude: 37.7786, longitude: -122.3893),
+    PlaceData(id: "place-5", name: "Palace of Fine Arts", latitude: 37.8029, longitude: -122.4484)
+]
+
 // MARK: - Sample Comments
 
 let sampleComments: [CommentData] = [
