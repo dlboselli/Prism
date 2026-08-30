@@ -4,7 +4,7 @@ Prism is a SwiftUI design system prototype. It pairs a complete token layer with
 
 | Home | Explore | Components |
 |---|---|---|
-| ![Home](docs/home-light.png) | ![Explore](docs/explore-map.png) | ![Components gallery](docs/components-gallery.png) |
+| <img src="docs/home-light.png" alt="Home" width="250"> | <img src="docs/explore-map.png" alt="Explore" width="250"> | <img src="docs/components-gallery.png" alt="Components gallery" width="250"> |
 
 ## What's inside
 
